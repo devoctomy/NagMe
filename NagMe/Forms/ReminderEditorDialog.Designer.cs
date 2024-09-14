@@ -34,12 +34,23 @@
             CancelButton = new Button();
             ApplyButton = new Button();
             TopPanel = new Panel();
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
+            ReminderEditorTabs = new TabControl();
+            GenerallTab = new TabPage();
+            GeneralDescriptionTextBox = new TextBox();
+            GeneralDescriptionLabel = new Label();
+            GeneralNameTextBox = new TextBox();
+            GeneralNameLabel = new Label();
+            TimingsTab = new TabPage();
+            TimingsIntervalPeriod = new ComboBox();
+            TimingsIntervalNumericUpDown = new NumericUpDown();
+            label1 = new Label();
+            AiTab = new TabPage();
             BottomPanel.SuspendLayout();
             TopPanel.SuspendLayout();
-            tabControl1.SuspendLayout();
+            ReminderEditorTabs.SuspendLayout();
+            GenerallTab.SuspendLayout();
+            TimingsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).BeginInit();
             SuspendLayout();
             // 
             // BottomPanel
@@ -87,43 +98,121 @@
             // 
             // TopPanel
             // 
-            TopPanel.Controls.Add(tabControl1);
+            TopPanel.Controls.Add(ReminderEditorTabs);
             TopPanel.Dock = DockStyle.Fill;
             TopPanel.Location = new Point(0, 0);
             TopPanel.Name = "TopPanel";
             TopPanel.Size = new Size(521, 401);
             TopPanel.TabIndex = 5;
             // 
-            // tabControl1
+            // ReminderEditorTabs
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Dock = DockStyle.Fill;
-            tabControl1.Location = new Point(0, 0);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(521, 401);
-            tabControl1.TabIndex = 0;
+            ReminderEditorTabs.Controls.Add(GenerallTab);
+            ReminderEditorTabs.Controls.Add(TimingsTab);
+            ReminderEditorTabs.Controls.Add(AiTab);
+            ReminderEditorTabs.Dock = DockStyle.Fill;
+            ReminderEditorTabs.Location = new Point(0, 0);
+            ReminderEditorTabs.Name = "ReminderEditorTabs";
+            ReminderEditorTabs.SelectedIndex = 0;
+            ReminderEditorTabs.Size = new Size(521, 401);
+            ReminderEditorTabs.TabIndex = 0;
             // 
-            // tabPage1
+            // GenerallTab
             // 
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(513, 373);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
+            GenerallTab.Controls.Add(GeneralDescriptionTextBox);
+            GenerallTab.Controls.Add(GeneralDescriptionLabel);
+            GenerallTab.Controls.Add(GeneralNameTextBox);
+            GenerallTab.Controls.Add(GeneralNameLabel);
+            GenerallTab.Location = new Point(4, 24);
+            GenerallTab.Name = "GenerallTab";
+            GenerallTab.Padding = new Padding(3);
+            GenerallTab.Size = new Size(513, 373);
+            GenerallTab.TabIndex = 2;
+            GenerallTab.Text = "General";
+            GenerallTab.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // GeneralDescriptionTextBox
             // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(192, 72);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            GeneralDescriptionTextBox.Location = new Point(17, 87);
+            GeneralDescriptionTextBox.Multiline = true;
+            GeneralDescriptionTextBox.Name = "GeneralDescriptionTextBox";
+            GeneralDescriptionTextBox.ScrollBars = ScrollBars.Vertical;
+            GeneralDescriptionTextBox.Size = new Size(475, 149);
+            GeneralDescriptionTextBox.TabIndex = 4;
+            // 
+            // GeneralDescriptionLabel
+            // 
+            GeneralDescriptionLabel.AutoSize = true;
+            GeneralDescriptionLabel.Location = new Point(17, 69);
+            GeneralDescriptionLabel.Name = "GeneralDescriptionLabel";
+            GeneralDescriptionLabel.Size = new Size(67, 15);
+            GeneralDescriptionLabel.TabIndex = 3;
+            GeneralDescriptionLabel.Text = "Description";
+            // 
+            // GeneralNameTextBox
+            // 
+            GeneralNameTextBox.Location = new Point(17, 31);
+            GeneralNameTextBox.Name = "GeneralNameTextBox";
+            GeneralNameTextBox.Size = new Size(475, 23);
+            GeneralNameTextBox.TabIndex = 2;
+            // 
+            // GeneralNameLabel
+            // 
+            GeneralNameLabel.AutoSize = true;
+            GeneralNameLabel.Location = new Point(17, 13);
+            GeneralNameLabel.Name = "GeneralNameLabel";
+            GeneralNameLabel.Size = new Size(39, 15);
+            GeneralNameLabel.TabIndex = 1;
+            GeneralNameLabel.Text = "Name";
+            // 
+            // TimingsTab
+            // 
+            TimingsTab.Controls.Add(TimingsIntervalPeriod);
+            TimingsTab.Controls.Add(TimingsIntervalNumericUpDown);
+            TimingsTab.Controls.Add(label1);
+            TimingsTab.Location = new Point(4, 24);
+            TimingsTab.Name = "TimingsTab";
+            TimingsTab.Padding = new Padding(3);
+            TimingsTab.Size = new Size(513, 373);
+            TimingsTab.TabIndex = 0;
+            TimingsTab.Text = "Timings";
+            TimingsTab.UseVisualStyleBackColor = true;
+            // 
+            // TimingsIntervalPeriod
+            // 
+            TimingsIntervalPeriod.FormattingEnabled = true;
+            TimingsIntervalPeriod.Location = new Point(328, 31);
+            TimingsIntervalPeriod.Name = "TimingsIntervalPeriod";
+            TimingsIntervalPeriod.Size = new Size(165, 23);
+            TimingsIntervalPeriod.TabIndex = 4;
+            TimingsIntervalPeriod.SelectedIndexChanged += TimingsIntervalPeriod_SelectedIndexChanged;
+            // 
+            // TimingsIntervalNumericUpDown
+            // 
+            TimingsIntervalNumericUpDown.Location = new Point(17, 31);
+            TimingsIntervalNumericUpDown.Name = "TimingsIntervalNumericUpDown";
+            TimingsIntervalNumericUpDown.Size = new Size(305, 23);
+            TimingsIntervalNumericUpDown.TabIndex = 3;
+            TimingsIntervalNumericUpDown.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(17, 13);
+            label1.Name = "label1";
+            label1.Size = new Size(46, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Interval";
+            // 
+            // AiTab
+            // 
+            AiTab.Location = new Point(4, 24);
+            AiTab.Name = "AiTab";
+            AiTab.Padding = new Padding(3);
+            AiTab.Size = new Size(513, 373);
+            AiTab.TabIndex = 1;
+            AiTab.Text = "AI";
+            AiTab.UseVisualStyleBackColor = true;
             // 
             // ReminderEditorDialog
             // 
@@ -140,7 +229,12 @@
             Text = "NagMe - Reminder Editor";
             BottomPanel.ResumeLayout(false);
             TopPanel.ResumeLayout(false);
-            tabControl1.ResumeLayout(false);
+            ReminderEditorTabs.ResumeLayout(false);
+            GenerallTab.ResumeLayout(false);
+            GenerallTab.PerformLayout();
+            TimingsTab.ResumeLayout(false);
+            TimingsTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).EndInit();
             ResumeLayout(false);
         }
 
@@ -151,11 +245,18 @@
         private Button CancelButton;
         private Button ApplyButton;
         private Panel TopPanel;
-        private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabControl ReminderEditorTabs;
+        private TabPage TimingsTab;
+        private TabPage AiTab;
         private Button button1;
         private Button button2;
-        private Button ApplyButton;
+        private TabPage GenerallTab;
+        private Label GeneralNameLabel;
+        private TextBox GeneralNameTextBox;
+        private TextBox GeneralDescriptionTextBox;
+        private Label GeneralDescriptionLabel;
+        private Label label1;
+        private ComboBox TimingsIntervalPeriod;
+        private NumericUpDown TimingsIntervalNumericUpDown;
     }
 }

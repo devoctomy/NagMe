@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NagMe.Enums;
+using NagMe.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,43 @@ namespace NagMe.Forms
 {
     public partial class ReminderEditorDialog : Form
     {
+        private Reminder _reminder = new Reminder();
+
         public ReminderEditorDialog()
         {
             InitializeComponent();
+            EnumeratePeriods();
+            ReadReminder();
+        }
+
+        public ReminderEditorDialog(Reminder reminder)
+        {
+            InitializeComponent();
+            EnumeratePeriods();
+            _reminder = reminder;
+            ReadReminder();
+        }
+
+        private void ReadReminder()
+        {
+            GeneralNameTextBox.Text = _reminder.Name;
+            GeneralDescriptionTextBox.Text = _reminder.Description;
+            TimingsIntervalNumericUpDown.Value = _reminder.Interval;
+            TimingsIntervalPeriod.Text = _reminder.Period.ToString();
+        }
+
+        private void EnumeratePeriods()
+        {
+            var periods = Enum.GetNames(typeof(IntervalPeriod));
+            TimingsIntervalPeriod.Items.AddRange(periods);
+        }
+
+        private void TimingsIntervalPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(TimingsIntervalPeriod.SelectedIndex == -1)
+            {
+                TimingsIntervalPeriod.SelectedIndex = 0; // Seconds
+            }
         }
     }
 }
