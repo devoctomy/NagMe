@@ -1,5 +1,4 @@
 ﻿using NagMe.Cryptography;
-using NagMe.IO;
 using System.Text.Json;
 
 namespace NagMe.Configuration
@@ -8,19 +7,27 @@ namespace NagMe.Configuration
     {
         private static Configuration? _current;
         private Config _config = new();
+        private string? _configPath = null;
 
         public static Configuration Current
         {
             get
             {
-                if (_current == null)
-                {
-                    _current = new Configuration();
-                    _current.Load();
-                }
-
+                ArgumentNullException.ThrowIfNull(_current);
                 return _current;
             }
+        }
+
+        public static Configuration Initialize(string path)
+        {
+            _current = new Configuration(path);
+            return _current;
+        }
+
+        private Configuration(string path)
+        {
+            _configPath = path;
+            Load();
         }
 
         public bool EnableAiFeatures
@@ -43,46 +50,55 @@ namespace NagMe.Configuration
         {
             get
             {
-                return CredentialManager.Current.GetCredential("NagMe.OpenAIApiToken");
+                if(string.IsNullOrEmpty(_config.OpenAiApiTokenBase64CypherText))
+                {
+                    return null;
+                }
+
+                var stringProtector = new StringProtector("NagMe", "Secure config settings");
+                var plaintext = stringProtector.Decrypt(_config.OpenAiApiTokenBase64CypherText);
+                return plaintext;
             }
             set
             {
-                var token = CredentialManager.Current.GetCredential("NagMe.OpenAIApiToken");
-
-                if (token != value)
+                if (string.IsNullOrEmpty(value))
                 {
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        CredentialManager.Current.RemoveCredential("NagMe.OpenAIApiToken");
-                        return;
-                    }
-
-                    CredentialManager.Current.SetCredential("NagMe.OpenAIApiToken", value);
+                    _config.OpenAiApiTokenBase64CypherText = null;
+                    Save();
+                    return;
                 }
+
+                var stringProtector = new StringProtector("NagMe", "Secure config settings");
+                var base64CypherText = stringProtector.Encrypt(value);
+                _config.OpenAiApiTokenBase64CypherText = base64CypherText;
+                Save();
             }
         }
 
         private void Save()
         {
+            ArgumentNullException.ThrowIfNull(_configPath);
+
             var configJsonRaw = JsonSerializer.Serialize(_config);
-            File.WriteAllText(Path.Combine(PathManager.Current.GetUserConfigurationPath(), "config.json"), configJsonRaw);
+            File.WriteAllText(_configPath, configJsonRaw);
         }
 
         private void Load()
         {
-            var configPath = Path.Combine(PathManager.Current.GetUserConfigurationPath(), "config.json");
-            if (!File.Exists(configPath))
+            ArgumentNullException.ThrowIfNull(_configPath);
+
+            if (!File.Exists(_configPath))
             {
+                Save();
                 return;
             }
 
-            var configJsonRaw = File.ReadAllText(Path.Combine(PathManager.Current.GetUserConfigurationPath(), "config.json"));
+            var configJsonRaw = File.ReadAllText(_configPath);
             var config = JsonSerializer.Deserialize<Config>(configJsonRaw);
-            if(config != null)
+            if (config != null)
             {
                 _config = config;
             }
         }
-
     }
 }

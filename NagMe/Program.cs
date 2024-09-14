@@ -6,7 +6,6 @@ namespace NagMe
 {
     internal static class Program
     {
-        private static ReminderLoader? _reminderLoader;
         private static SystemTray? _systemTray;
 
         [STAThread]
@@ -14,7 +13,8 @@ namespace NagMe
         {
             ApplicationConfiguration.Initialize();
 
-            _reminderLoader = ReminderLoader.Initialize(Path.Combine(PathManager.Current.GetUserConfigurationPath(), "reminders.json"));
+            ReminderLoader.Initialize(Path.Combine(PathManager.Current.GetUserConfigurationPath(), "reminders.json"));
+            Configuration.Configuration.Initialize(Path.Combine(PathManager.Current.GetUserConfigurationPath(), "config.json"));
             _systemTray = new SystemTray("NagMe");
 
             Application.Run();
