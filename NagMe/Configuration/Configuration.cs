@@ -30,6 +30,22 @@ namespace NagMe.Configuration
             Load();
         }
 
+        public bool FirstRun
+        {
+            get
+            {
+                return _config.FirstRun;
+            }
+            set
+            {
+                if (_config.FirstRun != value)
+                {
+                    _config.FirstRun = value;
+                    Save();
+                }
+            }
+        }
+
         public bool EnableAiFeatures
         {
             get

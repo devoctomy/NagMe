@@ -19,6 +19,12 @@ namespace NagMe
             Configuration.Configuration.Initialize(Path.Combine(PathManager.Current.GetUserConfigurationPath(), "config.json"));
             _systemTray = new SystemTray("NagMe");
 
+            if(Configuration.Configuration.Current.FirstRun)
+            {
+                // Display first run wizard here
+                Configuration.Configuration.Current.FirstRun = false;
+            }
+
             Application.Run();
         }
 

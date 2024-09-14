@@ -2,6 +2,7 @@
 {
     public class Config
     {
+        public bool FirstRun { get; set; } = true;
         public bool EnableAiFeatures { get; set; } = false;
         public string? OpenAiApiTokenBase64CypherText { get; set; } = null;
     }
