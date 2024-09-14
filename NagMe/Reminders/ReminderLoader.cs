@@ -6,7 +6,7 @@ namespace NagMe.Reminders
     {
         public IReadOnlyList<Reminder> Reminders => _reminders;
         public bool IsDirty { get; private set; }
-        private List<Reminder>? _reminders = new();
+        private List<Reminder> _reminders = new();
         private string? _path = null;
         private static ReminderLoader? _current;
 
@@ -37,7 +37,11 @@ namespace NagMe.Reminders
             if (File.Exists(path))
             {
                 var remindersJsonRaw = File.ReadAllText(path);
-                _reminders = JsonSerializer.Deserialize<List<Reminder>>(remindersJsonRaw);
+                var reminders = JsonSerializer.Deserialize<List<Reminder>>(remindersJsonRaw);
+                if(reminders != null)
+                {
+                    _reminders = reminders;
+                }
             }
         }
 
@@ -47,6 +51,8 @@ namespace NagMe.Reminders
 
             var remindersJsonRaw = JsonSerializer.Serialize(Reminders);
             File.WriteAllText(_path, remindersJsonRaw);
+
+            IsDirty = false;
         }
 
         public void AddReminder(Reminder reminder)
