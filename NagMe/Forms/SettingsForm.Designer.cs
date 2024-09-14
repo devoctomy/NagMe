@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             SettingsTabs = new TabControl();
             RemindersTab = new TabPage();
+            RemindersQueueListView = new ListView();
+            NameHeader = new ColumnHeader();
+            RemainingTimeHeader = new ColumnHeader();
+            TotalCountHeader = new ColumnHeader();
             DeleteReminderButton = new Button();
             AddReminderButton = new Button();
             RemindersCheckedListBox = new CheckedListBox();
@@ -46,11 +50,7 @@
             ApplyButton = new Button();
             BottomPanel = new Panel();
             OkButton = new Button();
-            CancelButton = new Button();
-            RemindersQueueListView = new ListView();
-            NameHeader = new ColumnHeader();
-            RemainingTimeHeader = new ColumnHeader();
-            TotalCountHeader = new ColumnHeader();
+            CnclButton = new Button();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             SystemTab.SuspendLayout();
@@ -85,6 +85,32 @@
             RemindersTab.TabIndex = 0;
             RemindersTab.Text = "Reminders";
             RemindersTab.UseVisualStyleBackColor = true;
+            // 
+            // RemindersQueueListView
+            // 
+            RemindersQueueListView.Columns.AddRange(new ColumnHeader[] { NameHeader, RemainingTimeHeader, TotalCountHeader });
+            RemindersQueueListView.Location = new Point(8, 143);
+            RemindersQueueListView.MultiSelect = false;
+            RemindersQueueListView.Name = "RemindersQueueListView";
+            RemindersQueueListView.Size = new Size(385, 152);
+            RemindersQueueListView.TabIndex = 3;
+            RemindersQueueListView.UseCompatibleStateImageBehavior = false;
+            RemindersQueueListView.View = View.Details;
+            // 
+            // NameHeader
+            // 
+            NameHeader.Text = "Name";
+            NameHeader.Width = 150;
+            // 
+            // RemainingTimeHeader
+            // 
+            RemainingTimeHeader.Text = "Remaining Time";
+            RemainingTimeHeader.Width = 100;
+            // 
+            // TotalCountHeader
+            // 
+            TotalCountHeader.Text = "TotalCount";
+            TotalCountHeader.Width = 100;
             // 
             // DeleteReminderButton
             // 
@@ -219,7 +245,7 @@
             // BottomPanel
             // 
             BottomPanel.Controls.Add(OkButton);
-            BottomPanel.Controls.Add(CancelButton);
+            BottomPanel.Controls.Add(CnclButton);
             BottomPanel.Controls.Add(ApplyButton);
             BottomPanel.Dock = DockStyle.Bottom;
             BottomPanel.Location = new Point(0, 329);
@@ -238,42 +264,16 @@
             OkButton.UseVisualStyleBackColor = true;
             OkButton.Click += OkButton_Click;
             // 
-            // CancelButton
+            // CnclButton
             // 
-            CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            CancelButton.DialogResult = DialogResult.Cancel;
-            CancelButton.Location = new Point(209, 7);
-            CancelButton.Name = "CancelButton";
-            CancelButton.Size = new Size(91, 27);
-            CancelButton.TabIndex = 3;
-            CancelButton.Text = "Cancel";
-            CancelButton.UseVisualStyleBackColor = true;
-            // 
-            // RemindersQueueListView
-            // 
-            RemindersQueueListView.Columns.AddRange(new ColumnHeader[] { NameHeader, RemainingTimeHeader, TotalCountHeader });
-            RemindersQueueListView.Location = new Point(8, 143);
-            RemindersQueueListView.MultiSelect = false;
-            RemindersQueueListView.Name = "RemindersQueueListView";
-            RemindersQueueListView.Size = new Size(385, 152);
-            RemindersQueueListView.TabIndex = 3;
-            RemindersQueueListView.UseCompatibleStateImageBehavior = false;
-            RemindersQueueListView.View = View.Details;
-            // 
-            // NameHeader
-            // 
-            NameHeader.Text = "Name";
-            NameHeader.Width = 150;
-            // 
-            // RemainingTimeHeader
-            // 
-            RemainingTimeHeader.Text = "Remaining Time";
-            RemainingTimeHeader.Width = 100;
-            // 
-            // TotalCountHeader
-            // 
-            TotalCountHeader.Text = "TotalCount";
-            TotalCountHeader.Width = 100;
+            CnclButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            CnclButton.DialogResult = DialogResult.Cancel;
+            CnclButton.Location = new Point(209, 7);
+            CnclButton.Name = "CnclButton";
+            CnclButton.Size = new Size(91, 27);
+            CnclButton.TabIndex = 3;
+            CnclButton.Text = "Cancel";
+            CnclButton.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -312,7 +312,7 @@
         private Button ApplyButton;
         private Panel BottomPanel;
         private Button OkButton;
-        private Button CancelButton;
+        private Button CnclButton;
         private CheckBox SystemStartWithWindowsCheckBox;
         private Button AddReminderButton;
         private CheckedListBox RemindersCheckedListBox;

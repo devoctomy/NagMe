@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReminderEditorDialog));
             BottomPanel = new Panel();
             OkButton = new Button();
-            CancelButton = new Button();
+            CnclButton = new Button();
             TopPanel = new Panel();
             ReminderEditorTabs = new TabControl();
             GeneralTab = new TabPage();
@@ -55,7 +55,7 @@
             // BottomPanel
             // 
             BottomPanel.Controls.Add(OkButton);
-            BottomPanel.Controls.Add(CancelButton);
+            BottomPanel.Controls.Add(CnclButton);
             BottomPanel.Dock = DockStyle.Bottom;
             BottomPanel.Location = new Point(0, 401);
             BottomPanel.Name = "BottomPanel";
@@ -73,16 +73,16 @@
             OkButton.UseVisualStyleBackColor = true;
             OkButton.Click += OkButton_Click;
             // 
-            // CancelButton
+            // CnclButton
             // 
-            CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            CancelButton.DialogResult = DialogResult.Cancel;
-            CancelButton.Location = new Point(418, 7);
-            CancelButton.Name = "CancelButton";
-            CancelButton.Size = new Size(91, 27);
-            CancelButton.TabIndex = 6;
-            CancelButton.Text = "Cancel";
-            CancelButton.UseVisualStyleBackColor = true;
+            CnclButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            CnclButton.DialogResult = DialogResult.Cancel;
+            CnclButton.Location = new Point(418, 7);
+            CnclButton.Name = "CnclButton";
+            CnclButton.Size = new Size(91, 27);
+            CnclButton.TabIndex = 6;
+            CnclButton.Text = "Cancel";
+            CnclButton.UseVisualStyleBackColor = true;
             // 
             // TopPanel
             // 
@@ -233,7 +233,7 @@
 
         private Panel BottomPanel;
         private Button OkButton;
-        private Button CancelButton;
+        private Button CnclButton;
         private Panel TopPanel;
         private TabControl ReminderEditorTabs;
         private TabPage TimingsTab;

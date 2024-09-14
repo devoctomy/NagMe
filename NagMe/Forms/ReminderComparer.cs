@@ -30,8 +30,8 @@ namespace NagMe.Forms
                 return -1;
             }
 
-            var remainingX = reminderX.GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(reminderX.StartedAt));
-            var remainingY = reminderY.GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(reminderY.StartedAt));
+            var remainingX = reminderX.GetRemainingTimeAsTimeSpan();
+            var remainingY = reminderY.GetRemainingTimeAsTimeSpan();
 
             return remainingX.CompareTo(remainingY);
         }

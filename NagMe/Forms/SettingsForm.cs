@@ -147,7 +147,7 @@ namespace NagMe.Forms
                 if (existing == null)
                 {
                     var newItem = new ListViewItem(curReminder.Name);
-                    var remaining = curReminder.IsEnabled ? curReminder.GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(curReminder.StartedAt)).ToString() : "-";
+                    var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString() : "-";
                     newItem.SubItems.Add(remaining);
                     newItem.SubItems.Add("0");
                     newItem.Tag = curReminder;
@@ -155,7 +155,7 @@ namespace NagMe.Forms
                 }
                 else
                 {
-                    var remaining = curReminder.IsEnabled ? curReminder.GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(curReminder.StartedAt)).ToString() : "-";
+                    var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString() : "-";
                     existing.SubItems[1].Text = remaining.ToString();
                 }
 

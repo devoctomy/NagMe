@@ -41,6 +41,11 @@ namespace NagMe.Reminders
             }
         }
 
+        public TimeSpan GetRemainingTimeAsTimeSpan()
+        {
+            return GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(StartedAt));
+        }
+
         public void Restart()
         {
             StartedAt = DateTime.Now;
