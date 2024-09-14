@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace NagMe.Windows
 {
+    // -----------------------------------------------------------------------------
+    // This class was generated with assistance from ChatGPT (OpenAI).
+    // -----------------------------------------------------------------------------
     public class StartupManager
     {
         private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";

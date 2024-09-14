@@ -1,6 +1,6 @@
 ﻿using NagMe.Enums;
 
-namespace NagMe.Models
+namespace NagMe.Reminders
 {
     public class Reminder
     {

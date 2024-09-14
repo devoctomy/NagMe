@@ -1,5 +1,5 @@
 ﻿using NagMe.Enums;
-using NagMe.Models;
+using NagMe.Reminders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +37,7 @@ namespace NagMe.Forms
             GeneralDescriptionTextBox.Text = _reminder.Description;
             TimingsIntervalNumericUpDown.Value = _reminder.Interval;
             TimingsIntervalPeriod.Text = _reminder.Period.ToString();
+            ReminderEditorTabs.SelectedTab = GeneralTab;
         }
 
         private void EnumeratePeriods()

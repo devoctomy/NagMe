@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             SettingsTabs = new TabControl();
             tabPage1 = new TabPage();
+            DeleteReminderButton = new Button();
+            AddReminderButton = new Button();
+            checkedListBox1 = new CheckedListBox();
             tabPage2 = new TabPage();
             StartWithWindowsCheckBox = new CheckBox();
             TopPanel = new Panel();
@@ -38,9 +41,6 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CancelButton = new Button();
-            checkedListBox1 = new CheckedListBox();
-            AddReminderButton = new Button();
-            DeleteReminderButton = new Button();
             SettingsTabs.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -71,6 +71,34 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Reminders";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // DeleteReminderButton
+            // 
+            DeleteReminderButton.Image = Properties.Resources.Garbage_Closed_24xBlack;
+            DeleteReminderButton.Location = new Point(345, 48);
+            DeleteReminderButton.Name = "DeleteReminderButton";
+            DeleteReminderButton.Size = new Size(48, 35);
+            DeleteReminderButton.TabIndex = 2;
+            DeleteReminderButton.UseVisualStyleBackColor = true;
+            DeleteReminderButton.Click += DeleteReminderButton_Click;
+            // 
+            // AddReminderButton
+            // 
+            AddReminderButton.Image = Properties.Resources.Add_New_24xBlack;
+            AddReminderButton.Location = new Point(345, 7);
+            AddReminderButton.Name = "AddReminderButton";
+            AddReminderButton.Size = new Size(48, 35);
+            AddReminderButton.TabIndex = 1;
+            AddReminderButton.UseVisualStyleBackColor = true;
+            AddReminderButton.Click += AddReminderButton_Click;
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Location = new Point(6, 7);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(333, 274);
+            checkedListBox1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -146,33 +174,6 @@
             CancelButton.TabIndex = 3;
             CancelButton.Text = "Cancel";
             CancelButton.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBox1
-            // 
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(6, 7);
-            checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(333, 274);
-            checkedListBox1.TabIndex = 0;
-            // 
-            // AddReminderButton
-            // 
-            AddReminderButton.Image = Properties.Resources.Add_New_24xBlack;
-            AddReminderButton.Location = new Point(345, 7);
-            AddReminderButton.Name = "AddReminderButton";
-            AddReminderButton.Size = new Size(48, 35);
-            AddReminderButton.TabIndex = 1;
-            AddReminderButton.UseVisualStyleBackColor = true;
-            // 
-            // DeleteReminderButton
-            // 
-            DeleteReminderButton.Image = Properties.Resources.Garbage_Closed_24xBlack;
-            DeleteReminderButton.Location = new Point(345, 48);
-            DeleteReminderButton.Name = "DeleteReminderButton";
-            DeleteReminderButton.Size = new Size(48, 35);
-            DeleteReminderButton.TabIndex = 2;
-            DeleteReminderButton.UseVisualStyleBackColor = true;
-            DeleteReminderButton.Click += DeleteReminderButton_Click;
             // 
             // SettingsForm
             // 

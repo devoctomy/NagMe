@@ -4,6 +4,9 @@ namespace NagMe.Windows
 {
     public static class ThemeDetector
     {
+        // -----------------------------------------------------------------------------
+        // This method was generated with assistance from ChatGPT (OpenAI).
+        // -----------------------------------------------------------------------------
         public static bool IsDarkModeEnabled()
         {
             const string registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";

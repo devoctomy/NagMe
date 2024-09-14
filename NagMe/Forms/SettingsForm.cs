@@ -39,5 +39,11 @@ namespace NagMe.Forms
         {
 
         }
+
+        private void AddReminderButton_Click(object sender, EventArgs e)
+        {
+            var reminderEditor = new ReminderEditorDialog();
+            var result = reminderEditor.ShowDialog(this);
+        }
     }
 }

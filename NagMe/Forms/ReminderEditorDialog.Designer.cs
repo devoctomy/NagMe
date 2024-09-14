@@ -35,7 +35,7 @@
             ApplyButton = new Button();
             TopPanel = new Panel();
             ReminderEditorTabs = new TabControl();
-            GenerallTab = new TabPage();
+            GeneralTab = new TabPage();
             GeneralDescriptionTextBox = new TextBox();
             GeneralDescriptionLabel = new Label();
             GeneralNameTextBox = new TextBox();
@@ -48,7 +48,7 @@
             BottomPanel.SuspendLayout();
             TopPanel.SuspendLayout();
             ReminderEditorTabs.SuspendLayout();
-            GenerallTab.SuspendLayout();
+            GeneralTab.SuspendLayout();
             TimingsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).BeginInit();
             SuspendLayout();
@@ -107,7 +107,7 @@
             // 
             // ReminderEditorTabs
             // 
-            ReminderEditorTabs.Controls.Add(GenerallTab);
+            ReminderEditorTabs.Controls.Add(GeneralTab);
             ReminderEditorTabs.Controls.Add(TimingsTab);
             ReminderEditorTabs.Controls.Add(AiTab);
             ReminderEditorTabs.Dock = DockStyle.Fill;
@@ -117,19 +117,19 @@
             ReminderEditorTabs.Size = new Size(521, 401);
             ReminderEditorTabs.TabIndex = 0;
             // 
-            // GenerallTab
+            // GeneralTab
             // 
-            GenerallTab.Controls.Add(GeneralDescriptionTextBox);
-            GenerallTab.Controls.Add(GeneralDescriptionLabel);
-            GenerallTab.Controls.Add(GeneralNameTextBox);
-            GenerallTab.Controls.Add(GeneralNameLabel);
-            GenerallTab.Location = new Point(4, 24);
-            GenerallTab.Name = "GenerallTab";
-            GenerallTab.Padding = new Padding(3);
-            GenerallTab.Size = new Size(513, 373);
-            GenerallTab.TabIndex = 2;
-            GenerallTab.Text = "General";
-            GenerallTab.UseVisualStyleBackColor = true;
+            GeneralTab.Controls.Add(GeneralDescriptionTextBox);
+            GeneralTab.Controls.Add(GeneralDescriptionLabel);
+            GeneralTab.Controls.Add(GeneralNameTextBox);
+            GeneralTab.Controls.Add(GeneralNameLabel);
+            GeneralTab.Location = new Point(4, 24);
+            GeneralTab.Name = "GeneralTab";
+            GeneralTab.Padding = new Padding(3);
+            GeneralTab.Size = new Size(513, 373);
+            GeneralTab.TabIndex = 2;
+            GeneralTab.Text = "General";
+            GeneralTab.UseVisualStyleBackColor = true;
             // 
             // GeneralDescriptionTextBox
             // 
@@ -190,6 +190,8 @@
             // TimingsIntervalNumericUpDown
             // 
             TimingsIntervalNumericUpDown.Location = new Point(17, 31);
+            TimingsIntervalNumericUpDown.Maximum = new decimal(new int[] { 86400, 0, 0, 0 });
+            TimingsIntervalNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             TimingsIntervalNumericUpDown.Name = "TimingsIntervalNumericUpDown";
             TimingsIntervalNumericUpDown.Size = new Size(305, 23);
             TimingsIntervalNumericUpDown.TabIndex = 3;
@@ -226,12 +228,13 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ReminderEditorDialog";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "NagMe - Reminder Editor";
             BottomPanel.ResumeLayout(false);
             TopPanel.ResumeLayout(false);
             ReminderEditorTabs.ResumeLayout(false);
-            GenerallTab.ResumeLayout(false);
-            GenerallTab.PerformLayout();
+            GeneralTab.ResumeLayout(false);
+            GeneralTab.PerformLayout();
             TimingsTab.ResumeLayout(false);
             TimingsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).EndInit();
@@ -250,7 +253,7 @@
         private TabPage AiTab;
         private Button button1;
         private Button button2;
-        private TabPage GenerallTab;
+        private TabPage GeneralTab;
         private Label GeneralNameLabel;
         private TextBox GeneralNameTextBox;
         private TextBox GeneralDescriptionTextBox;
