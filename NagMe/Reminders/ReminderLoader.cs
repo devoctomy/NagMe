@@ -4,11 +4,11 @@ namespace NagMe.Reminders
 {
     public class ReminderLoader
     {
-        public IReadOnlyList<Reminder> Reminders => _reminders;
-        public bool IsDirty { get; private set; }
         private List<Reminder> _reminders = new();
         private string? _path = null;
         private static ReminderLoader? _current;
+        public IReadOnlyList<Reminder> Reminders => _reminders;
+        public bool IsDirty { get; private set; }
 
         public static ReminderLoader Current
         {

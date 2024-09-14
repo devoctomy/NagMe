@@ -14,24 +14,30 @@ namespace NagMe.Forms
         private void ReadSettings()
         {
             var startupManager = StartupManager.Current;
-            StartWithWindowsCheckBox.Checked = startupManager.StartupWithWindows;
+            SystemStartWithWindowsCheckBox.Checked = startupManager.StartupWithWindows;
 
             RemindersCheckedListBox.Items.AddRange(new ListBox.ObjectCollection(RemindersCheckedListBox, [.. ReminderLoader.Current.Reminders]));
             for (int i = 0; i < RemindersCheckedListBox.Items.Count; i++)
             {
                 RemindersCheckedListBox.SetItemChecked(i, ReminderLoader.Current.Reminders[i].IsEnabled);
             }
+
+            AiEnableCheckBox.Checked = Configuration.Configuration.Current.EnableAiFeatures;
+            AiOpenAiApiTokenTextBox.Text = Configuration.Configuration.Current.OpenAIApiToken;
         }
 
         private void ApplySettings()
         {
             var startupManager = StartupManager.Current;
-            startupManager.StartupWithWindows = StartWithWindowsCheckBox.Checked;
+            startupManager.StartupWithWindows = SystemStartWithWindowsCheckBox.Checked;
 
             if (ReminderLoader.Current.IsDirty)
             {
                 ReminderLoader.Current.SaveReminders();
             }
+
+            Configuration.Configuration.Current.EnableAiFeatures = AiEnableCheckBox.Checked;
+            Configuration.Configuration.Current.OpenAIApiToken = AiOpenAiApiTokenTextBox.Text;
 
             ApplyButton.Enabled = false;
         }
@@ -74,16 +80,21 @@ namespace NagMe.Forms
         {
             var isChecked = RemindersCheckedListBox.CheckedItems.Contains(RemindersCheckedListBox.SelectedItem);
             var selectedReminder = RemindersCheckedListBox.SelectedItem as Reminder;
-            if(selectedReminder == null)
+            if (selectedReminder == null)
             {
                 return;
             }
 
-            if(selectedReminder.IsEnabled != isChecked)
+            if (selectedReminder.IsEnabled != isChecked)
             {
                 ReminderLoader.Current.SetReminderEnabledState(selectedReminder, isChecked);
                 ApplyButton.Enabled = true;
             }
+        }
+
+        private void AiEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            AiFeaturesPanel.Enabled = AiEnableCheckBox.Checked;
         }
     }
 }

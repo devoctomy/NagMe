@@ -30,28 +30,37 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             SettingsTabs = new TabControl();
-            tabPage1 = new TabPage();
+            RemindersTab = new TabPage();
             DeleteReminderButton = new Button();
             AddReminderButton = new Button();
             RemindersCheckedListBox = new CheckedListBox();
-            tabPage2 = new TabPage();
-            StartWithWindowsCheckBox = new CheckBox();
+            SystemTab = new TabPage();
+            SystemStartWithWindowsCheckBox = new CheckBox();
+            AiTab = new TabPage();
+            AiFeaturesPanel = new Panel();
+            AiOpenAiApiTokenLabel = new Label();
+            AiOpenAiApiTokenTextBox = new TextBox();
+            AiWarningLabel = new Label();
+            AiEnableCheckBox = new CheckBox();
             TopPanel = new Panel();
             ApplyButton = new Button();
             BottomPanel = new Panel();
             OkButton = new Button();
             CancelButton = new Button();
             SettingsTabs.SuspendLayout();
-            tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
+            RemindersTab.SuspendLayout();
+            SystemTab.SuspendLayout();
+            AiTab.SuspendLayout();
+            AiFeaturesPanel.SuspendLayout();
             TopPanel.SuspendLayout();
             BottomPanel.SuspendLayout();
             SuspendLayout();
             // 
             // SettingsTabs
             // 
-            SettingsTabs.Controls.Add(tabPage1);
-            SettingsTabs.Controls.Add(tabPage2);
+            SettingsTabs.Controls.Add(RemindersTab);
+            SettingsTabs.Controls.Add(SystemTab);
+            SettingsTabs.Controls.Add(AiTab);
             SettingsTabs.Dock = DockStyle.Fill;
             SettingsTabs.Location = new Point(0, 0);
             SettingsTabs.Name = "SettingsTabs";
@@ -59,18 +68,18 @@
             SettingsTabs.Size = new Size(409, 329);
             SettingsTabs.TabIndex = 0;
             // 
-            // tabPage1
+            // RemindersTab
             // 
-            tabPage1.Controls.Add(DeleteReminderButton);
-            tabPage1.Controls.Add(AddReminderButton);
-            tabPage1.Controls.Add(RemindersCheckedListBox);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(401, 301);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Reminders";
-            tabPage1.UseVisualStyleBackColor = true;
+            RemindersTab.Controls.Add(DeleteReminderButton);
+            RemindersTab.Controls.Add(AddReminderButton);
+            RemindersTab.Controls.Add(RemindersCheckedListBox);
+            RemindersTab.Location = new Point(4, 24);
+            RemindersTab.Name = "RemindersTab";
+            RemindersTab.Padding = new Padding(3);
+            RemindersTab.Size = new Size(401, 301);
+            RemindersTab.TabIndex = 0;
+            RemindersTab.Text = "Reminders";
+            RemindersTab.UseVisualStyleBackColor = true;
             // 
             // DeleteReminderButton
             // 
@@ -101,26 +110,85 @@
             RemindersCheckedListBox.TabIndex = 0;
             RemindersCheckedListBox.SelectedValueChanged += RemindersCheckedListBox_SelectedValueChanged;
             // 
-            // tabPage2
+            // SystemTab
             // 
-            tabPage2.Controls.Add(StartWithWindowsCheckBox);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(401, 301);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "System";
-            tabPage2.UseVisualStyleBackColor = true;
+            SystemTab.Controls.Add(SystemStartWithWindowsCheckBox);
+            SystemTab.Location = new Point(4, 24);
+            SystemTab.Name = "SystemTab";
+            SystemTab.Padding = new Padding(3);
+            SystemTab.Size = new Size(401, 301);
+            SystemTab.TabIndex = 1;
+            SystemTab.Text = "System";
+            SystemTab.UseVisualStyleBackColor = true;
             // 
-            // StartWithWindowsCheckBox
+            // SystemStartWithWindowsCheckBox
             // 
-            StartWithWindowsCheckBox.AutoSize = true;
-            StartWithWindowsCheckBox.Location = new Point(20, 17);
-            StartWithWindowsCheckBox.Name = "StartWithWindowsCheckBox";
-            StartWithWindowsCheckBox.Size = new Size(130, 19);
-            StartWithWindowsCheckBox.TabIndex = 0;
-            StartWithWindowsCheckBox.Text = "Start With Windows";
-            StartWithWindowsCheckBox.UseVisualStyleBackColor = true;
+            SystemStartWithWindowsCheckBox.AutoSize = true;
+            SystemStartWithWindowsCheckBox.Location = new Point(20, 17);
+            SystemStartWithWindowsCheckBox.Name = "SystemStartWithWindowsCheckBox";
+            SystemStartWithWindowsCheckBox.Size = new Size(130, 19);
+            SystemStartWithWindowsCheckBox.TabIndex = 0;
+            SystemStartWithWindowsCheckBox.Text = "Start With Windows";
+            SystemStartWithWindowsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AiTab
+            // 
+            AiTab.Controls.Add(AiFeaturesPanel);
+            AiTab.Controls.Add(AiWarningLabel);
+            AiTab.Controls.Add(AiEnableCheckBox);
+            AiTab.Location = new Point(4, 24);
+            AiTab.Name = "AiTab";
+            AiTab.Size = new Size(401, 301);
+            AiTab.TabIndex = 2;
+            AiTab.Text = "AI";
+            AiTab.UseVisualStyleBackColor = true;
+            // 
+            // AiFeaturesPanel
+            // 
+            AiFeaturesPanel.Controls.Add(AiOpenAiApiTokenLabel);
+            AiFeaturesPanel.Controls.Add(AiOpenAiApiTokenTextBox);
+            AiFeaturesPanel.Enabled = false;
+            AiFeaturesPanel.Location = new Point(0, 162);
+            AiFeaturesPanel.Name = "AiFeaturesPanel";
+            AiFeaturesPanel.Size = new Size(401, 78);
+            AiFeaturesPanel.TabIndex = 5;
+            // 
+            // AiOpenAiApiTokenLabel
+            // 
+            AiOpenAiApiTokenLabel.AutoSize = true;
+            AiOpenAiApiTokenLabel.Location = new Point(20, 12);
+            AiOpenAiApiTokenLabel.Name = "AiOpenAiApiTokenLabel";
+            AiOpenAiApiTokenLabel.Size = new Size(102, 15);
+            AiOpenAiApiTokenLabel.TabIndex = 6;
+            AiOpenAiApiTokenLabel.Text = "OpenAI API Token";
+            // 
+            // AiOpenAiApiTokenTextBox
+            // 
+            AiOpenAiApiTokenTextBox.Location = new Point(20, 39);
+            AiOpenAiApiTokenTextBox.Name = "AiOpenAiApiTokenTextBox";
+            AiOpenAiApiTokenTextBox.Size = new Size(373, 23);
+            AiOpenAiApiTokenTextBox.TabIndex = 5;
+            // 
+            // AiWarningLabel
+            // 
+            AiWarningLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            AiWarningLabel.ForeColor = Color.Red;
+            AiWarningLabel.Location = new Point(20, 16);
+            AiWarningLabel.Name = "AiWarningLabel";
+            AiWarningLabel.Size = new Size(359, 115);
+            AiWarningLabel.TabIndex = 2;
+            AiWarningLabel.Text = resources.GetString("AiWarningLabel.Text");
+            // 
+            // AiEnableCheckBox
+            // 
+            AiEnableCheckBox.AutoSize = true;
+            AiEnableCheckBox.Location = new Point(20, 137);
+            AiEnableCheckBox.Name = "AiEnableCheckBox";
+            AiEnableCheckBox.Size = new Size(122, 19);
+            AiEnableCheckBox.TabIndex = 1;
+            AiEnableCheckBox.Text = "Enable AI Features";
+            AiEnableCheckBox.UseVisualStyleBackColor = true;
+            AiEnableCheckBox.CheckedChanged += AiEnableCheckBox_CheckedChanged;
             // 
             // TopPanel
             // 
@@ -192,9 +260,13 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "NagMe - Settings";
             SettingsTabs.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
+            RemindersTab.ResumeLayout(false);
+            SystemTab.ResumeLayout(false);
+            SystemTab.PerformLayout();
+            AiTab.ResumeLayout(false);
+            AiTab.PerformLayout();
+            AiFeaturesPanel.ResumeLayout(false);
+            AiFeaturesPanel.PerformLayout();
             TopPanel.ResumeLayout(false);
             BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
@@ -203,16 +275,22 @@
         #endregion
 
         private TabControl SettingsTabs;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage RemindersTab;
+        private TabPage SystemTab;
         private Panel TopPanel;
         private Button ApplyButton;
         private Panel BottomPanel;
         private Button OkButton;
         private Button CancelButton;
-        private CheckBox StartWithWindowsCheckBox;
+        private CheckBox SystemStartWithWindowsCheckBox;
         private Button AddReminderButton;
         private CheckedListBox RemindersCheckedListBox;
         private Button DeleteReminderButton;
+        private TabPage AiTab;
+        private CheckBox AiEnableCheckBox;
+        private Label AiWarningLabel;
+        private Panel AiFeaturesPanel;
+        private Label AiOpenAiApiTokenLabel;
+        private TextBox AiOpenAiApiTokenTextBox;
     }
 }

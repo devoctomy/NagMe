@@ -4,10 +4,9 @@ namespace NagMe.Windows
 {
     public class SystemTray
     {
-        public string ToolTip { get; private set; }
-
         private NotifyIcon _notifyIcon;
         private ContextMenuStrip _contextMenuStrip;
+        public string ToolTip { get; private set; }
 
         public SystemTray(string toolTip)
         {
