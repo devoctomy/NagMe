@@ -1,13 +1,78 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace NagMe.Reminders
 {
     public class ReminderLoader
     {
+        public IReadOnlyList<Reminder> Reminders => _reminders;
+        public bool IsDirty { get; private set; }
+        private List<Reminder>? _reminders = new();
+        private string? _path = null;
+        private static ReminderLoader? _current;
 
+        public static ReminderLoader Current
+        {
+            get
+            {
+                ArgumentNullException.ThrowIfNull(_current);
+
+                return _current;
+            }
+        }
+
+        public ReminderLoader(string path)
+        {
+            LoadReminders(path);
+        }
+
+        public static ReminderLoader Initialize(string path)
+        {
+            _current = new ReminderLoader(path);
+            return _current;
+        }
+
+        private void LoadReminders(string path)
+        {
+            _path = path;
+            if (File.Exists(path))
+            {
+                var remindersJsonRaw = File.ReadAllText(path);
+                _reminders = JsonSerializer.Deserialize<List<Reminder>>(remindersJsonRaw);
+            }
+        }
+
+        public void SaveReminders()
+        {
+            ArgumentNullException.ThrowIfNull(_path);
+
+            var remindersJsonRaw = JsonSerializer.Serialize(Reminders);
+            File.WriteAllText(_path, remindersJsonRaw);
+        }
+
+        public void AddReminder(Reminder reminder)
+        {
+            _reminders.Add(reminder);
+            IsDirty = true;
+        }
+
+        public void RemoveReminder(Reminder reminder)
+        {
+            _reminders.Remove(reminder);
+            IsDirty = true;
+        }
+
+        public void ClearReminders()
+        {
+            _reminders.Clear();
+            IsDirty = true;
+        }
+
+        public void SetReminderEnabledState(
+            Reminder reminder,
+            bool isEnabled)
+        {
+            reminder.IsEnabled = isEnabled;
+            IsDirty = true;
+        }
     }
 }

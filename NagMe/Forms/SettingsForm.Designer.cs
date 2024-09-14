@@ -33,7 +33,7 @@
             tabPage1 = new TabPage();
             DeleteReminderButton = new Button();
             AddReminderButton = new Button();
-            checkedListBox1 = new CheckedListBox();
+            RemindersCheckedListBox = new CheckedListBox();
             tabPage2 = new TabPage();
             StartWithWindowsCheckBox = new CheckBox();
             TopPanel = new Panel();
@@ -63,7 +63,7 @@
             // 
             tabPage1.Controls.Add(DeleteReminderButton);
             tabPage1.Controls.Add(AddReminderButton);
-            tabPage1.Controls.Add(checkedListBox1);
+            tabPage1.Controls.Add(RemindersCheckedListBox);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -92,13 +92,14 @@
             AddReminderButton.UseVisualStyleBackColor = true;
             AddReminderButton.Click += AddReminderButton_Click;
             // 
-            // checkedListBox1
+            // RemindersCheckedListBox
             // 
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(6, 7);
-            checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(333, 274);
-            checkedListBox1.TabIndex = 0;
+            RemindersCheckedListBox.FormattingEnabled = true;
+            RemindersCheckedListBox.Location = new Point(6, 7);
+            RemindersCheckedListBox.Name = "RemindersCheckedListBox";
+            RemindersCheckedListBox.Size = new Size(333, 274);
+            RemindersCheckedListBox.TabIndex = 0;
+            RemindersCheckedListBox.SelectedValueChanged += RemindersCheckedListBox_SelectedValueChanged;
             // 
             // tabPage2
             // 
@@ -211,7 +212,7 @@
         private Button CancelButton;
         private CheckBox StartWithWindowsCheckBox;
         private Button AddReminderButton;
-        private CheckedListBox checkedListBox1;
+        private CheckedListBox RemindersCheckedListBox;
         private Button DeleteReminderButton;
     }
 }

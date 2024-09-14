@@ -16,6 +16,8 @@ namespace NagMe.Forms
     {
         private Reminder _reminder = new Reminder();
 
+        public Reminder Reminder => _reminder;
+
         public ReminderEditorDialog()
         {
             InitializeComponent();
@@ -48,10 +50,24 @@ namespace NagMe.Forms
 
         private void TimingsIntervalPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(TimingsIntervalPeriod.SelectedIndex == -1)
+            if (TimingsIntervalPeriod.SelectedIndex == -1)
             {
                 TimingsIntervalPeriod.SelectedIndex = 0; // Seconds
             }
+        }
+
+        private void UpdateReminder()
+        {
+            _reminder.Name = GeneralNameTextBox.Text;
+            _reminder.Description = GeneralDescriptionTextBox.Text;
+            _reminder.Interval = (int)TimingsIntervalNumericUpDown.Value;
+            _reminder.Period = Enum.Parse<IntervalPeriod>(TimingsIntervalPeriod.Text);
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            UpdateReminder();
+            DialogResult = DialogResult.OK;
         }
     }
 }

@@ -32,7 +32,6 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CancelButton = new Button();
-            ApplyButton = new Button();
             TopPanel = new Panel();
             ReminderEditorTabs = new TabControl();
             GeneralTab = new TabPage();
@@ -57,7 +56,6 @@
             // 
             BottomPanel.Controls.Add(OkButton);
             BottomPanel.Controls.Add(CancelButton);
-            BottomPanel.Controls.Add(ApplyButton);
             BottomPanel.Dock = DockStyle.Bottom;
             BottomPanel.Location = new Point(0, 401);
             BottomPanel.Name = "BottomPanel";
@@ -67,34 +65,24 @@
             // OkButton
             // 
             OkButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            OkButton.Location = new Point(224, 7);
+            OkButton.Location = new Point(321, 7);
             OkButton.Name = "OkButton";
             OkButton.Size = new Size(91, 27);
             OkButton.TabIndex = 7;
             OkButton.Text = "OK";
             OkButton.UseVisualStyleBackColor = true;
+            OkButton.Click += OkButton_Click;
             // 
             // CancelButton
             // 
             CancelButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CancelButton.DialogResult = DialogResult.Cancel;
-            CancelButton.Location = new Point(321, 7);
+            CancelButton.Location = new Point(418, 7);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(91, 27);
             CancelButton.TabIndex = 6;
             CancelButton.Text = "Cancel";
             CancelButton.UseVisualStyleBackColor = true;
-            // 
-            // ApplyButton
-            // 
-            ApplyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ApplyButton.Enabled = false;
-            ApplyButton.Location = new Point(418, 7);
-            ApplyButton.Name = "ApplyButton";
-            ApplyButton.Size = new Size(91, 27);
-            ApplyButton.TabIndex = 5;
-            ApplyButton.Text = "Apply";
-            ApplyButton.UseVisualStyleBackColor = true;
             // 
             // TopPanel
             // 
@@ -246,7 +234,6 @@
         private Panel BottomPanel;
         private Button OkButton;
         private Button CancelButton;
-        private Button ApplyButton;
         private Panel TopPanel;
         private TabControl ReminderEditorTabs;
         private TabPage TimingsTab;
