@@ -238,8 +238,6 @@
         private TabControl ReminderEditorTabs;
         private TabPage TimingsTab;
         private TabPage AiTab;
-        private Button button1;
-        private Button button2;
         private TabPage GeneralTab;
         private Label GeneralNameLabel;
         private TextBox GeneralNameTextBox;

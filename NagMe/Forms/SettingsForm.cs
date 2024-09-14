@@ -1,14 +1,34 @@
 using NagMe.Reminders;
 using NagMe.Windows;
+using System.ComponentModel;
+using System.Timers;
 
 namespace NagMe.Forms
 {
     public partial class SettingsForm : Form
     {
+        private System.Timers.Timer _queueUpdateTimer;
+
         public SettingsForm()
         {
             InitializeComponent();
             ReadSettings();
+            RemindersQueueListView.ListViewItemSorter = new ReminderComparer();
+
+            _queueUpdateTimer = new System.Timers.Timer(new TimeSpan(0, 0, 1));
+            _queueUpdateTimer.Elapsed += _queueUpdateTimer_Elapsed;
+            _queueUpdateTimer.Start();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            _queueUpdateTimer.Stop();
+        }
+
+        private void _queueUpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
+        {
+            UpdateQueue();
         }
 
         private void ReadSettings()
@@ -24,6 +44,8 @@ namespace NagMe.Forms
 
             AiEnableCheckBox.Checked = Configuration.Configuration.Current.EnableAiFeatures;
             AiOpenAiApiTokenTextBox.Text = Configuration.Configuration.Current.OpenAIApiToken;
+
+            UpdateQueue();
         }
 
         private void ApplySettings()
@@ -59,6 +81,7 @@ namespace NagMe.Forms
             {
                 RemindersCheckedListBox.Items.Remove(reminder);
                 ReminderLoader.Current.RemoveReminder(reminder);
+                UpdateQueue();
                 ApplyButton.Enabled = true;
             }
         }
@@ -69,9 +92,10 @@ namespace NagMe.Forms
             var result = reminderEditor.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                ReminderLoader.Current.AddReminder(reminderEditor.Reminder);
-                RemindersCheckedListBox.Items.Add(reminderEditor.Reminder);
-                RemindersCheckedListBox.SetItemCheckState(RemindersCheckedListBox.Items.Count - 1, CheckState.Checked);
+                var reminder = reminderEditor.Reminder;
+                ReminderLoader.Current.AddReminder(reminder);
+                RemindersCheckedListBox.Items.Add(reminder);
+                UpdateQueue();
                 ApplyButton.Enabled = true;
             }
         }
@@ -87,7 +111,9 @@ namespace NagMe.Forms
 
             if (selectedReminder.IsEnabled != isChecked)
             {
+                selectedReminder.Restart();
                 ReminderLoader.Current.SetReminderEnabledState(selectedReminder, isChecked);
+                UpdateQueue();
                 ApplyButton.Enabled = true;
             }
         }
@@ -95,6 +121,47 @@ namespace NagMe.Forms
         private void AiEnableCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             AiFeaturesPanel.Enabled = AiEnableCheckBox.Checked;
+        }
+
+        private void UpdateQueue()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    DoUpdate();
+                });
+            }
+            else
+            {
+                DoUpdate();
+            }
+        }
+
+        private void DoUpdate()
+        {
+            RemindersQueueListView.BeginUpdate();
+            foreach (var curReminder in ReminderLoader.Current.Reminders)
+            {
+                var existing = RemindersQueueListView.Items.Cast<ListViewItem>().SingleOrDefault(x => x.Tag == curReminder);
+                if (existing == null)
+                {
+                    var newItem = new ListViewItem(curReminder.Name);
+                    var remaining = curReminder.IsEnabled ? curReminder.GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(curReminder.StartedAt)).ToString() : "-";
+                    newItem.SubItems.Add(remaining);
+                    newItem.SubItems.Add("0");
+                    newItem.Tag = curReminder;
+                    RemindersQueueListView.Items.Add(newItem);
+                }
+                else
+                {
+                    var remaining = curReminder.IsEnabled ? curReminder.GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(curReminder.StartedAt)).ToString() : "-";
+                    existing.SubItems[1].Text = remaining.ToString();
+                }
+
+            }
+            RemindersQueueListView.Sort();
+            RemindersQueueListView.EndUpdate();
         }
     }
 }

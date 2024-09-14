@@ -41,6 +41,13 @@ namespace NagMe.Reminders
                 if(reminders != null)
                 {
                     _reminders = reminders;
+                    foreach (var reminder in _reminders)
+                    {
+                        if (reminder.IsEnabled)
+                        {
+                            reminder.Restart();
+                        }
+                    }
                 }
             }
         }
