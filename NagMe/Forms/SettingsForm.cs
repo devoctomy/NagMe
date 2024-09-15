@@ -1,4 +1,5 @@
 using NagMe.Reminders;
+using NagMe.ViewModels;
 using NagMe.Windows;
 using System.ComponentModel;
 using System.Timers;
@@ -7,33 +8,27 @@ namespace NagMe.Forms
 {
     public partial class SettingsForm : Form
     {
-        private List<ReminderQueueItem> _queueReminders = new List<ReminderQueueItem>();
-        private System.Timers.Timer _queueUpdateTimer;
-        private BindingSource _queueBindingSource;
+        private SettingsViewModel _viewModel;
 
         public SettingsForm()
         {
             InitializeComponent();
+
+            _viewModel = new SettingsViewModel(this);
+
             ReadSettings();
+            BindControls();
+        }
 
-            _queueBindingSource = new BindingSource();
-            _queueBindingSource.DataSource = _queueReminders;
-            ReminderQueueDataGrid.DataSource = _queueBindingSource;
-
-            _queueUpdateTimer = new System.Timers.Timer(new TimeSpan(0, 0, 1));
-            _queueUpdateTimer.Elapsed += _queueUpdateTimer_Elapsed;
-            _queueUpdateTimer.Start();
+        private void BindControls()
+        {
+            ReminderQueueDataGrid.DataBindings.Add("DataSource", _viewModel, nameof(_viewModel.QueueBindingSource), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            _queueUpdateTimer.Stop();
-        }
-
-        private void _queueUpdateTimer_Elapsed(object? sender, ElapsedEventArgs e)
-        {
-            UpdateQueue();
+            //_queueUpdateTimer.Stop();
         }
 
         private void ReadSettings()
@@ -50,7 +45,7 @@ namespace NagMe.Forms
             AiEnableCheckBox.Checked = Configuration.Configuration.Current.EnableAiFeatures;
             AiOpenAiApiTokenTextBox.Text = Configuration.Configuration.Current.OpenAIApiToken;
 
-            UpdateQueue();
+            //UpdateQueue();
         }
 
         private void ApplySettings()
@@ -86,7 +81,7 @@ namespace NagMe.Forms
             {
                 RemindersCheckedListBox.Items.Remove(reminder);
                 ReminderLoader.Current.RemoveReminder(reminder);
-                UpdateQueue();
+                //UpdateQueue();
                 ApplyButton.Enabled = true;
             }
         }
@@ -100,7 +95,7 @@ namespace NagMe.Forms
             {
                 ReminderLoader.Current.AddReminder(reminder);
                 RemindersCheckedListBox.Items.Add(reminder);
-                UpdateQueue();
+                //UpdateQueue();
                 ApplyButton.Enabled = true;
             }
         }
@@ -118,7 +113,7 @@ namespace NagMe.Forms
             {
                 selectedReminder.Restart();
                 ReminderLoader.Current.SetReminderEnabledState(selectedReminder, isChecked);
-                UpdateQueue();
+                //UpdateQueue();
                 ApplyButton.Enabled = true;
             }
         }
@@ -128,61 +123,61 @@ namespace NagMe.Forms
             AiFeaturesPanel.Enabled = AiEnableCheckBox.Checked;
         }
 
-        private void UpdateQueue()
-        {
-            if (this.InvokeRequired)
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    DoUpdate();
-                });
-            }
-            else
-            {
-                DoUpdate();
-            }
-        }
+        //private void UpdateQueue()
+        //{
+        //    if (this.InvokeRequired)
+        //    {
+        //        this.Invoke((MethodInvoker)delegate
+        //        {
+        //            DoUpdate();
+        //        });
+        //    }
+        //    else
+        //    {
+        //        DoUpdate();
+        //    }
+        //}
 
-        private void DoUpdate()
-        {
-            var reset = false;
-            var stale = _queueReminders.Where(x => !ReminderLoader.Current.Reminders.Any(y => y == x.Reminder)).ToList();
-            while (stale.Count > 0)
-            {
-                var curStale = stale.First();
-                _queueReminders.Remove(curStale);
-                stale.Remove(curStale);
-                reset = true;
-            }
+        //private void DoUpdate()
+        //{
+        //    var reset = false;
+        //    var stale = _queueReminders.Where(x => !ReminderLoader.Current.Reminders.Any(y => y == x.Reminder)).ToList();
+        //    while (stale.Count > 0)
+        //    {
+        //        var curStale = stale.First();
+        //        _queueReminders.Remove(curStale);
+        //        stale.Remove(curStale);
+        //        reset = true;
+        //    }
 
-            foreach (var curReminder in ReminderLoader.Current.Reminders)
-            {
-                var existing = _queueReminders.SingleOrDefault(x => x.Reminder == curReminder);
-                if (existing == null)
-                {
-                    var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
-                    var newItem = new ReminderQueueItem(
-                        curReminder,
-                        remaining,
-                        "0");
+        //    foreach (var curReminder in ReminderLoader.Current.Reminders)
+        //    {
+        //        var existing = _queueReminders.SingleOrDefault(x => x.Reminder == curReminder);
+        //        if (existing == null)
+        //        {
+        //            var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
+        //            var newItem = new ReminderQueueItem(
+        //                curReminder,
+        //                remaining,
+        //                "0");
 
-                    _queueReminders.Add(newItem);
-                    reset = true;
-                }
-                else
-                {
-                    var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
-                    existing.RemainingTime = remaining;
-                    reset = true;
-                }
-            }
+        //            _queueReminders.Add(newItem);
+        //            reset = true;
+        //        }
+        //        else
+        //        {
+        //            var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
+        //            existing.RemainingTime = remaining;
+        //            reset = true;
+        //        }
+        //    }
 
-            _queueReminders.Sort(new ReminderComparer());
+        //    _queueReminders.Sort(new ReminderComparer());
 
-            if (reset && _queueBindingSource != null)
-            {
-                _queueBindingSource.ResetBindings(false);
-            }
-        }
+        //    if (reset && _queueBindingSource != null)
+        //    {
+        //        _queueBindingSource.ResetBindings(false);
+        //    }
+        //}
     }
 }
