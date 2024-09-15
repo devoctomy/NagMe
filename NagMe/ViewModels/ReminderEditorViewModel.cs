@@ -8,35 +8,32 @@ namespace NagMe.ViewModels
 {
     public partial class ReminderEditorViewModel : ObservableObject
     {
+        private Form _parentForm;
         private Reminder _reminder;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-        public ReminderEditorViewModel(Reminder reminder)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-        {
-            _reminder = reminder;
-            EnumeratePeriods();
-            ReadReminder();
-        }
+        [ObservableProperty]
+        private string _name = string.Empty;
 
         [ObservableProperty]
-        private string _name;
-
-        [ObservableProperty]
-        private string _description;
+        private string _description = string.Empty;
 
         [ObservableProperty]
         private int _interval;
 
         [ObservableProperty]
-        private IntervalPeriod _period ;
+        private IntervalPeriod _period;
 
         [ObservableProperty]
         private ObservableCollection<string> _periods;
 
-        private void EnumeratePeriods()
+        public ReminderEditorViewModel(
+            Form parentForm,
+            Reminder reminder)
         {
+            _parentForm = parentForm;
+            _reminder = reminder;
             Periods = new ObservableCollection<string>(Enum.GetNames(typeof(IntervalPeriod)));
+            ReadReminder();
         }
 
         private void ReadReminder()
@@ -48,12 +45,13 @@ namespace NagMe.ViewModels
         }
 
         [RelayCommand()]
-        private void UpdateReminder()
+        private void OkButton()
         {
             _reminder.Name = Name;
             _reminder.Description = Description;
             _reminder.Interval = Interval;
             _reminder.Period = Period;
+            _parentForm.DialogResult = DialogResult.OK;
         }
     }
 }

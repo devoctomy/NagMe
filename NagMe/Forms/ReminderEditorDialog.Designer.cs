@@ -71,7 +71,6 @@
             OkButton.TabIndex = 7;
             OkButton.Text = "OK";
             OkButton.UseVisualStyleBackColor = true;
-            OkButton.Click += OkButton_Click;
             // 
             // CnclButton
             // 

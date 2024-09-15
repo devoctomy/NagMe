@@ -32,6 +32,9 @@
             SettingsTabs = new TabControl();
             RemindersTab = new TabPage();
             ReminderQueueDataGrid = new DataGridView();
+            ReminderQueueDataGridColumnName = new DataGridViewTextBoxColumn();
+            ReminderQueueDataGridColumnRemainingTime = new DataGridViewTextBoxColumn();
+            ReminderQueueDataGridColumnTotalCount = new DataGridViewTextBoxColumn();
             DeleteReminderButton = new Button();
             AddReminderButton = new Button();
             RemindersCheckedListBox = new CheckedListBox();
@@ -48,9 +51,6 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
-            ReminderQueueDataGridColumnName = new DataGridViewTextBoxColumn();
-            ReminderQueueDataGridColumnRemainingTime = new DataGridViewTextBoxColumn();
-            ReminderQueueDataGridColumnTotalCount = new DataGridViewTextBoxColumn();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
@@ -107,6 +107,25 @@
             ReminderQueueDataGrid.Size = new Size(385, 152);
             ReminderQueueDataGrid.TabIndex = 4;
             // 
+            // ReminderQueueDataGridColumnName
+            // 
+            ReminderQueueDataGridColumnName.DataPropertyName = "Reminder";
+            ReminderQueueDataGridColumnName.HeaderText = "Name";
+            ReminderQueueDataGridColumnName.Name = "ReminderQueueDataGridColumnName";
+            ReminderQueueDataGridColumnName.Width = 150;
+            // 
+            // ReminderQueueDataGridColumnRemainingTime
+            // 
+            ReminderQueueDataGridColumnRemainingTime.DataPropertyName = "RemainingTime";
+            ReminderQueueDataGridColumnRemainingTime.HeaderText = "Remaining Time";
+            ReminderQueueDataGridColumnRemainingTime.Name = "ReminderQueueDataGridColumnRemainingTime";
+            // 
+            // ReminderQueueDataGridColumnTotalCount
+            // 
+            ReminderQueueDataGridColumnTotalCount.DataPropertyName = "TotalCount";
+            ReminderQueueDataGridColumnTotalCount.HeaderText = "Total Count";
+            ReminderQueueDataGridColumnTotalCount.Name = "ReminderQueueDataGridColumnTotalCount";
+            // 
             // DeleteReminderButton
             // 
             DeleteReminderButton.Image = Properties.Resources.Garbage_Closed_24xBlack;
@@ -115,7 +134,6 @@
             DeleteReminderButton.Size = new Size(48, 35);
             DeleteReminderButton.TabIndex = 2;
             DeleteReminderButton.UseVisualStyleBackColor = true;
-            DeleteReminderButton.Click += DeleteReminderButton_Click;
             // 
             // AddReminderButton
             // 
@@ -125,7 +143,6 @@
             AddReminderButton.Size = new Size(48, 35);
             AddReminderButton.TabIndex = 1;
             AddReminderButton.UseVisualStyleBackColor = true;
-            AddReminderButton.Click += AddReminderButton_Click;
             // 
             // RemindersCheckedListBox
             // 
@@ -134,7 +151,7 @@
             RemindersCheckedListBox.Name = "RemindersCheckedListBox";
             RemindersCheckedListBox.Size = new Size(333, 130);
             RemindersCheckedListBox.TabIndex = 0;
-            RemindersCheckedListBox.SelectedValueChanged += RemindersCheckedListBox_SelectedValueChanged;
+            RemindersCheckedListBox.ItemCheck += RemindersCheckedListBox_ItemCheck;
             // 
             // SystemTab
             // 
@@ -235,7 +252,6 @@
             ApplyButton.TabIndex = 2;
             ApplyButton.Text = "Apply";
             ApplyButton.UseVisualStyleBackColor = true;
-            ApplyButton.Click += ApplyButton_Click;
             // 
             // BottomPanel
             // 
@@ -257,7 +273,6 @@
             OkButton.TabIndex = 4;
             OkButton.Text = "OK";
             OkButton.UseVisualStyleBackColor = true;
-            OkButton.Click += OkButton_Click;
             // 
             // CnclButton
             // 
@@ -269,25 +284,6 @@
             CnclButton.TabIndex = 3;
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
-            // 
-            // ReminderQueueDataGridColumnName
-            // 
-            ReminderQueueDataGridColumnName.DataPropertyName = "Reminder";
-            ReminderQueueDataGridColumnName.HeaderText = "Name";
-            ReminderQueueDataGridColumnName.Name = "ReminderQueueDataGridColumnName";
-            ReminderQueueDataGridColumnName.Width = 150;
-            // 
-            // ReminderQueueDataGridColumnRemainingTime
-            // 
-            ReminderQueueDataGridColumnRemainingTime.DataPropertyName = "RemainingTime";
-            ReminderQueueDataGridColumnRemainingTime.HeaderText = "Remaining Time";
-            ReminderQueueDataGridColumnRemainingTime.Name = "ReminderQueueDataGridColumnRemainingTime";
-            // 
-            // ReminderQueueDataGridColumnTotalCount
-            // 
-            ReminderQueueDataGridColumnTotalCount.DataPropertyName = "TotalCount";
-            ReminderQueueDataGridColumnTotalCount.HeaderText = "Total Count";
-            ReminderQueueDataGridColumnTotalCount.Name = "ReminderQueueDataGridColumnTotalCount";
             // 
             // SettingsForm
             // 
