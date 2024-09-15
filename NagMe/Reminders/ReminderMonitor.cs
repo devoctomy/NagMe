@@ -29,6 +29,11 @@
 
         public void Stop()
         {
+            if(_updateTimer == null)
+            {
+                return;
+            }
+
             _updateTimer.Stop();
         }
 
@@ -41,7 +46,7 @@
 
         private void CheckReminders()
         {
-            foreach (var curReminder in ReminderLoader.Current.Reminders)
+            foreach (var curReminder in ReminderLoader.Current.Reminders.Where(x => x.IsEnabled))
             {
                 var remainingTime = curReminder.GetRemainingTimeAsTimeSpan();
                 if(remainingTime.TotalSeconds <= 0)
