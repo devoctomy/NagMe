@@ -7,6 +7,7 @@ namespace NagMe.Forms
 {
     public partial class SettingsForm : Form
     {
+        private List<ReminderQueueItem> _reminders = new List<ReminderQueueItem>();
         private System.Timers.Timer _queueUpdateTimer;
 
         public SettingsForm()
@@ -141,9 +142,19 @@ namespace NagMe.Forms
         private void DoUpdate()
         {
             RemindersQueueListView.BeginUpdate();
+
+            var stale = _reminders.Where(x => !ReminderLoader.Current.Reminders.Contains(x.Reminder)).ToList();
+            while(stale.Count > 0)
+            {
+                var curStale = stale.First();
+                _reminders.Remove(curStale);
+                RemindersQueueListView.Items.Remove(curStale.ListViewItem);
+                stale.Remove(curStale);
+            }
+
             foreach (var curReminder in ReminderLoader.Current.Reminders)
             {
-                var existing = RemindersQueueListView.Items.Cast<ListViewItem>().SingleOrDefault(x => x.Tag == curReminder);
+                var existing = _reminders.SingleOrDefault(x => x.Reminder == curReminder);
                 if (existing == null)
                 {
                     var newItem = new ListViewItem(curReminder.Name);
@@ -151,12 +162,15 @@ namespace NagMe.Forms
                     newItem.SubItems.Add(remaining);
                     newItem.SubItems.Add("0");
                     newItem.Tag = curReminder;
-                    RemindersQueueListView.Items.Add(newItem);
+
+                    var newQueueItem = new ReminderQueueItem(curReminder, newItem);
+                    _reminders.Add(newQueueItem);
+                    RemindersQueueListView.Items.Add(newQueueItem.ListViewItem);
                 }
                 else
                 {
                     var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
-                    existing.SubItems[1].Text = remaining.ToString();
+                    existing.ListViewItem.SubItems[1].Text = remaining.ToString();
                 }
 
             }
