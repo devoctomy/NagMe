@@ -173,13 +173,11 @@
             TimingsIntervalPeriod.Name = "TimingsIntervalPeriod";
             TimingsIntervalPeriod.Size = new Size(165, 23);
             TimingsIntervalPeriod.TabIndex = 4;
-            TimingsIntervalPeriod.SelectedIndexChanged += TimingsIntervalPeriod_SelectedIndexChanged;
             // 
             // TimingsIntervalNumericUpDown
             // 
             TimingsIntervalNumericUpDown.Location = new Point(17, 31);
             TimingsIntervalNumericUpDown.Maximum = new decimal(new int[] { 86400, 0, 0, 0 });
-            TimingsIntervalNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             TimingsIntervalNumericUpDown.Name = "TimingsIntervalNumericUpDown";
             TimingsIntervalNumericUpDown.Size = new Size(305, 23);
             TimingsIntervalNumericUpDown.TabIndex = 3;

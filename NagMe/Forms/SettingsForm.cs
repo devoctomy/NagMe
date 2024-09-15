@@ -88,11 +88,11 @@ namespace NagMe.Forms
 
         private void AddReminderButton_Click(object sender, EventArgs e)
         {
-            var reminderEditor = new ReminderEditorDialog();
+            var reminder = new Reminder();
+            var reminderEditor = new ReminderEditorDialog(reminder);
             var result = reminderEditor.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                var reminder = reminderEditor.Reminder;
                 ReminderLoader.Current.AddReminder(reminder);
                 RemindersCheckedListBox.Items.Add(reminder);
                 UpdateQueue();
