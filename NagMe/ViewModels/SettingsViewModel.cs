@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NagMe.Enums;
 using NagMe.Forms;
 using NagMe.Reminders;
 using NagMe.Windows;

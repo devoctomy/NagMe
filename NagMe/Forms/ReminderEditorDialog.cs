@@ -25,6 +25,8 @@ namespace NagMe.Forms
             TimingsIntervalNumericUpDown.DataBindings.Add("Value", _viewModel, nameof(_viewModel.Interval), false, DataSourceUpdateMode.OnPropertyChanged);
             TimingsIntervalPeriod.DataBindings.Add("SelectedItem", _viewModel, nameof(_viewModel.Period), false, DataSourceUpdateMode.OnPropertyChanged);
             TimingsIntervalPeriod.DataSource = _viewModel.Periods;
+            NotificationTypeComboBox.DataBindings.Add("SelectedItem", _viewModel, nameof(_viewModel.NotificationType), false, DataSourceUpdateMode.OnPropertyChanged);
+            NotificationTypeComboBox.DataSource = _viewModel.NotificationTypes;
         }
     }
 }

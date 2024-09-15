@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             SettingsTabs = new TabControl();
             RemindersTab = new TabPage();
+            ToggleReminderEnabledButton = new Button();
             ReminderQueueDataGrid = new DataGridView();
             ReminderQueueDataGridColumnEnabled = new DataGridViewCheckBoxColumn();
             ReminderQueueDataGridColumnName = new DataGridViewTextBoxColumn();
@@ -51,7 +52,6 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
-            ToggleReminderEnabledButton = new Button();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
@@ -87,6 +87,14 @@
             RemindersTab.TabIndex = 0;
             RemindersTab.Text = "Reminders";
             RemindersTab.UseVisualStyleBackColor = true;
+            // 
+            // ToggleReminderEnabledButton
+            // 
+            ToggleReminderEnabledButton.Location = new Point(432, 88);
+            ToggleReminderEnabledButton.Name = "ToggleReminderEnabledButton";
+            ToggleReminderEnabledButton.Size = new Size(48, 34);
+            ToggleReminderEnabledButton.TabIndex = 5;
+            ToggleReminderEnabledButton.UseVisualStyleBackColor = true;
             // 
             // ReminderQueueDataGrid
             // 
@@ -194,7 +202,7 @@
             AiFeaturesPanel.Enabled = false;
             AiFeaturesPanel.Location = new Point(0, 162);
             AiFeaturesPanel.Name = "AiFeaturesPanel";
-            AiFeaturesPanel.Size = new Size(401, 78);
+            AiFeaturesPanel.Size = new Size(480, 78);
             AiFeaturesPanel.TabIndex = 5;
             // 
             // AiOpenAiApiTokenLabel
@@ -210,7 +218,7 @@
             // 
             AiOpenAiApiTokenTextBox.Location = new Point(20, 39);
             AiOpenAiApiTokenTextBox.Name = "AiOpenAiApiTokenTextBox";
-            AiOpenAiApiTokenTextBox.Size = new Size(373, 23);
+            AiOpenAiApiTokenTextBox.Size = new Size(457, 23);
             AiOpenAiApiTokenTextBox.TabIndex = 5;
             // 
             // AiWarningLabel
@@ -219,7 +227,7 @@
             AiWarningLabel.ForeColor = Color.Red;
             AiWarningLabel.Location = new Point(20, 16);
             AiWarningLabel.Name = "AiWarningLabel";
-            AiWarningLabel.Size = new Size(359, 115);
+            AiWarningLabel.Size = new Size(457, 115);
             AiWarningLabel.TabIndex = 2;
             AiWarningLabel.Text = resources.GetString("AiWarningLabel.Text");
             // 
@@ -284,14 +292,6 @@
             CnclButton.TabIndex = 3;
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
-            // 
-            // ToggleReminderEnabledButton
-            // 
-            ToggleReminderEnabledButton.Location = new Point(432, 88);
-            ToggleReminderEnabledButton.Name = "ToggleReminderEnabledButton";
-            ToggleReminderEnabledButton.Size = new Size(48, 34);
-            ToggleReminderEnabledButton.TabIndex = 5;
-            ToggleReminderEnabledButton.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 

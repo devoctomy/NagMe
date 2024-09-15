@@ -30,7 +30,22 @@ namespace NagMe
 
         private static void Current_ReminderPopped(object? sender, ReminderPoppedEventArgs e)
         {
-            MessageBox.Show($"Reminder {e.Reminder.Name} popped!");
+            switch (e.Reminder.NotificationType)
+            {
+                case Enums.NotificationType.MessageBox:
+                    {
+                        MessageBox.Show(e.Reminder.Description, e.Reminder.Name, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                        break;
+                    }
+
+                case Enums.NotificationType.Toast:
+                    {
+                        // pop up toast notification here
+
+                        break;
+                    }
+            }
         }
     }
 }

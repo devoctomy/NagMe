@@ -24,7 +24,13 @@ namespace NagMe.ViewModels
         private IntervalPeriod _period;
 
         [ObservableProperty]
-        private ObservableCollection<string> _periods;
+        private NotificationType _notificationType;
+
+        [ObservableProperty]
+        private ObservableCollection<IntervalPeriod> _periods;
+
+        [ObservableProperty]
+        private ObservableCollection<NotificationType> _notificationTypes;
 
         public ReminderEditorViewModel(
             Form parentForm,
@@ -32,7 +38,10 @@ namespace NagMe.ViewModels
         {
             _parentForm = parentForm;
             _reminder = reminder;
-            Periods = new ObservableCollection<string>(Enum.GetNames(typeof(IntervalPeriod)));
+            var periods = Enum.GetNames(typeof(IntervalPeriod)).Select(x => Enum.Parse<IntervalPeriod>(x)).ToList();
+            Periods = new ObservableCollection<IntervalPeriod>(periods);
+            var notificationTypes = Enum.GetNames(typeof(NotificationType)).Select(x => Enum.Parse<NotificationType>(x)).ToList();
+            NotificationTypes = new ObservableCollection<NotificationType>(notificationTypes);
             ReadReminder();
         }
 
@@ -42,6 +51,7 @@ namespace NagMe.ViewModels
             Description = _reminder.Description;
             Interval = _reminder.Interval;
             Period = _reminder.Period;
+            NotificationType = _reminder.NotificationType;
         }
 
         [RelayCommand()]
@@ -51,6 +61,7 @@ namespace NagMe.ViewModels
             _reminder.Description = Description;
             _reminder.Interval = Interval;
             _reminder.Period = Period;
+            _reminder.NotificationType = NotificationType;
             _parentForm.DialogResult = DialogResult.OK;
         }
     }

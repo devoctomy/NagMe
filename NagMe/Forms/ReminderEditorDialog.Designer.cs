@@ -43,13 +43,17 @@
             TimingsIntervalPeriod = new ComboBox();
             TimingsIntervalNumericUpDown = new NumericUpDown();
             label1 = new Label();
+            NotificationTab = new TabPage();
             AiTab = new TabPage();
+            NotificationTypeComboBox = new ComboBox();
+            NotificationTypeLabel = new Label();
             BottomPanel.SuspendLayout();
             TopPanel.SuspendLayout();
             ReminderEditorTabs.SuspendLayout();
             GeneralTab.SuspendLayout();
             TimingsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).BeginInit();
+            NotificationTab.SuspendLayout();
             SuspendLayout();
             // 
             // BottomPanel
@@ -96,6 +100,7 @@
             // 
             ReminderEditorTabs.Controls.Add(GeneralTab);
             ReminderEditorTabs.Controls.Add(TimingsTab);
+            ReminderEditorTabs.Controls.Add(NotificationTab);
             ReminderEditorTabs.Controls.Add(AiTab);
             ReminderEditorTabs.Dock = DockStyle.Fill;
             ReminderEditorTabs.Location = new Point(0, 0);
@@ -191,6 +196,17 @@
             label1.TabIndex = 2;
             label1.Text = "Interval";
             // 
+            // NotificationTab
+            // 
+            NotificationTab.Controls.Add(NotificationTypeLabel);
+            NotificationTab.Controls.Add(NotificationTypeComboBox);
+            NotificationTab.Location = new Point(4, 24);
+            NotificationTab.Name = "NotificationTab";
+            NotificationTab.Size = new Size(513, 373);
+            NotificationTab.TabIndex = 3;
+            NotificationTab.Text = "Notification";
+            NotificationTab.UseVisualStyleBackColor = true;
+            // 
             // AiTab
             // 
             AiTab.Location = new Point(4, 24);
@@ -200,6 +216,23 @@
             AiTab.TabIndex = 1;
             AiTab.Text = "AI";
             AiTab.UseVisualStyleBackColor = true;
+            // 
+            // NotificationTypeComboBox
+            // 
+            NotificationTypeComboBox.FormattingEnabled = true;
+            NotificationTypeComboBox.Location = new Point(17, 31);
+            NotificationTypeComboBox.Name = "NotificationTypeComboBox";
+            NotificationTypeComboBox.Size = new Size(488, 23);
+            NotificationTypeComboBox.TabIndex = 0;
+            // 
+            // NotificationTypeLabel
+            // 
+            NotificationTypeLabel.AutoSize = true;
+            NotificationTypeLabel.Location = new Point(17, 13);
+            NotificationTypeLabel.Name = "NotificationTypeLabel";
+            NotificationTypeLabel.Size = new Size(31, 15);
+            NotificationTypeLabel.TabIndex = 3;
+            NotificationTypeLabel.Text = "Type";
             // 
             // ReminderEditorDialog
             // 
@@ -223,6 +256,8 @@
             TimingsTab.ResumeLayout(false);
             TimingsTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).EndInit();
+            NotificationTab.ResumeLayout(false);
+            NotificationTab.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -243,5 +278,8 @@
         private Label label1;
         private ComboBox TimingsIntervalPeriod;
         private NumericUpDown TimingsIntervalNumericUpDown;
+        private TabPage NotificationTab;
+        private Label NotificationTypeLabel;
+        private ComboBox NotificationTypeComboBox;
     }
 }
