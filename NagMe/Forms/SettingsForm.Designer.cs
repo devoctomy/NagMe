@@ -31,10 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             SettingsTabs = new TabControl();
             RemindersTab = new TabPage();
-            RemindersQueueListView = new ListView();
-            NameHeader = new ColumnHeader();
-            RemainingTimeHeader = new ColumnHeader();
-            TotalCountHeader = new ColumnHeader();
+            ReminderQueueDataGrid = new DataGridView();
             DeleteReminderButton = new Button();
             AddReminderButton = new Button();
             RemindersCheckedListBox = new CheckedListBox();
@@ -51,8 +48,13 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
+            ReminderQueueDataGridColumnId = new DataGridViewTextBoxColumn();
+            ReminderQueueDataGridColumnName = new DataGridViewTextBoxColumn();
+            ReminderQueueDataGridColumnRemainingTime = new DataGridViewTextBoxColumn();
+            ReminderQueueDataGridColumnTotalCount = new DataGridViewTextBoxColumn();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
             SystemTab.SuspendLayout();
             AiTab.SuspendLayout();
             AiFeaturesPanel.SuspendLayout();
@@ -74,7 +76,7 @@
             // 
             // RemindersTab
             // 
-            RemindersTab.Controls.Add(RemindersQueueListView);
+            RemindersTab.Controls.Add(ReminderQueueDataGrid);
             RemindersTab.Controls.Add(DeleteReminderButton);
             RemindersTab.Controls.Add(AddReminderButton);
             RemindersTab.Controls.Add(RemindersCheckedListBox);
@@ -86,31 +88,25 @@
             RemindersTab.Text = "Reminders";
             RemindersTab.UseVisualStyleBackColor = true;
             // 
-            // RemindersQueueListView
+            // ReminderQueueDataGrid
             // 
-            RemindersQueueListView.Columns.AddRange(new ColumnHeader[] { NameHeader, RemainingTimeHeader, TotalCountHeader });
-            RemindersQueueListView.Location = new Point(8, 143);
-            RemindersQueueListView.MultiSelect = false;
-            RemindersQueueListView.Name = "RemindersQueueListView";
-            RemindersQueueListView.Size = new Size(385, 152);
-            RemindersQueueListView.TabIndex = 3;
-            RemindersQueueListView.UseCompatibleStateImageBehavior = false;
-            RemindersQueueListView.View = View.Details;
-            // 
-            // NameHeader
-            // 
-            NameHeader.Text = "Name";
-            NameHeader.Width = 150;
-            // 
-            // RemainingTimeHeader
-            // 
-            RemainingTimeHeader.Text = "Remaining Time";
-            RemainingTimeHeader.Width = 100;
-            // 
-            // TotalCountHeader
-            // 
-            TotalCountHeader.Text = "TotalCount";
-            TotalCountHeader.Width = 100;
+            ReminderQueueDataGrid.AllowUserToAddRows = false;
+            ReminderQueueDataGrid.AllowUserToDeleteRows = false;
+            ReminderQueueDataGrid.AllowUserToResizeColumns = false;
+            ReminderQueueDataGrid.AllowUserToResizeRows = false;
+            ReminderQueueDataGrid.BackgroundColor = SystemColors.Window;
+            ReminderQueueDataGrid.ColumnHeadersHeight = 24;
+            ReminderQueueDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            ReminderQueueDataGrid.Columns.AddRange(new DataGridViewColumn[] { ReminderQueueDataGridColumnId, ReminderQueueDataGridColumnName, ReminderQueueDataGridColumnRemainingTime, ReminderQueueDataGridColumnTotalCount });
+            ReminderQueueDataGrid.EditMode = DataGridViewEditMode.EditProgrammatically;
+            ReminderQueueDataGrid.GridColor = SystemColors.Window;
+            ReminderQueueDataGrid.Location = new Point(6, 143);
+            ReminderQueueDataGrid.MultiSelect = false;
+            ReminderQueueDataGrid.Name = "ReminderQueueDataGrid";
+            ReminderQueueDataGrid.RowHeadersVisible = false;
+            ReminderQueueDataGrid.ScrollBars = ScrollBars.Vertical;
+            ReminderQueueDataGrid.Size = new Size(385, 152);
+            ReminderQueueDataGrid.TabIndex = 4;
             // 
             // DeleteReminderButton
             // 
@@ -275,6 +271,32 @@
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
+            // ReminderQueueDataGridColumnId
+            // 
+            ReminderQueueDataGridColumnId.DataPropertyName = "Id";
+            ReminderQueueDataGridColumnId.HeaderText = "Id";
+            ReminderQueueDataGridColumnId.Name = "ReminderQueueDataGridColumnId";
+            ReminderQueueDataGridColumnId.Visible = false;
+            // 
+            // ReminderQueueDataGridColumnName
+            // 
+            ReminderQueueDataGridColumnName.DataPropertyName = "Name";
+            ReminderQueueDataGridColumnName.HeaderText = "Name";
+            ReminderQueueDataGridColumnName.Name = "ReminderQueueDataGridColumnName";
+            ReminderQueueDataGridColumnName.Width = 150;
+            // 
+            // ReminderQueueDataGridColumnRemainingTime
+            // 
+            ReminderQueueDataGridColumnRemainingTime.DataPropertyName = "RemainingTime";
+            ReminderQueueDataGridColumnRemainingTime.HeaderText = "Remaining Time";
+            ReminderQueueDataGridColumnRemainingTime.Name = "ReminderQueueDataGridColumnRemainingTime";
+            // 
+            // ReminderQueueDataGridColumnTotalCount
+            // 
+            ReminderQueueDataGridColumnTotalCount.DataPropertyName = "TotalCount";
+            ReminderQueueDataGridColumnTotalCount.HeaderText = "Total Count";
+            ReminderQueueDataGridColumnTotalCount.Name = "ReminderQueueDataGridColumnTotalCount";
+            // 
             // SettingsForm
             // 
             AcceptButton = OkButton;
@@ -292,6 +314,7 @@
             Text = "NagMe - Settings";
             SettingsTabs.ResumeLayout(false);
             RemindersTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).EndInit();
             SystemTab.ResumeLayout(false);
             SystemTab.PerformLayout();
             AiTab.ResumeLayout(false);
@@ -323,9 +346,10 @@
         private Panel AiFeaturesPanel;
         private Label AiOpenAiApiTokenLabel;
         private TextBox AiOpenAiApiTokenTextBox;
-        private ListView RemindersQueueListView;
-        private ColumnHeader NameHeader;
-        private ColumnHeader RemainingTimeHeader;
-        private ColumnHeader TotalCountHeader;
+        private DataGridView ReminderQueueDataGrid;
+        private DataGridViewTextBoxColumn ReminderQueueDataGridColumnId;
+        private DataGridViewTextBoxColumn ReminderQueueDataGridColumnName;
+        private DataGridViewTextBoxColumn ReminderQueueDataGridColumnRemainingTime;
+        private DataGridViewTextBoxColumn ReminderQueueDataGridColumnTotalCount;
     }
 }

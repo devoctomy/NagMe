@@ -1,16 +1,33 @@
-﻿namespace NagMe.Reminders
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace NagMe.Reminders
 {
-    public class ReminderQueueItem
+    public partial class ReminderQueueItem : ObservableObject
     {
-        public Reminder Reminder { get; set; }
-        public ListViewItem ListViewItem { get; set; }
+        public Reminder Reminder { get; }
+        public string Id { get; }
+
+        [ObservableProperty]
+        private string _name;
+
+        [ObservableProperty]
+        private string _remainingTime;
+
+        [ObservableProperty]
+        private string _totalCount;
 
         public ReminderQueueItem(
             Reminder reminder,
-            ListViewItem listViewItem)
+            string id,
+            string name,
+            string remainingTime,
+            string totalCount)
         {
             Reminder = reminder;
-            ListViewItem = listViewItem;
+            Id = id;
+            Name = name;
+            RemainingTime = remainingTime;
+            TotalCount = totalCount;
         }
     }
 }

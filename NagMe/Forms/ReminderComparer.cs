@@ -1,19 +1,15 @@
 ﻿using NagMe.Reminders;
-using System.Collections;
 
 namespace NagMe.Forms
 {
-    public class ReminderComparer : IComparer
+    public class ReminderComparer : IComparer<ReminderQueueItem>
     {
         public int Compare(
-            object? x,
-            object? y)
+            ReminderQueueItem? x,
+            ReminderQueueItem? y)
         {
-            var itemX = (ListViewItem)x!;
-            var itemY = (ListViewItem)y!;
-
-            var reminderX = (Reminder)itemX.Tag!;
-            var reminderY = (Reminder)itemY.Tag!;
+            var reminderX = x!.Reminder;
+            var reminderY = y!.Reminder;
 
             if (!reminderX.IsEnabled && !reminderY.IsEnabled)
             {

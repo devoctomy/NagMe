@@ -1,5 +1,6 @@
 using NagMe.Reminders;
 using NagMe.Windows;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Timers;
 
@@ -7,14 +8,18 @@ namespace NagMe.Forms
 {
     public partial class SettingsForm : Form
     {
-        private List<ListViewItem> _queueReminders = new List<ListViewItem>();
+        private List<ReminderQueueItem> _queueReminders = new List<ReminderQueueItem>();
         private System.Timers.Timer _queueUpdateTimer;
+        private BindingSource _queueBindingSource;
 
         public SettingsForm()
         {
             InitializeComponent();
             ReadSettings();
-            RemindersQueueListView.ListViewItemSorter = new ReminderComparer();
+
+            _queueBindingSource = new BindingSource();
+            _queueBindingSource.DataSource = _queueReminders;
+            ReminderQueueDataGrid.DataSource = _queueBindingSource;
 
             _queueUpdateTimer = new System.Timers.Timer(new TimeSpan(0, 0, 1));
             _queueUpdateTimer.Elapsed += _queueUpdateTimer_Elapsed;
@@ -126,55 +131,72 @@ namespace NagMe.Forms
 
         private void UpdateQueue()
         {
-            if (this.InvokeRequired)
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    DoUpdate();
-                });
-            }
-            else
-            {
-                DoUpdate();
-            }
+            DoUpdate();
+            //if (this.InvokeRequired)
+            //{
+            //    this.Invoke((MethodInvoker)delegate
+            //    {
+            //        DoUpdate();
+            //    });
+            //}
+            //else
+            //{
+            //    DoUpdate();
+            //}
         }
 
         private void DoUpdate()
         {
-            RemindersQueueListView.BeginUpdate();
-
-            var stale = _queueReminders.Where(x => !ReminderLoader.Current.Reminders.Contains(x.Tag as Reminder)).ToList();
-            while(stale.Count > 0)
+            var reset = false;
+            var stale = _queueReminders.Where(x => !ReminderLoader.Current.Reminders.Any(y => y.Id == x.Id)).ToList();
+            while (stale.Count > 0)
             {
                 var curStale = stale.First();
                 _queueReminders.Remove(curStale);
-                RemindersQueueListView.Items.Remove(curStale);
                 stale.Remove(curStale);
+                reset = true;
             }
 
             foreach (var curReminder in ReminderLoader.Current.Reminders)
             {
-                var existing = _queueReminders.SingleOrDefault(x => x.Tag as Reminder == curReminder);
+                var existing = _queueReminders.SingleOrDefault(x => x.Id == curReminder.Id);
                 if (existing == null)
                 {
-                    var newItem = new ListViewItem(curReminder.Name);
                     var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
-                    newItem.SubItems.Add(remaining);
-                    newItem.SubItems.Add("0");
-                    newItem.Tag = curReminder;
+                    var newItem = new ReminderQueueItem(
+                        curReminder,
+                        curReminder.Id,
+                        curReminder.Name,
+                        remaining,
+                        "0");
 
                     _queueReminders.Add(newItem);
-                    RemindersQueueListView.Items.Add(newItem);
+                    reset = true;
                 }
                 else
                 {
                     var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
-                    existing.SubItems[1].Text = remaining.ToString();
+                    existing.RemainingTime = remaining;
+                    reset = true;
                 }
-
             }
-            RemindersQueueListView.Sort();
-            RemindersQueueListView.EndUpdate();
+
+            _queueReminders.Sort(new ReminderComparer());
+
+            if (reset && _queueBindingSource != null)
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        _queueBindingSource.ResetBindings(false);
+                    });
+                }
+                else
+                {
+                    _queueBindingSource.ResetBindings(false);
+                }
+            }
         }
     }
 }
