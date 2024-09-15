@@ -28,7 +28,7 @@ namespace NagMe.ViewModels
         private BindingSource _queueBindingSource;
 
         [ObservableProperty]
-        private Reminder _selectedReminder;
+        private Reminder? _selectedReminder;
 
         [ObservableProperty]
         private ObservableCollection<Reminder> _reminders = new ObservableCollection<Reminder>();
