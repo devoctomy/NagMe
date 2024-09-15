@@ -7,6 +7,9 @@ namespace NagMe.Reminders
         public Reminder Reminder { get; }
 
         [ObservableProperty]
+        private bool _isEnabled;
+
+        [ObservableProperty]
         private string _remainingTime;
 
         [ObservableProperty]
@@ -18,6 +21,7 @@ namespace NagMe.Reminders
             string totalCount)
         {
             Reminder = reminder;
+            IsEnabled = reminder.IsEnabled;
             RemainingTime = remainingTime;
             TotalCount = totalCount;
         }

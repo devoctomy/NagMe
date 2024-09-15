@@ -28,7 +28,7 @@ namespace NagMe.ViewModels
         private BindingSource _queueBindingSource;
 
         [ObservableProperty]
-        private Reminder? _selectedReminder;
+        private ReminderQueueItem? _selectedReminderQueueItem;
 
         [ObservableProperty]
         private ObservableCollection<Reminder> _reminders = new ObservableCollection<Reminder>();
@@ -109,6 +109,7 @@ namespace NagMe.ViewModels
                 {
                     var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
                     existing.RemainingTime = remaining;
+                    existing.IsEnabled = curReminder.IsEnabled;
                     reset = true;
                 }
             }
@@ -150,8 +151,6 @@ namespace NagMe.ViewModels
 
             Configuration.Configuration.Current.EnableAiFeatures = AiEnabled;
             Configuration.Configuration.Current.OpenAIApiToken = OpenAiApiToken;
-
-            // Enable apply button
         }
 
         [RelayCommand]
@@ -192,15 +191,26 @@ namespace NagMe.ViewModels
         [RelayCommand]
         private void DeleteReminderButton(object selectedReminder)
         {
-            if(SelectedReminder == null)
+            if(SelectedReminderQueueItem == null)
             {
                 return;
             }
 
-            ReminderLoader.Current.RemoveReminder(SelectedReminder);
-            Reminders.Remove(SelectedReminder);
+            ReminderLoader.Current.RemoveReminder(SelectedReminderQueueItem.Reminder);
+            Reminders.Remove(SelectedReminderQueueItem.Reminder);
             UpdateQueue();
             IsDirty = true;
+        }
+
+        [RelayCommand]
+        private void ToggleReminderEnabledButton()
+        {
+            if (SelectedReminderQueueItem == null)
+            {
+                return;
+            }
+
+            SelectedReminderQueueItem.Reminder.IsEnabled = !SelectedReminderQueueItem.Reminder.IsEnabled;
         }
     }
 }

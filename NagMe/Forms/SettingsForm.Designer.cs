@@ -32,12 +32,12 @@
             SettingsTabs = new TabControl();
             RemindersTab = new TabPage();
             ReminderQueueDataGrid = new DataGridView();
+            ReminderQueueDataGridColumnEnabled = new DataGridViewCheckBoxColumn();
             ReminderQueueDataGridColumnName = new DataGridViewTextBoxColumn();
             ReminderQueueDataGridColumnRemainingTime = new DataGridViewTextBoxColumn();
             ReminderQueueDataGridColumnTotalCount = new DataGridViewTextBoxColumn();
             DeleteReminderButton = new Button();
             AddReminderButton = new Button();
-            RemindersCheckedListBox = new CheckedListBox();
             SystemTab = new TabPage();
             SystemStartWithWindowsCheckBox = new CheckBox();
             AiTab = new TabPage();
@@ -51,6 +51,7 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
+            ToggleReminderEnabledButton = new Button();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
@@ -70,19 +71,19 @@
             SettingsTabs.Location = new Point(0, 0);
             SettingsTabs.Name = "SettingsTabs";
             SettingsTabs.SelectedIndex = 0;
-            SettingsTabs.Size = new Size(409, 329);
+            SettingsTabs.Size = new Size(496, 329);
             SettingsTabs.TabIndex = 0;
             // 
             // RemindersTab
             // 
+            RemindersTab.Controls.Add(ToggleReminderEnabledButton);
             RemindersTab.Controls.Add(ReminderQueueDataGrid);
             RemindersTab.Controls.Add(DeleteReminderButton);
             RemindersTab.Controls.Add(AddReminderButton);
-            RemindersTab.Controls.Add(RemindersCheckedListBox);
             RemindersTab.Location = new Point(4, 24);
             RemindersTab.Name = "RemindersTab";
             RemindersTab.Padding = new Padding(3);
-            RemindersTab.Size = new Size(401, 301);
+            RemindersTab.Size = new Size(488, 301);
             RemindersTab.TabIndex = 0;
             RemindersTab.Text = "Reminders";
             RemindersTab.UseVisualStyleBackColor = true;
@@ -96,16 +97,25 @@
             ReminderQueueDataGrid.BackgroundColor = SystemColors.Window;
             ReminderQueueDataGrid.ColumnHeadersHeight = 24;
             ReminderQueueDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            ReminderQueueDataGrid.Columns.AddRange(new DataGridViewColumn[] { ReminderQueueDataGridColumnName, ReminderQueueDataGridColumnRemainingTime, ReminderQueueDataGridColumnTotalCount });
+            ReminderQueueDataGrid.Columns.AddRange(new DataGridViewColumn[] { ReminderQueueDataGridColumnEnabled, ReminderQueueDataGridColumnName, ReminderQueueDataGridColumnRemainingTime, ReminderQueueDataGridColumnTotalCount });
             ReminderQueueDataGrid.EditMode = DataGridViewEditMode.EditProgrammatically;
             ReminderQueueDataGrid.GridColor = SystemColors.Window;
-            ReminderQueueDataGrid.Location = new Point(6, 143);
+            ReminderQueueDataGrid.Location = new Point(6, 6);
             ReminderQueueDataGrid.MultiSelect = false;
             ReminderQueueDataGrid.Name = "ReminderQueueDataGrid";
             ReminderQueueDataGrid.RowHeadersVisible = false;
             ReminderQueueDataGrid.ScrollBars = ScrollBars.Vertical;
-            ReminderQueueDataGrid.Size = new Size(385, 152);
+            ReminderQueueDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ReminderQueueDataGrid.Size = new Size(420, 289);
             ReminderQueueDataGrid.TabIndex = 4;
+            // 
+            // ReminderQueueDataGridColumnEnabled
+            // 
+            ReminderQueueDataGridColumnEnabled.DataPropertyName = "IsEnabled";
+            ReminderQueueDataGridColumnEnabled.FillWeight = 50F;
+            ReminderQueueDataGridColumnEnabled.HeaderText = "";
+            ReminderQueueDataGridColumnEnabled.Name = "ReminderQueueDataGridColumnEnabled";
+            ReminderQueueDataGridColumnEnabled.Width = 25;
             // 
             // ReminderQueueDataGridColumnName
             // 
@@ -129,7 +139,7 @@
             // DeleteReminderButton
             // 
             DeleteReminderButton.Image = Properties.Resources.Garbage_Closed_24xBlack;
-            DeleteReminderButton.Location = new Point(345, 48);
+            DeleteReminderButton.Location = new Point(432, 47);
             DeleteReminderButton.Name = "DeleteReminderButton";
             DeleteReminderButton.Size = new Size(48, 35);
             DeleteReminderButton.TabIndex = 2;
@@ -138,20 +148,11 @@
             // AddReminderButton
             // 
             AddReminderButton.Image = Properties.Resources.Add_New_24xBlack;
-            AddReminderButton.Location = new Point(345, 7);
+            AddReminderButton.Location = new Point(432, 6);
             AddReminderButton.Name = "AddReminderButton";
             AddReminderButton.Size = new Size(48, 35);
             AddReminderButton.TabIndex = 1;
             AddReminderButton.UseVisualStyleBackColor = true;
-            // 
-            // RemindersCheckedListBox
-            // 
-            RemindersCheckedListBox.FormattingEnabled = true;
-            RemindersCheckedListBox.Location = new Point(6, 7);
-            RemindersCheckedListBox.Name = "RemindersCheckedListBox";
-            RemindersCheckedListBox.Size = new Size(333, 130);
-            RemindersCheckedListBox.TabIndex = 0;
-            RemindersCheckedListBox.ItemCheck += RemindersCheckedListBox_ItemCheck;
             // 
             // SystemTab
             // 
@@ -159,7 +160,7 @@
             SystemTab.Location = new Point(4, 24);
             SystemTab.Name = "SystemTab";
             SystemTab.Padding = new Padding(3);
-            SystemTab.Size = new Size(401, 301);
+            SystemTab.Size = new Size(488, 301);
             SystemTab.TabIndex = 1;
             SystemTab.Text = "System";
             SystemTab.UseVisualStyleBackColor = true;
@@ -181,7 +182,7 @@
             AiTab.Controls.Add(AiEnableCheckBox);
             AiTab.Location = new Point(4, 24);
             AiTab.Name = "AiTab";
-            AiTab.Size = new Size(401, 301);
+            AiTab.Size = new Size(488, 301);
             AiTab.TabIndex = 2;
             AiTab.Text = "AI";
             AiTab.UseVisualStyleBackColor = true;
@@ -231,7 +232,6 @@
             AiEnableCheckBox.TabIndex = 1;
             AiEnableCheckBox.Text = "Enable AI Features";
             AiEnableCheckBox.UseVisualStyleBackColor = true;
-            AiEnableCheckBox.CheckedChanged += AiEnableCheckBox_CheckedChanged;
             // 
             // TopPanel
             // 
@@ -239,14 +239,14 @@
             TopPanel.Dock = DockStyle.Fill;
             TopPanel.Location = new Point(0, 0);
             TopPanel.Name = "TopPanel";
-            TopPanel.Size = new Size(409, 329);
+            TopPanel.Size = new Size(496, 329);
             TopPanel.TabIndex = 1;
             // 
             // ApplyButton
             // 
             ApplyButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ApplyButton.Enabled = false;
-            ApplyButton.Location = new Point(306, 7);
+            ApplyButton.Location = new Point(393, 7);
             ApplyButton.Name = "ApplyButton";
             ApplyButton.Size = new Size(91, 27);
             ApplyButton.TabIndex = 2;
@@ -261,13 +261,13 @@
             BottomPanel.Dock = DockStyle.Bottom;
             BottomPanel.Location = new Point(0, 329);
             BottomPanel.Name = "BottomPanel";
-            BottomPanel.Size = new Size(409, 46);
+            BottomPanel.Size = new Size(496, 46);
             BottomPanel.TabIndex = 3;
             // 
             // OkButton
             // 
             OkButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            OkButton.Location = new Point(112, 7);
+            OkButton.Location = new Point(199, 7);
             OkButton.Name = "OkButton";
             OkButton.Size = new Size(91, 27);
             OkButton.TabIndex = 4;
@@ -278,19 +278,27 @@
             // 
             CnclButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             CnclButton.DialogResult = DialogResult.Cancel;
-            CnclButton.Location = new Point(209, 7);
+            CnclButton.Location = new Point(296, 7);
             CnclButton.Name = "CnclButton";
             CnclButton.Size = new Size(91, 27);
             CnclButton.TabIndex = 3;
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
+            // ToggleReminderEnabledButton
+            // 
+            ToggleReminderEnabledButton.Location = new Point(432, 88);
+            ToggleReminderEnabledButton.Name = "ToggleReminderEnabledButton";
+            ToggleReminderEnabledButton.Size = new Size(48, 34);
+            ToggleReminderEnabledButton.TabIndex = 5;
+            ToggleReminderEnabledButton.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             AcceptButton = OkButton;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(409, 375);
+            ClientSize = new Size(496, 375);
             Controls.Add(TopPanel);
             Controls.Add(BottomPanel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -326,7 +334,6 @@
         private Button CnclButton;
         private CheckBox SystemStartWithWindowsCheckBox;
         private Button AddReminderButton;
-        private CheckedListBox RemindersCheckedListBox;
         private Button DeleteReminderButton;
         private TabPage AiTab;
         private CheckBox AiEnableCheckBox;
@@ -335,8 +342,10 @@
         private Label AiOpenAiApiTokenLabel;
         private TextBox AiOpenAiApiTokenTextBox;
         private DataGridView ReminderQueueDataGrid;
+        private DataGridViewCheckBoxColumn ReminderQueueDataGridColumnEnabled;
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnName;
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnRemainingTime;
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnTotalCount;
+        private Button ToggleReminderEnabledButton;
     }
 }
