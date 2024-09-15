@@ -48,7 +48,6 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
-            ReminderQueueDataGridColumnId = new DataGridViewTextBoxColumn();
             ReminderQueueDataGridColumnName = new DataGridViewTextBoxColumn();
             ReminderQueueDataGridColumnRemainingTime = new DataGridViewTextBoxColumn();
             ReminderQueueDataGridColumnTotalCount = new DataGridViewTextBoxColumn();
@@ -97,7 +96,7 @@
             ReminderQueueDataGrid.BackgroundColor = SystemColors.Window;
             ReminderQueueDataGrid.ColumnHeadersHeight = 24;
             ReminderQueueDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            ReminderQueueDataGrid.Columns.AddRange(new DataGridViewColumn[] { ReminderQueueDataGridColumnId, ReminderQueueDataGridColumnName, ReminderQueueDataGridColumnRemainingTime, ReminderQueueDataGridColumnTotalCount });
+            ReminderQueueDataGrid.Columns.AddRange(new DataGridViewColumn[] { ReminderQueueDataGridColumnName, ReminderQueueDataGridColumnRemainingTime, ReminderQueueDataGridColumnTotalCount });
             ReminderQueueDataGrid.EditMode = DataGridViewEditMode.EditProgrammatically;
             ReminderQueueDataGrid.GridColor = SystemColors.Window;
             ReminderQueueDataGrid.Location = new Point(6, 143);
@@ -271,16 +270,9 @@
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
-            // ReminderQueueDataGridColumnId
-            // 
-            ReminderQueueDataGridColumnId.DataPropertyName = "Id";
-            ReminderQueueDataGridColumnId.HeaderText = "Id";
-            ReminderQueueDataGridColumnId.Name = "ReminderQueueDataGridColumnId";
-            ReminderQueueDataGridColumnId.Visible = false;
-            // 
             // ReminderQueueDataGridColumnName
             // 
-            ReminderQueueDataGridColumnName.DataPropertyName = "Name";
+            ReminderQueueDataGridColumnName.DataPropertyName = "Reminder";
             ReminderQueueDataGridColumnName.HeaderText = "Name";
             ReminderQueueDataGridColumnName.Name = "ReminderQueueDataGridColumnName";
             ReminderQueueDataGridColumnName.Width = 150;
@@ -347,7 +339,6 @@
         private Label AiOpenAiApiTokenLabel;
         private TextBox AiOpenAiApiTokenTextBox;
         private DataGridView ReminderQueueDataGrid;
-        private DataGridViewTextBoxColumn ReminderQueueDataGridColumnId;
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnName;
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnRemainingTime;
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnTotalCount;

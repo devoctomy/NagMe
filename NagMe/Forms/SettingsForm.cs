@@ -131,24 +131,23 @@ namespace NagMe.Forms
 
         private void UpdateQueue()
         {
-            DoUpdate();
-            //if (this.InvokeRequired)
-            //{
-            //    this.Invoke((MethodInvoker)delegate
-            //    {
-            //        DoUpdate();
-            //    });
-            //}
-            //else
-            //{
-            //    DoUpdate();
-            //}
+            if (this.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    DoUpdate();
+                });
+            }
+            else
+            {
+                DoUpdate();
+            }
         }
 
         private void DoUpdate()
         {
             var reset = false;
-            var stale = _queueReminders.Where(x => !ReminderLoader.Current.Reminders.Any(y => y.Id == x.Id)).ToList();
+            var stale = _queueReminders.Where(x => !ReminderLoader.Current.Reminders.Any(y => y == x.Reminder)).ToList();
             while (stale.Count > 0)
             {
                 var curStale = stale.First();
@@ -159,14 +158,12 @@ namespace NagMe.Forms
 
             foreach (var curReminder in ReminderLoader.Current.Reminders)
             {
-                var existing = _queueReminders.SingleOrDefault(x => x.Id == curReminder.Id);
+                var existing = _queueReminders.SingleOrDefault(x => x.Reminder == curReminder);
                 if (existing == null)
                 {
                     var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
                     var newItem = new ReminderQueueItem(
                         curReminder,
-                        curReminder.Id,
-                        curReminder.Name,
                         remaining,
                         "0");
 
@@ -185,17 +182,7 @@ namespace NagMe.Forms
 
             if (reset && _queueBindingSource != null)
             {
-                if (this.InvokeRequired)
-                {
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        _queueBindingSource.ResetBindings(false);
-                    });
-                }
-                else
-                {
-                    _queueBindingSource.ResetBindings(false);
-                }
+                _queueBindingSource.ResetBindings(false);
             }
         }
     }
