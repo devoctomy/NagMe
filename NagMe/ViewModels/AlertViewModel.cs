@@ -7,7 +7,7 @@ namespace NagMe.ViewModels
     public partial class AlertViewModel : ObservableObject
     {
         private Form _parentForm;
-        private System.Timers.Timer _autoClose;
+        private System.Timers.Timer? _autoClose = null;
 
         [ObservableProperty]
         private string _title;
@@ -26,13 +26,28 @@ namespace NagMe.ViewModels
             _autoClose = new System.Timers.Timer(new TimeSpan(0, 0, 10)); // !!! Need a property for this
             _autoClose.Elapsed += _autoClose_Elapsed;
             _autoClose.Start();
-
         }
 
         private void _autoClose_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            _autoClose.Stop();
-            _parentForm.Invoke(new Action(() => _parentForm.Close()));
+            var timer = sender as System.Timers.Timer;
+            if(timer == null)
+            {
+                _autoClose.Stop();
+            }
+
+
+            if (_parentForm.InvokeRequired)
+            {
+                _parentForm.Invoke((MethodInvoker)delegate
+                {
+                    _parentForm.Close();
+                });
+            }
+            else
+            {
+                _parentForm.Close();
+            }
         }
     }
 }

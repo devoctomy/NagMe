@@ -1,14 +1,15 @@
 using NagMe.Forms;
 using NagMe.IO;
 using NagMe.Reminders;
-using NagMe.ViewModels;
 using NagMe.Windows;
+using System.Collections.Concurrent;
 
 namespace NagMe
 {
     internal static class Program
     {
         private static SystemTray? _systemTray;
+        private static List<Form> _alertForms = new List<Form>();
 
         [STAThread]
         static void Main()
@@ -52,17 +53,43 @@ namespace NagMe
                     {
                         foreach(var curScreen in Screen.AllScreens)
                         {
-                            var alertForm = new AlertForm(e.Reminder)
+                            Task.Run(async () =>
                             {
-                                StartPosition = FormStartPosition.Manual,
-                                Location = curScreen.Bounds.Location,
-                                Size = curScreen.Bounds.Size
-                            };
-                            alertForm.Show();
+                                await DisplayFullScreenAlertForm(curScreen, e.Reminder);
+                            });
                         }
 
                         break;
                     }
+            }
+        }
+
+        private static async Task DisplayFullScreenAlertForm(
+            Screen screen,
+            Reminder reminder)
+        {
+            await Task.Yield();
+            using var alertForm = new AlertForm(reminder)
+            {
+                StartPosition = FormStartPosition.Manual,
+                Location = screen.Bounds.Location,
+                Size = screen.Bounds.Size
+            };
+            alertForm.ShowDialog();
+        }
+
+        private static void AlertForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            var alertForm = sender as Form;
+            if(alertForm == null)
+            {
+                return;
+            }
+
+            lock (_alertForms)
+            {
+                _alertForms.Remove(alertForm);
+                alertForm.Dispose();
             }
         }
     }

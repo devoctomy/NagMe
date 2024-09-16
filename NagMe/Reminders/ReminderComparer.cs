@@ -1,6 +1,4 @@
-﻿using NagMe.Reminders;
-
-namespace NagMe.Forms
+﻿namespace NagMe.Reminders
 {
     public class ReminderComparer : IComparer<ReminderQueueItem>
     {
@@ -21,7 +19,7 @@ namespace NagMe.Forms
                 return 1;
             }
 
-            if(!reminderY.IsEnabled)
+            if (!reminderY.IsEnabled)
             {
                 return -1;
             }
