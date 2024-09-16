@@ -211,6 +211,10 @@ namespace NagMe.ViewModels
                 return;
             }
 
+            if (!SelectedReminderQueueItem.Reminder.IsEnabled)
+            {
+                SelectedReminderQueueItem.Reminder.Restart();
+            }
             SelectedReminderQueueItem.Reminder.IsEnabled = !SelectedReminderQueueItem.Reminder.IsEnabled;
         }
     }

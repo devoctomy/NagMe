@@ -1,5 +1,7 @@
+using NagMe.Forms;
 using NagMe.IO;
 using NagMe.Reminders;
+using NagMe.ViewModels;
 using NagMe.Windows;
 
 namespace NagMe
@@ -42,6 +44,22 @@ namespace NagMe
                 case Enums.NotificationType.Toast:
                     {
                         // pop up toast notification here
+
+                        break;
+                    }
+
+                case Enums.NotificationType.FullScreen:
+                    {
+                        foreach(var curScreen in Screen.AllScreens)
+                        {
+                            var alertForm = new AlertForm(e.Reminder)
+                            {
+                                StartPosition = FormStartPosition.Manual,
+                                Location = curScreen.Bounds.Location,
+                                Size = curScreen.Bounds.Size
+                            };
+                            alertForm.Show();
+                        }
 
                         break;
                     }
