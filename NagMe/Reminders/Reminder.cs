@@ -1,4 +1,5 @@
 ﻿using NagMe.Enums;
+using NagMe.Extensions;
 using System.Text.Json.Serialization;
 
 namespace NagMe.Reminders
@@ -7,6 +8,8 @@ namespace NagMe.Reminders
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public bool IsEnabled { get; set; } = false;
+
+        // General
         public string Name { get; set; } = "New Reminder";
         public string Description { get; set; } = "Give your reminder a helpful description here so that you know exactly why you are being nagged.";
         
@@ -28,35 +31,9 @@ namespace NagMe.Reminders
         [JsonIgnore]
         public DateTime StartedAt { get; set; }
 
-        public TimeSpan GetIntervalAsTimeSpan()
-        {
-            switch(Period)
-            {
-                case IntervalPeriod.Seconds:
-                    {
-                        return new TimeSpan(0, 0, Interval);
-                    }
-
-                case IntervalPeriod.Minutes:
-                    {
-                        return new TimeSpan(0, Interval, 0);
-                    }
-
-                case IntervalPeriod.Hours:
-                    {
-                        return new TimeSpan(Interval, 0, 0);
-                    }
-
-                default:
-                    { 
-                        throw new InvalidOperationException("Invalid interval period.");
-                    }
-            }
-        }
-
         public TimeSpan GetRemainingTimeAsTimeSpan()
         {
-            return GetIntervalAsTimeSpan().Subtract(DateTime.Now.Subtract(StartedAt));
+            return Period.CreateTimeSpan(Interval).Subtract(DateTime.Now.Subtract(StartedAt));
         }
 
         public void Restart()
