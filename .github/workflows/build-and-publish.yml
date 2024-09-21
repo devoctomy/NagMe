@@ -28,7 +28,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish --configuration Release --no-build --output ./publish /p:PublishProfile=ClickOnceProfile
+        run: dotnet publish --configuration Release --no-build --output ./publish /p:PublishProfile=ClickOnceProfile.pubxml
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
