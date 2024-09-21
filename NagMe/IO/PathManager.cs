@@ -24,7 +24,6 @@
         private PathManager(string appName)
         {
             _appName = appName;
-            EnsurePathsExist();
         }
 
         public static string GetUserDocumentsPath()
@@ -34,23 +33,23 @@
 
         public string GetUserStorageRootPath()
         {
-            return Path.Combine(GetUserDocumentsPath(), _appName);
+            var dir = Path.Combine(GetUserDocumentsPath(), _appName);
+            Directory.CreateDirectory(dir);
+            return dir;
         }
 
         public string GetUserConfigurationPath()
         {
-            return Path.Combine(GetUserStorageRootPath(), "Configuration");
+            var dir = Path.Combine(GetUserStorageRootPath(), "Configuration");
+            Directory.CreateDirectory(dir);
+            return dir;
         }
 
         public string GetUserResourcesPath()
         {
-            return Path.Combine(GetUserStorageRootPath(), "Resources");
-        }
-
-        public void EnsurePathsExist()
-        {
-            Directory.CreateDirectory(GetUserStorageRootPath());
-            Directory.CreateDirectory(GetUserConfigurationPath());
+            var dir = Path.Combine(GetUserStorageRootPath(), "Resources");
+            Directory.CreateDirectory(dir);
+            return dir;
         }
     }
 }

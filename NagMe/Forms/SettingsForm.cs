@@ -1,3 +1,4 @@
+using NagMe.AI;
 using NagMe.Reminders;
 using NagMe.ViewModels;
 
@@ -27,6 +28,7 @@ namespace NagMe.Forms
             SystemStartWithWindowsCheckBox.DataBindings.Add("Checked", _viewModel, nameof(_viewModel.StartWithWindows), false, DataSourceUpdateMode.OnPropertyChanged);
 
             AiEnableCheckBox.DataBindings.Add("Checked", _viewModel, nameof(_viewModel.AiEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
+            AiOpenAiApiTokenTextBox.DataBindings.Add("Text", _viewModel, nameof(_viewModel.OpenAiApiToken), false, DataSourceUpdateMode.OnPropertyChanged);
             AiFeaturesPanel.DataBindings.Add("Enabled", _viewModel, nameof(_viewModel.AiEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             AIResourceLifeTimeNumericUpDown.DataBindings.Add("Value", _viewModel, nameof(_viewModel.AiResourceLifeTime), false, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -55,6 +57,13 @@ namespace NagMe.Forms
                 var selected = ReminderQueueDataGrid.SelectedRows[0].DataBoundItem as ReminderQueueItem;
                 _viewModel.SelectedReminderQueueItem = selected;
             }
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            var test = await AIUpdateManager.Current.GetTextResource(
+                Enums.AIResourceSubType.AlertMessageText,
+                _viewModel.SelectedReminderQueueItem.Reminder);
         }
     }
 }

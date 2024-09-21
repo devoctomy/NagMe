@@ -43,6 +43,8 @@
             SystemTab = new TabPage();
             SystemStartWithWindowsCheckBox = new CheckBox();
             AiTab = new TabPage();
+            AIAlertPanel = new Panel();
+            AiWarningLabel = new Label();
             AiFeaturesPanel = new Panel();
             AIAlertAudioNumericUpDown = new NumericUpDown();
             AIAlertAudioLabel = new Label();
@@ -58,19 +60,19 @@
             AiOpenAiResourceLifeTimeLabel = new Label();
             AiOpenAiApiTokenLabel = new Label();
             AiOpenAiApiTokenTextBox = new TextBox();
-            AiWarningLabel = new Label();
             AiEnableCheckBox = new CheckBox();
             TopPanel = new Panel();
             ApplyButton = new Button();
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
-            AIAlertPanel = new Panel();
+            button1 = new Button();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
             SystemTab.SuspendLayout();
             AiTab.SuspendLayout();
+            AIAlertPanel.SuspendLayout();
             AiFeaturesPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AIAlertAudioNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AIAlertImagesNumericUpDown).BeginInit();
@@ -79,7 +81,6 @@
             ((System.ComponentModel.ISupportInitialize)AIResourceLifeTimeNumericUpDown).BeginInit();
             TopPanel.SuspendLayout();
             BottomPanel.SuspendLayout();
-            AIAlertPanel.SuspendLayout();
             SuspendLayout();
             // 
             // SettingsTabs
@@ -225,6 +226,28 @@
             AiTab.TabIndex = 2;
             AiTab.Text = "AI";
             AiTab.UseVisualStyleBackColor = true;
+            // 
+            // AIAlertPanel
+            // 
+            AIAlertPanel.BackColor = Color.FromArgb(255, 192, 192);
+            AIAlertPanel.Controls.Add(button1);
+            AIAlertPanel.Controls.Add(AiWarningLabel);
+            AIAlertPanel.Location = new Point(8, 3);
+            AIAlertPanel.Name = "AIAlertPanel";
+            AIAlertPanel.Size = new Size(472, 128);
+            AIAlertPanel.TabIndex = 6;
+            // 
+            // AiWarningLabel
+            // 
+            AiWarningLabel.Dock = DockStyle.Fill;
+            AiWarningLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            AiWarningLabel.ForeColor = SystemColors.ControlText;
+            AiWarningLabel.Location = new Point(0, 0);
+            AiWarningLabel.Name = "AiWarningLabel";
+            AiWarningLabel.Size = new Size(472, 128);
+            AiWarningLabel.TabIndex = 2;
+            AiWarningLabel.Text = resources.GetString("AiWarningLabel.Text");
+            AiWarningLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // AiFeaturesPanel
             // 
@@ -372,18 +395,6 @@
             AiOpenAiApiTokenTextBox.Size = new Size(457, 23);
             AiOpenAiApiTokenTextBox.TabIndex = 5;
             // 
-            // AiWarningLabel
-            // 
-            AiWarningLabel.Dock = DockStyle.Fill;
-            AiWarningLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            AiWarningLabel.ForeColor = SystemColors.ControlText;
-            AiWarningLabel.Location = new Point(0, 0);
-            AiWarningLabel.Name = "AiWarningLabel";
-            AiWarningLabel.Size = new Size(472, 128);
-            AiWarningLabel.TabIndex = 2;
-            AiWarningLabel.Text = resources.GetString("AiWarningLabel.Text");
-            AiWarningLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // AiEnableCheckBox
             // 
             AiEnableCheckBox.AutoSize = true;
@@ -446,14 +457,15 @@
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
-            // AIAlertPanel
+            // button1
             // 
-            AIAlertPanel.BackColor = Color.FromArgb(255, 192, 192);
-            AIAlertPanel.Controls.Add(AiWarningLabel);
-            AIAlertPanel.Location = new Point(8, 3);
-            AIAlertPanel.Name = "AIAlertPanel";
-            AIAlertPanel.Size = new Size(472, 128);
-            AIAlertPanel.TabIndex = 6;
+            button1.Location = new Point(381, 13);
+            button1.Name = "button1";
+            button1.Size = new Size(67, 26);
+            button1.TabIndex = 7;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // SettingsForm
             // 
@@ -477,6 +489,7 @@
             SystemTab.PerformLayout();
             AiTab.ResumeLayout(false);
             AiTab.PerformLayout();
+            AIAlertPanel.ResumeLayout(false);
             AiFeaturesPanel.ResumeLayout(false);
             AiFeaturesPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)AIAlertAudioNumericUpDown).EndInit();
@@ -486,7 +499,6 @@
             ((System.ComponentModel.ISupportInitialize)AIResourceLifeTimeNumericUpDown).EndInit();
             TopPanel.ResumeLayout(false);
             BottomPanel.ResumeLayout(false);
-            AIAlertPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -529,5 +541,6 @@
         private NumericUpDown AIAlertTitlesNumericUpDown;
         private Label AIAlertTitlesLabel;
         private Panel AIAlertPanel;
+        private Button button1;
     }
 }

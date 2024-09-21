@@ -6,23 +6,40 @@ namespace NagMe.AI
 {
     public class AIResourceEntry
     {
-        public string Id { get; set; }
-        public string ReferencedReminderId { get; set; }
-        public AIResourceType Type { get; set; }
-        public AIResourceSubType SubType { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string? Id { get; set; }
+        public string? ReferencedReminderId { get; set; }
+        public AIResourceType? ResourceType { get; set; }
+        public AIResourceSubType? ResourceSubType { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string? Content { get; set; }
         public string? ContentPath { get; set; }
 
-        public AIResourceEntry(Reminder referencedReminder)
+        public AIResourceEntry()
+        {
+        }
+
+        public AIResourceEntry(
+            AIResourceType type,
+            AIResourceSubType subType,
+            Reminder referencedReminder)
         {
             Id = Guid.NewGuid().ToString();
-            ReferencedReminderId = Guid.NewGuid().ToString();
+            ResourceType = type;
+            ResourceSubType = subType;
+            ReferencedReminderId = referencedReminder.Id;
             CreatedAt = DateTime.Now;
+        }
+
+        public string GetResourcePath()
+        {
+            return Path.Combine(PathManager.Current.GetUserResourcesPath(), $"{Id}.json");
         }
 
         public void DeleteContent()
         {
-            if(ContentPath == null)
+            File.Delete(GetResourcePath());
+
+            if (ContentPath == null)
             {
                 return;
             }

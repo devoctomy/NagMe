@@ -10,7 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\PromptTemplates\GenerateTextResourcePrompt_AlertMessage.txt" />
+    <None Remove="Data\PromptTemplates\GenerateTextResourcePrompt_AlertTitle.txt" />
     <None Remove="Resources\Warning-Shield-24xBlack.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\PromptTemplates\GenerateTextResourcePrompt_AlertMessage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\PromptTemplates\GenerateTextResourcePrompt_AlertTitle.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
