@@ -70,6 +70,8 @@ namespace NagMe.ViewModels
         public SettingsViewModel(Form parentForm)
         {
             _parentForm = parentForm;
+            _parentForm.FormClosing += _parentForm_FormClosing1;
+
             _parentForm.FormClosing += _parentForm_FormClosing;
 
             _queueReminders = [];
@@ -87,6 +89,11 @@ namespace NagMe.ViewModels
 
             ReadSettings();
             this.PropertyChanged += SettingsViewModel_PropertyChanged;
+        }
+
+        private void _parentForm_FormClosing1(object? sender, FormClosingEventArgs e)
+        {
+            _queueUpdateTimer.Stop();
         }
 
         private void SettingsViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)

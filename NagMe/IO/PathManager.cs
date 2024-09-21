@@ -34,6 +34,7 @@
         public string GetUserStorageRootPath()
         {
             var dir = Path.Combine(GetUserDocumentsPath(), _appName);
+            dir = Path.Combine(dir, $"{Environment.MachineName}\\");
             Directory.CreateDirectory(dir);
             return dir;
         }

@@ -1,0 +1,20 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+	  <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+		  <Component Id="NagMeBinaries" Guid="15D80CA3-1D9F-4AD0-BE86-E50541736E89">
+			  <File Id="NagMe" Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\NagMe.exe" KeyPath="yes" />
+			  <File Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\D3DCompiler_47_cor3.dll" />
+			  <File Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\PenImc_cor3.dll" />
+			  <File Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\PresentationNative_cor3.dll" />
+			  <File Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\vcruntime140_cor3.dll" />
+			  <File Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\wpfgfx_cor3.dll" />
+		  </Component>
+
+		  <Component Id="PromptTemplatesFiles" Guid="3EEA1BA9-9440-4776-BFF6-2A10FB19A7AA" Directory="PromptTemplatesFolder">
+			  <File Id="Template1File" Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\Data\PromptTemplates\GenerateTextResourcePrompt_AlertMessage.txt" KeyPath="yes" />
+			  <File Id="Template2File" Source="..\NagMe\bin\Release\net8.0-windows\win-x64\publish\Data\PromptTemplates\GenerateTextResourcePrompt_AlertTitle.txt" />
+		  </Component>
+	  </ComponentGroup>
+
+  </Fragment>
+</Wix>
