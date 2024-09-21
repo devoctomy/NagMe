@@ -15,7 +15,7 @@ namespace NagMe.Reminders
         
         // Timing
         public int Interval { get; set; } = 5;
-        public IntervalPeriod Period { get; set; } = IntervalPeriod.Minutes;
+        public ShortIntervalPeriod Period { get; set; } = ShortIntervalPeriod.Minutes;
 
         // Notification
         public NotificationType NotificationType { get; set; } = NotificationType.MessageBox;
@@ -23,7 +23,7 @@ namespace NagMe.Reminders
         // Notification : Full Screen
         public int FullScreenBackgroundOpacity { get; set; } = 90;
         public int NotificationFullScreenDisplayTime { get; set; } = 30;
-        public IntervalPeriod NotificationFullScreenDisplayPeriod { get; set; } = IntervalPeriod.Seconds;
+        public ShortIntervalPeriod NotificationFullScreenDisplayPeriod { get; set; } = ShortIntervalPeriod.Seconds;
 
         // AI
         public bool IsAIEnabled { get; set; } = false;

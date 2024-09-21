@@ -134,7 +134,7 @@ namespace NagMe.ViewModels
             }
 
             AiEnabled = Configuration.Configuration.Current.EnableAiFeatures;
-            OpenAiApiToken = Configuration.Configuration.Current.OpenAIApiToken;
+            OpenAiApiToken = Configuration.Configuration.Current.OpenAIApiKey;
 
             UpdateQueue();
         }
@@ -147,7 +147,7 @@ namespace NagMe.ViewModels
             ReminderLoader.Current.SaveReminders();
 
             Configuration.Configuration.Current.EnableAiFeatures = AiEnabled;
-            Configuration.Configuration.Current.OpenAIApiToken = OpenAiApiToken;
+            Configuration.Configuration.Current.OpenAIApiKey = OpenAiApiToken;
         }
 
         [RelayCommand]

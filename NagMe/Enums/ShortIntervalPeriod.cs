@@ -1,9 +1,9 @@
 ﻿namespace NagMe.Enums
 {
-    public enum IntervalPeriod
+    public enum ShortIntervalPeriod
     {
         Seconds = 1,
         Minutes = 2,
-        Hours = 3,
+        Hours = 3
     }
 }

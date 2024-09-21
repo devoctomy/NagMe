@@ -1,4 +1,5 @@
 ﻿using NagMe.Cryptography;
+using NagMe.Enums;
 using System.Text.Json;
 
 namespace NagMe.Configuration
@@ -6,6 +7,7 @@ namespace NagMe.Configuration
     public class Configuration
     {
         private static Configuration? _current;
+
         private Config _config = new();
         private string? _configPath = null;
 
@@ -62,32 +64,80 @@ namespace NagMe.Configuration
             }
         }
 
-        public string? OpenAIApiToken
+        public string? OpenAIApiKey
         {
             get
             {
-                if(string.IsNullOrEmpty(_config.OpenAiApiTokenBase64CypherText))
+                if(string.IsNullOrEmpty(_config.OpenAiApiKeyBase64CypherText))
                 {
                     return null;
                 }
 
                 var stringProtector = new StringProtector("NagMe", "Secure config settings");
-                var plaintext = stringProtector.Decrypt(_config.OpenAiApiTokenBase64CypherText);
+                var plaintext = stringProtector.Decrypt(_config.OpenAiApiKeyBase64CypherText);
                 return plaintext;
             }
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    _config.OpenAiApiTokenBase64CypherText = null;
+                    _config.OpenAiApiKeyBase64CypherText = null;
                     Save();
                     return;
                 }
 
                 var stringProtector = new StringProtector("NagMe", "Secure config settings");
                 var base64CypherText = stringProtector.Encrypt(value);
-                _config.OpenAiApiTokenBase64CypherText = base64CypherText;
+                _config.OpenAiApiKeyBase64CypherText = base64CypherText;
                 Save();
+            }
+        }
+
+        public int AIResourceLifeTime
+        {
+            get
+            {
+                return _config.AIResourceLifeTime;
+            }
+            set
+            {
+                if (_config.AIResourceLifeTime != value)
+                {
+                    _config.AIResourceLifeTime = value;
+                    Save();
+                }
+            }
+        }
+
+        public LongIntervalPeriod AIResourceLifeTimePeriod
+        {
+            get
+            {
+                return _config.AIResourceLifeTimePeriod;
+            }
+            set
+            {
+                if (_config.AIResourceLifeTimePeriod != value)
+                {
+                    _config.AIResourceLifeTimePeriod = value;
+                    Save();
+                }
+            }
+        }
+
+        public DateTime? LastAIResourceUpdate
+        {
+            get
+            {
+                return _config.LastAIResourceUpdate;
+            }
+            set
+            {
+                if (_config.LastAIResourceUpdate != value)
+                {
+                    _config.LastAIResourceUpdate = value;
+                    Save();
+                }
             }
         }
 

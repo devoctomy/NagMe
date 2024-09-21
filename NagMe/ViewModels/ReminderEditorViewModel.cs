@@ -24,7 +24,7 @@ namespace NagMe.ViewModels
         private int _interval;
 
         [ObservableProperty]
-        private IntervalPeriod _period;
+        private ShortIntervalPeriod _period;
 
         // Notification
         [ObservableProperty]
@@ -44,7 +44,7 @@ namespace NagMe.ViewModels
         private int _fullScreenDisplayTime;
 
         [ObservableProperty]
-        private IntervalPeriod _fullScreenDisplayPeriod;
+        private ShortIntervalPeriod _fullScreenDisplayPeriod;
 
         // AI
         [ObservableProperty]
@@ -52,7 +52,7 @@ namespace NagMe.ViewModels
 
         // Common
         [ObservableProperty]
-        private ObservableCollection<IntervalPeriod> _periods;
+        private ObservableCollection<ShortIntervalPeriod> _periods;
 
         public ReminderEditorViewModel(
             Form parentForm,
@@ -60,8 +60,8 @@ namespace NagMe.ViewModels
         {
             _parentForm = parentForm;
             _reminder = reminder;
-            var periods = Enum.GetNames(typeof(IntervalPeriod)).Select(x => Enum.Parse<IntervalPeriod>(x)).ToList();
-            Periods = new ObservableCollection<IntervalPeriod>(periods);
+            var periods = Enum.GetNames(typeof(ShortIntervalPeriod)).Select(x => Enum.Parse<ShortIntervalPeriod>(x)).ToList();
+            Periods = new ObservableCollection<ShortIntervalPeriod>(periods);
             var notificationTypes = Enum.GetNames(typeof(NotificationType)).Select(x => Enum.Parse<NotificationType>(x)).ToList();
             NotificationTypes = new ObservableCollection<NotificationType>(notificationTypes);
             ReadReminder();

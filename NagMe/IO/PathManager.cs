@@ -42,6 +42,11 @@
             return Path.Combine(GetUserStorageRootPath(), "Configuration");
         }
 
+        public string GetUserResourcesPath()
+        {
+            return Path.Combine(GetUserStorageRootPath(), "Resources");
+        }
+
         public void EnsurePathsExist()
         {
             Directory.CreateDirectory(GetUserStorageRootPath());

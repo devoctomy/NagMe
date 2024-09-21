@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             SettingsTabs = new TabControl();
             RemindersTab = new TabPage();
+            EditReminderButton = new Button();
             ToggleReminderEnabledButton = new Button();
             ReminderQueueDataGrid = new DataGridView();
             ReminderQueueDataGridColumnEnabled = new DataGridViewCheckBoxColumn();
@@ -43,6 +44,9 @@
             SystemStartWithWindowsCheckBox = new CheckBox();
             AiTab = new TabPage();
             AiFeaturesPanel = new Panel();
+            TimingsIntervalPeriodComboBox = new ComboBox();
+            TimingsIntervalNumericUpDown = new NumericUpDown();
+            AiOpenAiResourceLifeTimeLabel = new Label();
             AiOpenAiApiTokenLabel = new Label();
             AiOpenAiApiTokenTextBox = new TextBox();
             AiWarningLabel = new Label();
@@ -52,13 +56,13 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
-            EditReminderButton = new Button();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
             SystemTab.SuspendLayout();
             AiTab.SuspendLayout();
             AiFeaturesPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).BeginInit();
             TopPanel.SuspendLayout();
             BottomPanel.SuspendLayout();
             SuspendLayout();
@@ -89,6 +93,15 @@
             RemindersTab.TabIndex = 0;
             RemindersTab.Text = "Reminders";
             RemindersTab.UseVisualStyleBackColor = true;
+            // 
+            // EditReminderButton
+            // 
+            EditReminderButton.Image = Properties.Resources.Data_Edit_24xblack;
+            EditReminderButton.Location = new Point(432, 47);
+            EditReminderButton.Name = "EditReminderButton";
+            EditReminderButton.Size = new Size(48, 35);
+            EditReminderButton.TabIndex = 6;
+            EditReminderButton.UseVisualStyleBackColor = true;
             // 
             // ToggleReminderEnabledButton
             // 
@@ -200,13 +213,42 @@
             // 
             // AiFeaturesPanel
             // 
+            AiFeaturesPanel.Controls.Add(TimingsIntervalPeriodComboBox);
+            AiFeaturesPanel.Controls.Add(TimingsIntervalNumericUpDown);
+            AiFeaturesPanel.Controls.Add(AiOpenAiResourceLifeTimeLabel);
             AiFeaturesPanel.Controls.Add(AiOpenAiApiTokenLabel);
             AiFeaturesPanel.Controls.Add(AiOpenAiApiTokenTextBox);
             AiFeaturesPanel.Enabled = false;
             AiFeaturesPanel.Location = new Point(0, 162);
             AiFeaturesPanel.Name = "AiFeaturesPanel";
-            AiFeaturesPanel.Size = new Size(480, 78);
+            AiFeaturesPanel.Size = new Size(480, 124);
             AiFeaturesPanel.TabIndex = 5;
+            // 
+            // TimingsIntervalPeriodComboBox
+            // 
+            TimingsIntervalPeriodComboBox.FormattingEnabled = true;
+            TimingsIntervalPeriodComboBox.Location = new Point(312, 74);
+            TimingsIntervalPeriodComboBox.Name = "TimingsIntervalPeriodComboBox";
+            TimingsIntervalPeriodComboBox.Size = new Size(165, 23);
+            TimingsIntervalPeriodComboBox.TabIndex = 9;
+            // 
+            // TimingsIntervalNumericUpDown
+            // 
+            TimingsIntervalNumericUpDown.Location = new Point(20, 74);
+            TimingsIntervalNumericUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            TimingsIntervalNumericUpDown.Name = "TimingsIntervalNumericUpDown";
+            TimingsIntervalNumericUpDown.Size = new Size(286, 23);
+            TimingsIntervalNumericUpDown.TabIndex = 8;
+            TimingsIntervalNumericUpDown.Value = new decimal(new int[] { 7, 0, 0, 0 });
+            // 
+            // AiOpenAiResourceLifeTimeLabel
+            // 
+            AiOpenAiResourceLifeTimeLabel.AutoSize = true;
+            AiOpenAiResourceLifeTimeLabel.Location = new Point(20, 56);
+            AiOpenAiResourceLifeTimeLabel.Name = "AiOpenAiResourceLifeTimeLabel";
+            AiOpenAiResourceLifeTimeLabel.Size = new Size(101, 15);
+            AiOpenAiResourceLifeTimeLabel.TabIndex = 7;
+            AiOpenAiResourceLifeTimeLabel.Text = "Resource Lifetime";
             // 
             // AiOpenAiApiTokenLabel
             // 
@@ -219,7 +261,7 @@
             // 
             // AiOpenAiApiTokenTextBox
             // 
-            AiOpenAiApiTokenTextBox.Location = new Point(20, 39);
+            AiOpenAiApiTokenTextBox.Location = new Point(20, 30);
             AiOpenAiApiTokenTextBox.Name = "AiOpenAiApiTokenTextBox";
             AiOpenAiApiTokenTextBox.Size = new Size(457, 23);
             AiOpenAiApiTokenTextBox.TabIndex = 5;
@@ -296,15 +338,6 @@
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
-            // EditReminderButton
-            // 
-            EditReminderButton.Image = Properties.Resources.Data_Edit_24xblack;
-            EditReminderButton.Location = new Point(432, 47);
-            EditReminderButton.Name = "EditReminderButton";
-            EditReminderButton.Size = new Size(48, 35);
-            EditReminderButton.TabIndex = 6;
-            EditReminderButton.UseVisualStyleBackColor = true;
-            // 
             // SettingsForm
             // 
             AcceptButton = OkButton;
@@ -329,6 +362,7 @@
             AiTab.PerformLayout();
             AiFeaturesPanel.ResumeLayout(false);
             AiFeaturesPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).EndInit();
             TopPanel.ResumeLayout(false);
             BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
@@ -360,5 +394,8 @@
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnTotalCount;
         private Button ToggleReminderEnabledButton;
         private Button EditReminderButton;
+        private ComboBox TimingsIntervalPeriodComboBox;
+        private NumericUpDown TimingsIntervalNumericUpDown;
+        private Label AiOpenAiResourceLifeTimeLabel;
     }
 }

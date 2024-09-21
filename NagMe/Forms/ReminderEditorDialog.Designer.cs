@@ -56,9 +56,9 @@
             NotificationTypeLabel = new Label();
             NotificationTypeComboBox = new ComboBox();
             AiTab = new TabPage();
+            AIEnabledCheckBox = new CheckBox();
             panel1 = new Panel();
             label2 = new Label();
-            AIEnabledCheckBox = new CheckBox();
             BottomPanel.SuspendLayout();
             TopPanel.SuspendLayout();
             ReminderEditorTabs.SuspendLayout();
@@ -147,7 +147,7 @@
             GeneralDescriptionTextBox.Multiline = true;
             GeneralDescriptionTextBox.Name = "GeneralDescriptionTextBox";
             GeneralDescriptionTextBox.ScrollBars = ScrollBars.Vertical;
-            GeneralDescriptionTextBox.Size = new Size(475, 149);
+            GeneralDescriptionTextBox.Size = new Size(475, 266);
             GeneralDescriptionTextBox.TabIndex = 4;
             // 
             // GeneralDescriptionLabel
@@ -344,6 +344,16 @@
             AiTab.Text = "AI";
             AiTab.UseVisualStyleBackColor = true;
             // 
+            // AIEnabledCheckBox
+            // 
+            AIEnabledCheckBox.AutoSize = true;
+            AIEnabledCheckBox.Location = new Point(8, 66);
+            AIEnabledCheckBox.Name = "AIEnabledCheckBox";
+            AIEnabledCheckBox.Size = new Size(61, 19);
+            AIEnabledCheckBox.TabIndex = 1;
+            AIEnabledCheckBox.Text = "Enable";
+            AIEnabledCheckBox.UseVisualStyleBackColor = true;
+            // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(255, 192, 192);
@@ -362,16 +372,6 @@
             label2.TabIndex = 0;
             label2.Text = "AI Functionality currently only works with FullScreen notifications, and as such enabling this feature will force FullScreen notifications.";
             label2.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // AIEnabledCheckBox
-            // 
-            AIEnabledCheckBox.AutoSize = true;
-            AIEnabledCheckBox.Location = new Point(8, 66);
-            AIEnabledCheckBox.Name = "AIEnabledCheckBox";
-            AIEnabledCheckBox.Size = new Size(61, 19);
-            AIEnabledCheckBox.TabIndex = 1;
-            AIEnabledCheckBox.Text = "Enable";
-            AIEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // ReminderEditorDialog
             // 
