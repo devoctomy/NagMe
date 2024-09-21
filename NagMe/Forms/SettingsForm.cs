@@ -29,7 +29,14 @@ namespace NagMe.Forms
             AiEnableCheckBox.DataBindings.Add("Checked", _viewModel, nameof(_viewModel.AiEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             AiFeaturesPanel.DataBindings.Add("Enabled", _viewModel, nameof(_viewModel.AiEnabled), false, DataSourceUpdateMode.OnPropertyChanged);
             AIResourceLifeTimeNumericUpDown.DataBindings.Add("Value", _viewModel, nameof(_viewModel.AiResourceLifeTime), false, DataSourceUpdateMode.OnPropertyChanged);
-            AIResourceLifeTimePeriodComboBox.DataBindings.Add("SelectedValue", _viewModel, nameof(_viewModel.AiResourceLifeTimePeriod), false, DataSourceUpdateMode.OnPropertyChanged);
+
+            AIResourceLifeTimePeriodComboBox.DataBindings.Add("SelectedItem", _viewModel, nameof(_viewModel.AiResourceLifeTimePeriod), false, DataSourceUpdateMode.OnPropertyChanged);
+            AIResourceLifeTimePeriodComboBox.SelectionChangeCommitted += (s, e) =>
+            {
+                AIResourceLifeTimePeriodComboBox.DataBindings["SelectedItem"].WriteValue();
+            };
+            AIResourceLifeTimePeriodComboBox.DataSource = _viewModel.Periods;
+
             AIAlertTitlesNumericUpDown.DataBindings.Add("Value", _viewModel, nameof(_viewModel.AiResourceAlertTitleLimit), false, DataSourceUpdateMode.OnPropertyChanged);
             AIAlertMessagesNumericUpDown.DataBindings.Add("Value", _viewModel, nameof(_viewModel.AiResourceAlertMessageLimit), false, DataSourceUpdateMode.OnPropertyChanged);
             AIAlertImagesNumericUpDown.DataBindings.Add("Value", _viewModel, nameof(_viewModel.AiResourceAlertImageLimit), false, DataSourceUpdateMode.OnPropertyChanged);

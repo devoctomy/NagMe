@@ -5,12 +5,21 @@ using NagMe.Forms;
 using NagMe.Reminders;
 using NagMe.Windows;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Timers;
 
 namespace NagMe.ViewModels
 {
     public partial class SettingsViewModel : ObservableObject
     {
+        private readonly string[] _ignoredProperties = new string[]
+        {
+            nameof(IsDirty),
+            nameof(QueueBindingSource),
+            nameof(SelectedReminderQueueItem),
+            nameof(Reminders)
+        };
+
         private Form _parentForm;
 
         private List<ReminderQueueItem> _queueReminders;
@@ -53,6 +62,9 @@ namespace NagMe.ViewModels
         private ObservableCollection<Reminder> _reminders = new ObservableCollection<Reminder>();
 
         [ObservableProperty]
+        private ObservableCollection<LongIntervalPeriod> _periods;
+
+        [ObservableProperty]
         private bool _isDirty;
 
         public SettingsViewModel(Form parentForm)
@@ -66,11 +78,26 @@ namespace NagMe.ViewModels
                 DataSource = _queueReminders
             };
 
+            var periods = Enum.GetNames(typeof(LongIntervalPeriod)).Select(x => Enum.Parse<LongIntervalPeriod>(x)).ToList();
+            Periods = new ObservableCollection<LongIntervalPeriod>(periods);
+
             _queueUpdateTimer = new System.Timers.Timer(new TimeSpan(0, 0, 1));
             _queueUpdateTimer.Elapsed += _queueUpdateTimer_Elapsed;
             _queueUpdateTimer.Start();
 
             ReadSettings();
+            this.PropertyChanged += SettingsViewModel_PropertyChanged;
+        }
+
+        private void SettingsViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if(_ignoredProperties.Contains(e.PropertyName))
+            {
+                return;
+            }
+
+            Console.WriteLine($"Property changed: {e.PropertyName}");
+            IsDirty = true;
         }
 
         private void _parentForm_FormClosing(object? sender, FormClosingEventArgs e)
@@ -153,6 +180,7 @@ namespace NagMe.ViewModels
 
             AiEnabled = Configuration.Configuration.Current.EnableAiFeatures;
             OpenAiApiToken = Configuration.Configuration.Current.OpenAIApiKey;
+            AiResourceLifeTime = Configuration.Configuration.Current.AIResourceLifeTime;
             AiResourceLifeTimePeriod = Configuration.Configuration.Current.AIResourceLifeTimePeriod;
             AiResourceAlertTitleLimit = Configuration.Configuration.Current.AIResourceAlertTitleLimit;
             AiResourceAlertMessageLimit = Configuration.Configuration.Current.AIResourceAlertMessageLimit;
