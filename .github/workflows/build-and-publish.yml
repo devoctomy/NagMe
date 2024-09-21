@@ -24,14 +24,17 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      - name: Build Application
+        run: dotnet build NagMe/NagMe.csproj --configuration Release --no-restore
 
-      - name: Publish
-        run: dotnet publish --configuration Release --no-build --output ./publish /p:PublishProfile=ClickOnce
+      - name: Publish Application
+        run: dotnet publish NagMe/NagMe.csproj --configuration Release --no-build -p:PublishProfile=FolderProfile
 
-      - name: Upload artifact
+      - name: Build Installer
+        run: dotnet build Installer/Installer.wixproj --configuration Debug --no-restore
+
+      - name: Upload Installer artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: PublishedApp
-          path: ./publish
+          name: Installer
+          path: ./Installer/bin/Debug/en-US
