@@ -96,7 +96,44 @@ namespace NagMe.ViewModels
                 return;
             }
 
-            Console.WriteLine($"Property changed: {e.PropertyName}");
+            switch(e.PropertyName)
+            {
+                case nameof(AiResourceAlertTitleLimit):
+                    {
+                        if (AiResourceAlertTitleLimit < 1)
+                        {
+                            AiResourceAlertTitleLimit = 1;
+                        }
+                        break;
+                    }
+
+                case nameof(AiResourceAlertMessageLimit):
+                    {
+                        if (AiResourceAlertMessageLimit < 1)
+                        {
+                            AiResourceAlertMessageLimit = 1;
+                        }
+                        break;
+                    }
+
+                case nameof(AiResourceAlertImageLimit):
+                    {
+                        if (AiResourceAlertImageLimit < 1)
+                        {
+                            AiResourceAlertImageLimit = 1;
+                        }
+                        break;
+                    }
+
+                case nameof(AiResourceAlertAudioLimit):
+                    {
+                        if(AiResourceAlertAudioLimit < 1)
+                        {
+                            AiResourceAlertAudioLimit = 1;
+                        }
+                        break;
+                    }
+            }
             IsDirty = true;
         }
 

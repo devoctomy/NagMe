@@ -365,6 +365,7 @@
             // 
             // AIAlertLabel
             // 
+            AIAlertLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             AIAlertLabel.ForeColor = SystemColors.ControlText;
             AIAlertLabel.Location = new Point(12, 10);
             AIAlertLabel.Name = "AIAlertLabel";
