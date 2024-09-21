@@ -63,7 +63,7 @@ namespace NagMe.AI
 
         public override string ToString()
         {
-            return Content ?? "Unset";
+            return string.IsNullOrEmpty(Content) ? "Unset" : Content.Trim('\"');
         }
     }
 }

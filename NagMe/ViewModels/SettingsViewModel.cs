@@ -182,7 +182,7 @@ namespace NagMe.ViewModels
                 var existing = _queueReminders.SingleOrDefault(x => x.Reminder == curReminder);
                 if (existing == null)
                 {
-                    var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
+                    var remaining = curReminder.IsEnabled ? curReminder.Displaying ? "Displaying..." : curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
                     var newItem = new ReminderQueueItem(
                         curReminder,
                         remaining,
@@ -193,7 +193,7 @@ namespace NagMe.ViewModels
                 }
                 else
                 {
-                    var remaining = curReminder.IsEnabled ? curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
+                    var remaining = curReminder.IsEnabled ? curReminder.Displaying ? "Displaying..." : curReminder.GetRemainingTimeAsTimeSpan().ToString(Constants.Standards.TimeSpanFormat) : "-";
                     existing.RemainingTime = remaining;
                     existing.IsEnabled = curReminder.IsEnabled;
                     reset = true;
