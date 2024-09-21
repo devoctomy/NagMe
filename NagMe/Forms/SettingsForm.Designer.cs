@@ -66,7 +66,6 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
-            button1 = new Button();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
@@ -230,7 +229,6 @@
             // AIAlertPanel
             // 
             AIAlertPanel.BackColor = Color.FromArgb(255, 192, 192);
-            AIAlertPanel.Controls.Add(button1);
             AIAlertPanel.Controls.Add(AiWarningLabel);
             AIAlertPanel.Location = new Point(8, 3);
             AIAlertPanel.Name = "AIAlertPanel";
@@ -457,16 +455,6 @@
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            button1.Location = new Point(381, 13);
-            button1.Name = "button1";
-            button1.Size = new Size(67, 26);
-            button1.TabIndex = 7;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // SettingsForm
             // 
             AcceptButton = OkButton;
@@ -541,6 +529,5 @@
         private NumericUpDown AIAlertTitlesNumericUpDown;
         private Label AIAlertTitlesLabel;
         private Panel AIAlertPanel;
-        private Button button1;
     }
 }

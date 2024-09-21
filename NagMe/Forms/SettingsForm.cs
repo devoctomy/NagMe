@@ -58,12 +58,5 @@ namespace NagMe.Forms
                 _viewModel.SelectedReminderQueueItem = selected;
             }
         }
-
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            var test = await AIUpdateManager.Current.GetTextResource(
-                Enums.AIResourceSubType.AlertMessageText,
-                _viewModel.SelectedReminderQueueItem.Reminder);
-        }
     }
 }

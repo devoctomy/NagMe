@@ -1,4 +1,5 @@
-﻿using NagMe.ViewModels;
+﻿using NagMe.AI;
+using NagMe.ViewModels;
 
 namespace NagMe.Forms
 {

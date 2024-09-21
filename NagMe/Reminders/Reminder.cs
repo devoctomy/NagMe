@@ -1,4 +1,5 @@
-﻿using NagMe.Enums;
+﻿using NagMe.AI;
+using NagMe.Enums;
 using NagMe.Extensions;
 using System.Text.Json.Serialization;
 
@@ -27,9 +28,13 @@ namespace NagMe.Reminders
 
         // AI
         public bool IsAIEnabled { get; set; } = false;
+        public AIResourceEntry? AITitleEntry { get; set; }
+        public AIResourceEntry? AIMessageEntry { get; set; }
 
         [JsonIgnore]
         public DateTime StartedAt { get; set; }
+
+        public bool Displaying { get; set; }
 
         public TimeSpan GetRemainingTimeAsTimeSpan()
         {
@@ -38,6 +43,7 @@ namespace NagMe.Reminders
 
         public void Restart()
         {
+            Displaying = false;
             StartedAt = DateTime.Now;
         }
 

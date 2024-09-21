@@ -1,3 +1,4 @@
+using NagMe.AI;
 using NagMe.Forms;
 using NagMe.IO;
 using NagMe.Reminders;
@@ -68,6 +69,7 @@ namespace NagMe
             Reminder reminder)
         {
             await Task.Yield();
+            await ActivateAI(reminder);
             using var alertForm = new AlertForm(reminder)
             {
                 StartPosition = FormStartPosition.Manual,
@@ -77,6 +79,17 @@ namespace NagMe
                 TopLevel = true
             };
             alertForm.ShowDialog();
+        }
+
+        private static async Task ActivateAI(Reminders.Reminder reminder)
+        {
+            if (!reminder.IsAIEnabled)
+            {
+                return;
+            }
+
+            reminder.AITitleEntry = await AIUpdateManager.Current.GetTextResource(Enums.AIResourceSubType.AlertTitleText, reminder);
+            reminder.AIMessageEntry = await AIUpdateManager.Current.GetTextResource(Enums.AIResourceSubType.AlertMessageText, reminder);
         }
 
         private static void AlertForm_FormClosed(object? sender, FormClosedEventArgs e)

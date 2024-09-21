@@ -46,12 +46,12 @@
 
         private void CheckReminders()
         {
-            foreach (var curReminder in ReminderLoader.Current.Reminders.Where(x => x.IsEnabled))
+            foreach (var curReminder in ReminderLoader.Current.Reminders.Where(x => x.IsEnabled && !x.Displaying))
             {
                 var remainingTime = curReminder.GetRemainingTimeAsTimeSpan();
                 if(remainingTime.TotalSeconds <= 0)
                 {
-                    curReminder.Restart();
+                    curReminder.Displaying = true;
                     ReminderPopped?.Invoke(this, new ReminderPoppedEventArgs(curReminder, DateTime.Now));
                 }
             }

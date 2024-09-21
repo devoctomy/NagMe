@@ -60,5 +60,10 @@ namespace NagMe.AI
                 throw new UnauthorizedAccessException("Attempted to delete content outside of the applications resource directory.");
             }
         }
+
+        public override string ToString()
+        {
+            return Content ?? "Unset";
+        }
     }
 }
