@@ -117,7 +117,8 @@ namespace NagMe.AI
 
             var chat = _openAiApiClient.Chat.CreateConversation();
             chat.Model = Model.GPT4;
-            chat.RequestParameters.Temperature = 0;
+            chat.RequestParameters.Temperature = 0.7d;
+            chat.RequestParameters.TopP = 0.8d;
             chat.AppendSystemMessage(prompt);
             chat.AppendUserInput($"Name: {reminder.Name}\r\nDescription: {reminder.Description}");
             var response = await chat.GetResponseFromChatbotAsync();
