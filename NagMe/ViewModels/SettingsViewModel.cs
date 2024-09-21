@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using NagMe.Enums;
 using NagMe.Forms;
 using NagMe.Reminders;
 using NagMe.Windows;
@@ -145,10 +144,7 @@ namespace NagMe.ViewModels
             var startupManager = StartupManager.Current;
             startupManager.StartupWithWindows = StartWithWindows;
 
-            if (ReminderLoader.Current.IsDirty)
-            {
-                ReminderLoader.Current.SaveReminders();
-            }
+            ReminderLoader.Current.SaveReminders();
 
             Configuration.Configuration.Current.EnableAiFeatures = AiEnabled;
             Configuration.Configuration.Current.OpenAIApiToken = OpenAiApiToken;
@@ -190,6 +186,29 @@ namespace NagMe.ViewModels
         }
 
         [RelayCommand]
+        private void EditReminderButton()
+        {
+            if (SelectedReminderQueueItem == null)
+            {
+                return;
+            }
+
+            var original = SelectedReminderQueueItem.Reminder;
+            var reminder = SelectedReminderQueueItem.Reminder.Clone();
+            var reminderEditor = new ReminderEditorDialog(reminder);
+            var result = reminderEditor.ShowDialog(_parentForm);
+            if (result == DialogResult.OK)
+            {
+                if(ReminderLoader.Current.Reminders.Contains(original))
+                {
+                    ReminderLoader.Current.UpdateReminder(original, reminder);
+                    UpdateQueue();
+                    IsDirty = true;
+                }
+            }
+        }
+
+        [RelayCommand]
         private void DeleteReminderButton(object selectedReminder)
         {
             if(SelectedReminderQueueItem == null)
@@ -216,6 +235,7 @@ namespace NagMe.ViewModels
                 SelectedReminderQueueItem.Reminder.Restart();
             }
             SelectedReminderQueueItem.Reminder.IsEnabled = !SelectedReminderQueueItem.Reminder.IsEnabled;
+            IsDirty = true;
         }
     }
 }

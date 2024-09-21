@@ -2,7 +2,6 @@ using NagMe.Forms;
 using NagMe.IO;
 using NagMe.Reminders;
 using NagMe.Windows;
-using System.Collections.Concurrent;
 
 namespace NagMe
 {
@@ -73,7 +72,9 @@ namespace NagMe
             {
                 StartPosition = FormStartPosition.Manual,
                 Location = screen.Bounds.Location,
-                Size = screen.Bounds.Size
+                Size = screen.Bounds.Size,
+                Opacity = reminder.FullScreenBackgroundOpacity / 100.0,
+                TopLevel = true
             };
             alertForm.ShowDialog();
         }

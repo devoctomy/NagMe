@@ -21,6 +21,7 @@ namespace NagMe.Forms
             CnclButton.Command = _viewModel.CancelButtonCommand;
             ApplyButton.Command = _viewModel.ApplyButtonCommand;
             AddReminderButton.Command = _viewModel.AddReminderButtonCommand;
+            EditReminderButton.Command = _viewModel.EditReminderButtonCommand;
             DeleteReminderButton.Command = _viewModel.DeleteReminderButtonCommand;
             ToggleReminderEnabledButton.Command = _viewModel.ToggleReminderEnabledButtonCommand;
             AiEnableCheckBox.DataBindings.Add("Checked", _viewModel, nameof(_viewModel.AiEnabled), false, DataSourceUpdateMode.OnPropertyChanged);

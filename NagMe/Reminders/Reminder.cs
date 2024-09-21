@@ -9,9 +9,21 @@ namespace NagMe.Reminders
         public bool IsEnabled { get; set; } = false;
         public string Name { get; set; } = "New Reminder";
         public string Description { get; set; } = "Give your reminder a helpful description here so that you know exactly why you are being nagged.";
+        
+        // Timing
         public int Interval { get; set; } = 5;
         public IntervalPeriod Period { get; set; } = IntervalPeriod.Minutes;
+
+        // Notification
         public NotificationType NotificationType { get; set; } = NotificationType.MessageBox;
+
+        // Notification : Full Screen
+        public int FullScreenBackgroundOpacity { get; set; } = 90;
+        public int NotificationFullScreenDisplayTime { get; set; } = 30;
+        public IntervalPeriod NotificationFullScreenDisplayPeriod { get; set; } = IntervalPeriod.Seconds;
+
+        // AI
+        public bool IsAIEnabled { get; set; } = false;
 
         [JsonIgnore]
         public DateTime StartedAt { get; set; }
@@ -55,6 +67,11 @@ namespace NagMe.Reminders
         public override string ToString()
         {
             return Name;
+        }
+
+        public Reminder Clone()
+        {
+            return (Reminder)MemberwiseClone();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using NagMe.Extensions;
 using NagMe.Reminders;
 using System.Timers;
 
@@ -23,7 +24,7 @@ namespace NagMe.ViewModels
             _title = reminder.Name;
             _message = reminder.Description;
 
-            _autoClose = new System.Timers.Timer(new TimeSpan(0, 0, 10)); // !!! Need a property for this
+            _autoClose = new System.Timers.Timer(reminder.NotificationFullScreenDisplayPeriod.CreateTimeSpan(reminder.NotificationFullScreenDisplayTime));
             _autoClose.Elapsed += _autoClose_Elapsed;
             _autoClose.Start();
         }
@@ -31,7 +32,7 @@ namespace NagMe.ViewModels
         private void _autoClose_Elapsed(object? sender, ElapsedEventArgs e)
         {
             var timer = sender as System.Timers.Timer;
-            if(timer == null)
+            if(timer == null && _autoClose != null)
             {
                 _autoClose.Stop();
             }

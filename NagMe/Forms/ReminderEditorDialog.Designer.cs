@@ -40,13 +40,25 @@
             GeneralNameTextBox = new TextBox();
             GeneralNameLabel = new Label();
             TimingsTab = new TabPage();
-            TimingsIntervalPeriod = new ComboBox();
+            TimingsIntervalPeriodComboBox = new ComboBox();
             TimingsIntervalNumericUpDown = new NumericUpDown();
             label1 = new Label();
             NotificationTab = new TabPage();
-            AiTab = new TabPage();
-            NotificationTypeComboBox = new ComboBox();
+            NotificationSettingsTabs = new TabControl();
+            NotificationMessageBoxTab = new TabPage();
+            NotificationToastTab = new TabPage();
+            NotificationFullScreenTab = new TabPage();
+            NotificationFullScreenDisplayTimePeriodComboBox = new ComboBox();
+            NotificationFullScreenDisplayTimeNumericUpDown = new NumericUpDown();
+            NotificationFullScreenDisplayTimeLabel = new Label();
+            NotificationFullScreenBackgroundOpacityTrackbar = new TrackBar();
+            NotificationFullScreenBackgroundOpacityLabel = new Label();
             NotificationTypeLabel = new Label();
+            NotificationTypeComboBox = new ComboBox();
+            AiTab = new TabPage();
+            panel1 = new Panel();
+            label2 = new Label();
+            AIEnabledCheckBox = new CheckBox();
             BottomPanel.SuspendLayout();
             TopPanel.SuspendLayout();
             ReminderEditorTabs.SuspendLayout();
@@ -54,6 +66,12 @@
             TimingsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).BeginInit();
             NotificationTab.SuspendLayout();
+            NotificationSettingsTabs.SuspendLayout();
+            NotificationFullScreenTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)NotificationFullScreenDisplayTimeNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NotificationFullScreenBackgroundOpacityTrackbar).BeginInit();
+            AiTab.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // BottomPanel
@@ -159,7 +177,7 @@
             // 
             // TimingsTab
             // 
-            TimingsTab.Controls.Add(TimingsIntervalPeriod);
+            TimingsTab.Controls.Add(TimingsIntervalPeriodComboBox);
             TimingsTab.Controls.Add(TimingsIntervalNumericUpDown);
             TimingsTab.Controls.Add(label1);
             TimingsTab.Location = new Point(4, 24);
@@ -170,13 +188,13 @@
             TimingsTab.Text = "Timings";
             TimingsTab.UseVisualStyleBackColor = true;
             // 
-            // TimingsIntervalPeriod
+            // TimingsIntervalPeriodComboBox
             // 
-            TimingsIntervalPeriod.FormattingEnabled = true;
-            TimingsIntervalPeriod.Location = new Point(328, 31);
-            TimingsIntervalPeriod.Name = "TimingsIntervalPeriod";
-            TimingsIntervalPeriod.Size = new Size(165, 23);
-            TimingsIntervalPeriod.TabIndex = 4;
+            TimingsIntervalPeriodComboBox.FormattingEnabled = true;
+            TimingsIntervalPeriodComboBox.Location = new Point(328, 31);
+            TimingsIntervalPeriodComboBox.Name = "TimingsIntervalPeriodComboBox";
+            TimingsIntervalPeriodComboBox.Size = new Size(165, 23);
+            TimingsIntervalPeriodComboBox.TabIndex = 4;
             // 
             // TimingsIntervalNumericUpDown
             // 
@@ -198,6 +216,7 @@
             // 
             // NotificationTab
             // 
+            NotificationTab.Controls.Add(NotificationSettingsTabs);
             NotificationTab.Controls.Add(NotificationTypeLabel);
             NotificationTab.Controls.Add(NotificationTypeComboBox);
             NotificationTab.Location = new Point(4, 24);
@@ -207,23 +226,94 @@
             NotificationTab.Text = "Notification";
             NotificationTab.UseVisualStyleBackColor = true;
             // 
-            // AiTab
+            // NotificationSettingsTabs
             // 
-            AiTab.Location = new Point(4, 24);
-            AiTab.Name = "AiTab";
-            AiTab.Padding = new Padding(3);
-            AiTab.Size = new Size(513, 373);
-            AiTab.TabIndex = 1;
-            AiTab.Text = "AI";
-            AiTab.UseVisualStyleBackColor = true;
+            NotificationSettingsTabs.Controls.Add(NotificationMessageBoxTab);
+            NotificationSettingsTabs.Controls.Add(NotificationToastTab);
+            NotificationSettingsTabs.Controls.Add(NotificationFullScreenTab);
+            NotificationSettingsTabs.Location = new Point(17, 60);
+            NotificationSettingsTabs.Name = "NotificationSettingsTabs";
+            NotificationSettingsTabs.SelectedIndex = 0;
+            NotificationSettingsTabs.Size = new Size(493, 310);
+            NotificationSettingsTabs.TabIndex = 4;
             // 
-            // NotificationTypeComboBox
+            // NotificationMessageBoxTab
             // 
-            NotificationTypeComboBox.FormattingEnabled = true;
-            NotificationTypeComboBox.Location = new Point(17, 31);
-            NotificationTypeComboBox.Name = "NotificationTypeComboBox";
-            NotificationTypeComboBox.Size = new Size(488, 23);
-            NotificationTypeComboBox.TabIndex = 0;
+            NotificationMessageBoxTab.Location = new Point(4, 24);
+            NotificationMessageBoxTab.Name = "NotificationMessageBoxTab";
+            NotificationMessageBoxTab.Padding = new Padding(3);
+            NotificationMessageBoxTab.Size = new Size(485, 282);
+            NotificationMessageBoxTab.TabIndex = 0;
+            NotificationMessageBoxTab.Text = "MessageBox";
+            NotificationMessageBoxTab.UseVisualStyleBackColor = true;
+            // 
+            // NotificationToastTab
+            // 
+            NotificationToastTab.Location = new Point(4, 24);
+            NotificationToastTab.Name = "NotificationToastTab";
+            NotificationToastTab.Padding = new Padding(3);
+            NotificationToastTab.Size = new Size(485, 282);
+            NotificationToastTab.TabIndex = 1;
+            NotificationToastTab.Text = "Toast";
+            NotificationToastTab.UseVisualStyleBackColor = true;
+            // 
+            // NotificationFullScreenTab
+            // 
+            NotificationFullScreenTab.Controls.Add(NotificationFullScreenDisplayTimePeriodComboBox);
+            NotificationFullScreenTab.Controls.Add(NotificationFullScreenDisplayTimeNumericUpDown);
+            NotificationFullScreenTab.Controls.Add(NotificationFullScreenDisplayTimeLabel);
+            NotificationFullScreenTab.Controls.Add(NotificationFullScreenBackgroundOpacityTrackbar);
+            NotificationFullScreenTab.Controls.Add(NotificationFullScreenBackgroundOpacityLabel);
+            NotificationFullScreenTab.Location = new Point(4, 24);
+            NotificationFullScreenTab.Name = "NotificationFullScreenTab";
+            NotificationFullScreenTab.Size = new Size(485, 282);
+            NotificationFullScreenTab.TabIndex = 2;
+            NotificationFullScreenTab.Text = "FullScreen";
+            NotificationFullScreenTab.UseVisualStyleBackColor = true;
+            // 
+            // NotificationFullScreenDisplayTimePeriodComboBox
+            // 
+            NotificationFullScreenDisplayTimePeriodComboBox.FormattingEnabled = true;
+            NotificationFullScreenDisplayTimePeriodComboBox.Location = new Point(304, 94);
+            NotificationFullScreenDisplayTimePeriodComboBox.Name = "NotificationFullScreenDisplayTimePeriodComboBox";
+            NotificationFullScreenDisplayTimePeriodComboBox.Size = new Size(165, 23);
+            NotificationFullScreenDisplayTimePeriodComboBox.TabIndex = 8;
+            // 
+            // NotificationFullScreenDisplayTimeNumericUpDown
+            // 
+            NotificationFullScreenDisplayTimeNumericUpDown.Location = new Point(14, 95);
+            NotificationFullScreenDisplayTimeNumericUpDown.Maximum = new decimal(new int[] { 86400, 0, 0, 0 });
+            NotificationFullScreenDisplayTimeNumericUpDown.Name = "NotificationFullScreenDisplayTimeNumericUpDown";
+            NotificationFullScreenDisplayTimeNumericUpDown.Size = new Size(284, 23);
+            NotificationFullScreenDisplayTimeNumericUpDown.TabIndex = 7;
+            NotificationFullScreenDisplayTimeNumericUpDown.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            // 
+            // NotificationFullScreenDisplayTimeLabel
+            // 
+            NotificationFullScreenDisplayTimeLabel.AutoSize = true;
+            NotificationFullScreenDisplayTimeLabel.Location = new Point(14, 77);
+            NotificationFullScreenDisplayTimeLabel.Name = "NotificationFullScreenDisplayTimeLabel";
+            NotificationFullScreenDisplayTimeLabel.Size = new Size(74, 15);
+            NotificationFullScreenDisplayTimeLabel.TabIndex = 6;
+            NotificationFullScreenDisplayTimeLabel.Text = "Display Time";
+            // 
+            // NotificationFullScreenBackgroundOpacityTrackbar
+            // 
+            NotificationFullScreenBackgroundOpacityTrackbar.Location = new Point(14, 29);
+            NotificationFullScreenBackgroundOpacityTrackbar.Maximum = 100;
+            NotificationFullScreenBackgroundOpacityTrackbar.Name = "NotificationFullScreenBackgroundOpacityTrackbar";
+            NotificationFullScreenBackgroundOpacityTrackbar.Size = new Size(455, 45);
+            NotificationFullScreenBackgroundOpacityTrackbar.TabIndex = 5;
+            NotificationFullScreenBackgroundOpacityTrackbar.TickFrequency = 10;
+            // 
+            // NotificationFullScreenBackgroundOpacityLabel
+            // 
+            NotificationFullScreenBackgroundOpacityLabel.AutoSize = true;
+            NotificationFullScreenBackgroundOpacityLabel.Location = new Point(14, 11);
+            NotificationFullScreenBackgroundOpacityLabel.Name = "NotificationFullScreenBackgroundOpacityLabel";
+            NotificationFullScreenBackgroundOpacityLabel.Size = new Size(115, 15);
+            NotificationFullScreenBackgroundOpacityLabel.TabIndex = 4;
+            NotificationFullScreenBackgroundOpacityLabel.Text = "Background Opacity";
             // 
             // NotificationTypeLabel
             // 
@@ -233,6 +323,55 @@
             NotificationTypeLabel.Size = new Size(31, 15);
             NotificationTypeLabel.TabIndex = 3;
             NotificationTypeLabel.Text = "Type";
+            // 
+            // NotificationTypeComboBox
+            // 
+            NotificationTypeComboBox.FormattingEnabled = true;
+            NotificationTypeComboBox.Location = new Point(17, 31);
+            NotificationTypeComboBox.Name = "NotificationTypeComboBox";
+            NotificationTypeComboBox.Size = new Size(488, 23);
+            NotificationTypeComboBox.TabIndex = 0;
+            // 
+            // AiTab
+            // 
+            AiTab.Controls.Add(AIEnabledCheckBox);
+            AiTab.Controls.Add(panel1);
+            AiTab.Location = new Point(4, 24);
+            AiTab.Name = "AiTab";
+            AiTab.Padding = new Padding(3);
+            AiTab.Size = new Size(513, 373);
+            AiTab.TabIndex = 1;
+            AiTab.Text = "AI";
+            AiTab.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(255, 192, 192);
+            panel1.Controls.Add(label2);
+            panel1.Location = new Point(8, 6);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(497, 54);
+            panel1.TabIndex = 0;
+            // 
+            // label2
+            // 
+            label2.ForeColor = SystemColors.ControlText;
+            label2.Location = new Point(12, 10);
+            label2.Name = "label2";
+            label2.Size = new Size(473, 38);
+            label2.TabIndex = 0;
+            label2.Text = "AI Functionality currently only works with FullScreen notifications, and as such enabling this feature will force FullScreen notifications.";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // AIEnabledCheckBox
+            // 
+            AIEnabledCheckBox.AutoSize = true;
+            AIEnabledCheckBox.Location = new Point(8, 66);
+            AIEnabledCheckBox.Name = "AIEnabledCheckBox";
+            AIEnabledCheckBox.Size = new Size(61, 19);
+            AIEnabledCheckBox.TabIndex = 1;
+            AIEnabledCheckBox.Text = "Enable";
+            AIEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // ReminderEditorDialog
             // 
@@ -258,6 +397,14 @@
             ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).EndInit();
             NotificationTab.ResumeLayout(false);
             NotificationTab.PerformLayout();
+            NotificationSettingsTabs.ResumeLayout(false);
+            NotificationFullScreenTab.ResumeLayout(false);
+            NotificationFullScreenTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)NotificationFullScreenDisplayTimeNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NotificationFullScreenBackgroundOpacityTrackbar).EndInit();
+            AiTab.ResumeLayout(false);
+            AiTab.PerformLayout();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -276,10 +423,22 @@
         private TextBox GeneralDescriptionTextBox;
         private Label GeneralDescriptionLabel;
         private Label label1;
-        private ComboBox TimingsIntervalPeriod;
+        private ComboBox TimingsIntervalPeriodComboBox;
         private NumericUpDown TimingsIntervalNumericUpDown;
         private TabPage NotificationTab;
         private Label NotificationTypeLabel;
         private ComboBox NotificationTypeComboBox;
+        private TabControl NotificationSettingsTabs;
+        private TabPage NotificationMessageBoxTab;
+        private TabPage NotificationToastTab;
+        private TabPage NotificationFullScreenTab;
+        private TrackBar NotificationFullScreenBackgroundOpacityTrackbar;
+        private Label NotificationFullScreenBackgroundOpacityLabel;
+        private ComboBox NotificationFullScreenDisplayTimePeriodComboBox;
+        private NumericUpDown NotificationFullScreenDisplayTimeNumericUpDown;
+        private Label NotificationFullScreenDisplayTimeLabel;
+        private Panel panel1;
+        private Label label2;
+        private CheckBox AIEnabledCheckBox;
     }
 }

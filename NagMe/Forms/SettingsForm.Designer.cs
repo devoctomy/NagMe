@@ -52,6 +52,7 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
+            EditReminderButton = new Button();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
@@ -76,6 +77,7 @@
             // 
             // RemindersTab
             // 
+            RemindersTab.Controls.Add(EditReminderButton);
             RemindersTab.Controls.Add(ToggleReminderEnabledButton);
             RemindersTab.Controls.Add(ReminderQueueDataGrid);
             RemindersTab.Controls.Add(DeleteReminderButton);
@@ -90,7 +92,8 @@
             // 
             // ToggleReminderEnabledButton
             // 
-            ToggleReminderEnabledButton.Location = new Point(432, 88);
+            ToggleReminderEnabledButton.Image = Properties.Resources.Power_Off_WF_24xBlack;
+            ToggleReminderEnabledButton.Location = new Point(432, 129);
             ToggleReminderEnabledButton.Name = "ToggleReminderEnabledButton";
             ToggleReminderEnabledButton.Size = new Size(48, 34);
             ToggleReminderEnabledButton.TabIndex = 5;
@@ -147,7 +150,7 @@
             // DeleteReminderButton
             // 
             DeleteReminderButton.Image = Properties.Resources.Garbage_Closed_24xBlack;
-            DeleteReminderButton.Location = new Point(432, 47);
+            DeleteReminderButton.Location = new Point(432, 88);
             DeleteReminderButton.Name = "DeleteReminderButton";
             DeleteReminderButton.Size = new Size(48, 35);
             DeleteReminderButton.TabIndex = 2;
@@ -293,6 +296,15 @@
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
+            // EditReminderButton
+            // 
+            EditReminderButton.Image = Properties.Resources.Data_Edit_24xblack;
+            EditReminderButton.Location = new Point(432, 47);
+            EditReminderButton.Name = "EditReminderButton";
+            EditReminderButton.Size = new Size(48, 35);
+            EditReminderButton.TabIndex = 6;
+            EditReminderButton.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             AcceptButton = OkButton;
@@ -347,5 +359,6 @@
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnRemainingTime;
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnTotalCount;
         private Button ToggleReminderEnabledButton;
+        private Button EditReminderButton;
     }
 }

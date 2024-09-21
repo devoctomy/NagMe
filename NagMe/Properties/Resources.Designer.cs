@@ -73,9 +73,29 @@ namespace NagMe.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Data_Edit_24xblack {
+            get {
+                object obj = ResourceManager.GetObject("Data-Edit_24xblack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Garbage_Closed_24xBlack {
             get {
                 object obj = ResourceManager.GetObject("Garbage-Closed_24xBlack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Power_Off_WF_24xBlack {
+            get {
+                object obj = ResourceManager.GetObject("Power Off-WF_24xBlack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

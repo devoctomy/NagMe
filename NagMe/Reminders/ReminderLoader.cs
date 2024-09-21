@@ -74,6 +74,15 @@ namespace NagMe.Reminders
             IsDirty = true;
         }
 
+        public void UpdateReminder(
+            Reminder old,
+            Reminder updated)
+        {
+            RemoveReminder(old);
+            AddReminder(updated);
+            IsDirty = true;
+        }
+
         public void ClearReminders()
         {
             _reminders.Clear();
