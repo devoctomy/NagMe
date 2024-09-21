@@ -44,8 +44,17 @@
             SystemStartWithWindowsCheckBox = new CheckBox();
             AiTab = new TabPage();
             AiFeaturesPanel = new Panel();
-            TimingsIntervalPeriodComboBox = new ComboBox();
-            TimingsIntervalNumericUpDown = new NumericUpDown();
+            AIAlertAudioNumericUpDown = new NumericUpDown();
+            AIAlertAudioLabel = new Label();
+            AIAlertImagesNumericUpDown = new NumericUpDown();
+            AIAlertImagesLabel = new Label();
+            AIAlertMessagesNumericUpDown = new NumericUpDown();
+            AIAlertMessagesLabel = new Label();
+            AICachedResourceLimitsLabel = new Label();
+            AIAlertTitlesNumericUpDown = new NumericUpDown();
+            AIAlertTitlesLabel = new Label();
+            AIResourceLifeTimePeriodComboBox = new ComboBox();
+            AIResourceLifeTimeNumericUpDown = new NumericUpDown();
             AiOpenAiResourceLifeTimeLabel = new Label();
             AiOpenAiApiTokenLabel = new Label();
             AiOpenAiApiTokenTextBox = new TextBox();
@@ -56,28 +65,19 @@
             BottomPanel = new Panel();
             OkButton = new Button();
             CnclButton = new Button();
-            AIAlertAudioNumericUpDown = new NumericUpDown();
-            AIAlertAudioLabel = new Label();
-            AIAlertImagesNumericUpDown = new NumericUpDown();
-            AIAlertImagesLabel = new Label();
-            AIAlertMessagesNumericUpDown = new NumericUpDown();
-            AIAlertMessagesLabel = new Label();
-            AICachedResourceLimitsLabel = new Label();
-            AIAlertTitlesNumericUpDown = new NumericUpDown();
-            AIAlertTitlesLabel = new Label();
             SettingsTabs.SuspendLayout();
             RemindersTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReminderQueueDataGrid).BeginInit();
             SystemTab.SuspendLayout();
             AiTab.SuspendLayout();
             AiFeaturesPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).BeginInit();
-            TopPanel.SuspendLayout();
-            BottomPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AIAlertAudioNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AIAlertImagesNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AIAlertMessagesNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AIAlertTitlesNumericUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AIResourceLifeTimeNumericUpDown).BeginInit();
+            TopPanel.SuspendLayout();
+            BottomPanel.SuspendLayout();
             SuspendLayout();
             // 
             // SettingsTabs
@@ -235,8 +235,8 @@
             AiFeaturesPanel.Controls.Add(AICachedResourceLimitsLabel);
             AiFeaturesPanel.Controls.Add(AIAlertTitlesNumericUpDown);
             AiFeaturesPanel.Controls.Add(AIAlertTitlesLabel);
-            AiFeaturesPanel.Controls.Add(TimingsIntervalPeriodComboBox);
-            AiFeaturesPanel.Controls.Add(TimingsIntervalNumericUpDown);
+            AiFeaturesPanel.Controls.Add(AIResourceLifeTimePeriodComboBox);
+            AiFeaturesPanel.Controls.Add(AIResourceLifeTimeNumericUpDown);
             AiFeaturesPanel.Controls.Add(AiOpenAiResourceLifeTimeLabel);
             AiFeaturesPanel.Controls.Add(AiOpenAiApiTokenLabel);
             AiFeaturesPanel.Controls.Add(AiOpenAiApiTokenTextBox);
@@ -246,22 +246,108 @@
             AiFeaturesPanel.Size = new Size(480, 313);
             AiFeaturesPanel.TabIndex = 5;
             // 
-            // TimingsIntervalPeriodComboBox
+            // AIAlertAudioNumericUpDown
             // 
-            TimingsIntervalPeriodComboBox.FormattingEnabled = true;
-            TimingsIntervalPeriodComboBox.Location = new Point(312, 74);
-            TimingsIntervalPeriodComboBox.Name = "TimingsIntervalPeriodComboBox";
-            TimingsIntervalPeriodComboBox.Size = new Size(165, 23);
-            TimingsIntervalPeriodComboBox.TabIndex = 9;
+            AIAlertAudioNumericUpDown.Location = new Point(20, 271);
+            AIAlertAudioNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
+            AIAlertAudioNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            AIAlertAudioNumericUpDown.Name = "AIAlertAudioNumericUpDown";
+            AIAlertAudioNumericUpDown.Size = new Size(457, 23);
+            AIAlertAudioNumericUpDown.TabIndex = 21;
+            AIAlertAudioNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // TimingsIntervalNumericUpDown
+            // AIAlertAudioLabel
             // 
-            TimingsIntervalNumericUpDown.Location = new Point(20, 74);
-            TimingsIntervalNumericUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            TimingsIntervalNumericUpDown.Name = "TimingsIntervalNumericUpDown";
-            TimingsIntervalNumericUpDown.Size = new Size(286, 23);
-            TimingsIntervalNumericUpDown.TabIndex = 8;
-            TimingsIntervalNumericUpDown.Value = new decimal(new int[] { 7, 0, 0, 0 });
+            AIAlertAudioLabel.AutoSize = true;
+            AIAlertAudioLabel.Location = new Point(20, 253);
+            AIAlertAudioLabel.Name = "AIAlertAudioLabel";
+            AIAlertAudioLabel.Size = new Size(67, 15);
+            AIAlertAudioLabel.TabIndex = 20;
+            AIAlertAudioLabel.Text = "Alert Audio";
+            // 
+            // AIAlertImagesNumericUpDown
+            // 
+            AIAlertImagesNumericUpDown.Location = new Point(20, 227);
+            AIAlertImagesNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
+            AIAlertImagesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            AIAlertImagesNumericUpDown.Name = "AIAlertImagesNumericUpDown";
+            AIAlertImagesNumericUpDown.Size = new Size(457, 23);
+            AIAlertImagesNumericUpDown.TabIndex = 19;
+            AIAlertImagesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // AIAlertImagesLabel
+            // 
+            AIAlertImagesLabel.AutoSize = true;
+            AIAlertImagesLabel.Location = new Point(20, 209);
+            AIAlertImagesLabel.Name = "AIAlertImagesLabel";
+            AIAlertImagesLabel.Size = new Size(73, 15);
+            AIAlertImagesLabel.TabIndex = 18;
+            AIAlertImagesLabel.Text = "Alert Images";
+            // 
+            // AIAlertMessagesNumericUpDown
+            // 
+            AIAlertMessagesNumericUpDown.Location = new Point(20, 183);
+            AIAlertMessagesNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
+            AIAlertMessagesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            AIAlertMessagesNumericUpDown.Name = "AIAlertMessagesNumericUpDown";
+            AIAlertMessagesNumericUpDown.Size = new Size(457, 23);
+            AIAlertMessagesNumericUpDown.TabIndex = 17;
+            AIAlertMessagesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // AIAlertMessagesLabel
+            // 
+            AIAlertMessagesLabel.AutoSize = true;
+            AIAlertMessagesLabel.Location = new Point(20, 165);
+            AIAlertMessagesLabel.Name = "AIAlertMessagesLabel";
+            AIAlertMessagesLabel.Size = new Size(86, 15);
+            AIAlertMessagesLabel.TabIndex = 16;
+            AIAlertMessagesLabel.Text = "Alert Messages";
+            // 
+            // AICachedResourceLimitsLabel
+            // 
+            AICachedResourceLimitsLabel.AutoSize = true;
+            AICachedResourceLimitsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            AICachedResourceLimitsLabel.Location = new Point(20, 106);
+            AICachedResourceLimitsLabel.Name = "AICachedResourceLimitsLabel";
+            AICachedResourceLimitsLabel.Size = new Size(291, 15);
+            AICachedResourceLimitsLabel.TabIndex = 15;
+            AICachedResourceLimitsLabel.Text = "Cached Resource Limits (Per Configured Reminder)";
+            // 
+            // AIAlertTitlesNumericUpDown
+            // 
+            AIAlertTitlesNumericUpDown.Location = new Point(20, 139);
+            AIAlertTitlesNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
+            AIAlertTitlesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            AIAlertTitlesNumericUpDown.Name = "AIAlertTitlesNumericUpDown";
+            AIAlertTitlesNumericUpDown.Size = new Size(457, 23);
+            AIAlertTitlesNumericUpDown.TabIndex = 14;
+            AIAlertTitlesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // AIAlertTitlesLabel
+            // 
+            AIAlertTitlesLabel.AutoSize = true;
+            AIAlertTitlesLabel.Location = new Point(20, 121);
+            AIAlertTitlesLabel.Name = "AIAlertTitlesLabel";
+            AIAlertTitlesLabel.Size = new Size(62, 15);
+            AIAlertTitlesLabel.TabIndex = 13;
+            AIAlertTitlesLabel.Text = "Alert Titles";
+            // 
+            // AIResourceLifeTimePeriodComboBox
+            // 
+            AIResourceLifeTimePeriodComboBox.FormattingEnabled = true;
+            AIResourceLifeTimePeriodComboBox.Location = new Point(312, 74);
+            AIResourceLifeTimePeriodComboBox.Name = "AIResourceLifeTimePeriodComboBox";
+            AIResourceLifeTimePeriodComboBox.Size = new Size(165, 23);
+            AIResourceLifeTimePeriodComboBox.TabIndex = 9;
+            // 
+            // AIResourceLifeTimeNumericUpDown
+            // 
+            AIResourceLifeTimeNumericUpDown.Location = new Point(20, 74);
+            AIResourceLifeTimeNumericUpDown.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            AIResourceLifeTimeNumericUpDown.Name = "AIResourceLifeTimeNumericUpDown";
+            AIResourceLifeTimeNumericUpDown.Size = new Size(286, 23);
+            AIResourceLifeTimeNumericUpDown.TabIndex = 8;
+            AIResourceLifeTimeNumericUpDown.Value = new decimal(new int[] { 7, 0, 0, 0 });
             // 
             // AiOpenAiResourceLifeTimeLabel
             // 
@@ -360,92 +446,6 @@
             CnclButton.Text = "Cancel";
             CnclButton.UseVisualStyleBackColor = true;
             // 
-            // AIAlertAudioNumericUpDown
-            // 
-            AIAlertAudioNumericUpDown.Location = new Point(20, 271);
-            AIAlertAudioNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
-            AIAlertAudioNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            AIAlertAudioNumericUpDown.Name = "AIAlertAudioNumericUpDown";
-            AIAlertAudioNumericUpDown.Size = new Size(457, 23);
-            AIAlertAudioNumericUpDown.TabIndex = 21;
-            AIAlertAudioNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // AIAlertAudioLabel
-            // 
-            AIAlertAudioLabel.AutoSize = true;
-            AIAlertAudioLabel.Location = new Point(20, 253);
-            AIAlertAudioLabel.Name = "AIAlertAudioLabel";
-            AIAlertAudioLabel.Size = new Size(67, 15);
-            AIAlertAudioLabel.TabIndex = 20;
-            AIAlertAudioLabel.Text = "Alert Audio";
-            // 
-            // AIAlertImagesNumericUpDown
-            // 
-            AIAlertImagesNumericUpDown.Location = new Point(20, 227);
-            AIAlertImagesNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
-            AIAlertImagesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            AIAlertImagesNumericUpDown.Name = "AIAlertImagesNumericUpDown";
-            AIAlertImagesNumericUpDown.Size = new Size(457, 23);
-            AIAlertImagesNumericUpDown.TabIndex = 19;
-            AIAlertImagesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // AIAlertImagesLabel
-            // 
-            AIAlertImagesLabel.AutoSize = true;
-            AIAlertImagesLabel.Location = new Point(20, 209);
-            AIAlertImagesLabel.Name = "AIAlertImagesLabel";
-            AIAlertImagesLabel.Size = new Size(73, 15);
-            AIAlertImagesLabel.TabIndex = 18;
-            AIAlertImagesLabel.Text = "Alert Images";
-            // 
-            // AIAlertMessagesNumericUpDown
-            // 
-            AIAlertMessagesNumericUpDown.Location = new Point(20, 183);
-            AIAlertMessagesNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
-            AIAlertMessagesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            AIAlertMessagesNumericUpDown.Name = "AIAlertMessagesNumericUpDown";
-            AIAlertMessagesNumericUpDown.Size = new Size(457, 23);
-            AIAlertMessagesNumericUpDown.TabIndex = 17;
-            AIAlertMessagesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // AIAlertMessagesLabel
-            // 
-            AIAlertMessagesLabel.AutoSize = true;
-            AIAlertMessagesLabel.Location = new Point(20, 165);
-            AIAlertMessagesLabel.Name = "AIAlertMessagesLabel";
-            AIAlertMessagesLabel.Size = new Size(86, 15);
-            AIAlertMessagesLabel.TabIndex = 16;
-            AIAlertMessagesLabel.Text = "Alert Messages";
-            // 
-            // AICachedResourceLimitsLabel
-            // 
-            AICachedResourceLimitsLabel.AutoSize = true;
-            AICachedResourceLimitsLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AICachedResourceLimitsLabel.Location = new Point(20, 106);
-            AICachedResourceLimitsLabel.Name = "AICachedResourceLimitsLabel";
-            AICachedResourceLimitsLabel.Size = new Size(291, 15);
-            AICachedResourceLimitsLabel.TabIndex = 15;
-            AICachedResourceLimitsLabel.Text = "Cached Resource Limits (Per Configured Reminder)";
-            // 
-            // AIAlertTitlesNumericUpDown
-            // 
-            AIAlertTitlesNumericUpDown.Location = new Point(20, 139);
-            AIAlertTitlesNumericUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
-            AIAlertTitlesNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            AIAlertTitlesNumericUpDown.Name = "AIAlertTitlesNumericUpDown";
-            AIAlertTitlesNumericUpDown.Size = new Size(457, 23);
-            AIAlertTitlesNumericUpDown.TabIndex = 14;
-            AIAlertTitlesNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // AIAlertTitlesLabel
-            // 
-            AIAlertTitlesLabel.AutoSize = true;
-            AIAlertTitlesLabel.Location = new Point(20, 121);
-            AIAlertTitlesLabel.Name = "AIAlertTitlesLabel";
-            AIAlertTitlesLabel.Size = new Size(62, 15);
-            AIAlertTitlesLabel.TabIndex = 13;
-            AIAlertTitlesLabel.Text = "Alert Titles";
-            // 
             // SettingsForm
             // 
             AcceptButton = OkButton;
@@ -470,13 +470,13 @@
             AiTab.PerformLayout();
             AiFeaturesPanel.ResumeLayout(false);
             AiFeaturesPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)TimingsIntervalNumericUpDown).EndInit();
-            TopPanel.ResumeLayout(false);
-            BottomPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AIAlertAudioNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AIAlertImagesNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AIAlertMessagesNumericUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AIAlertTitlesNumericUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AIResourceLifeTimeNumericUpDown).EndInit();
+            TopPanel.ResumeLayout(false);
+            BottomPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -506,8 +506,8 @@
         private DataGridViewTextBoxColumn ReminderQueueDataGridColumnTotalCount;
         private Button ToggleReminderEnabledButton;
         private Button EditReminderButton;
-        private ComboBox TimingsIntervalPeriodComboBox;
-        private NumericUpDown TimingsIntervalNumericUpDown;
+        private ComboBox AIResourceLifeTimePeriodComboBox;
+        private NumericUpDown AIResourceLifeTimeNumericUpDown;
         private Label AiOpenAiResourceLifeTimeLabel;
         private NumericUpDown AIAlertAudioNumericUpDown;
         private Label AIAlertAudioLabel;

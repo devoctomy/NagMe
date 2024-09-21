@@ -141,6 +141,70 @@ namespace NagMe.Configuration
             }
         }
 
+        public int AIResourceAlertTitleLimit
+        {
+            get
+            {
+                return _config.AIResourceAlertTitleLimit;
+            }
+            set
+            {
+                if (_config.AIResourceAlertTitleLimit != value)
+                {
+                    _config.AIResourceAlertTitleLimit = value;
+                    Save();
+                }
+            }
+        }
+
+        public int AIResourceAlertMessageLimit
+        {
+            get
+            {
+                return _config.AIResourceAlertMessageLimit;
+            }
+            set
+            {
+                if (_config.AIResourceAlertMessageLimit != value)
+                {
+                    _config.AIResourceAlertMessageLimit = value;
+                    Save();
+                }
+            }
+        }
+
+        public int AIResourceAlertImageLimit
+        {
+            get
+            {
+                return _config.AIResourceAlertImageLimit;
+            }
+            set
+            {
+                if (_config.AIResourceAlertImageLimit != value)
+                {
+                    _config.AIResourceAlertImageLimit = value;
+                    Save();
+                }
+            }
+        }
+
+        public int AIResourceAlertAudioLimit
+        {
+            get
+            {
+                return _config.AIResourceAlertAudioLimit;
+            }
+            set
+            {
+                if (_config.AIResourceAlertAudioLimit != value)
+                {
+                    _config.AIResourceAlertAudioLimit = value;
+                    Save();
+                }
+            }
+        }
+
         private void Save()
         {
             ArgumentNullException.ThrowIfNull(_configPath);

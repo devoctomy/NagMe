@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NagMe.Enums;
 using NagMe.Forms;
 using NagMe.Reminders;
 using NagMe.Windows;
@@ -23,6 +24,24 @@ namespace NagMe.ViewModels
 
         [ObservableProperty]
         private string? _openAiApiToken;
+
+        [ObservableProperty]
+        private int _aiResourceLifeTime;
+
+        [ObservableProperty]
+        private LongIntervalPeriod _aiResourceLifeTimePeriod;
+
+        [ObservableProperty]
+        private int _aiResourceAlertTitleLimit;
+
+        [ObservableProperty]
+        private int _aiResourceAlertMessageLimit;
+
+        [ObservableProperty]
+        private int _aiResourceAlertImageLimit;
+
+        [ObservableProperty]
+        private int _aiResourceAlertAudioLimit;
 
         [ObservableProperty]
         private BindingSource _queueBindingSource;
@@ -124,30 +143,39 @@ namespace NagMe.ViewModels
 
         private void ReadSettings()
         {
-            var startupManager = StartupManager.Current;
-            StartWithWindows = startupManager.StartupWithWindows;
-
             Reminders.Clear();
             foreach (var curReminder in ReminderLoader.Current.Reminders)
             {
                 Reminders.Add(curReminder);
             }
 
+            StartWithWindows = StartupManager.Current.StartupWithWindows;
+
             AiEnabled = Configuration.Configuration.Current.EnableAiFeatures;
             OpenAiApiToken = Configuration.Configuration.Current.OpenAIApiKey;
+            AiResourceLifeTimePeriod = Configuration.Configuration.Current.AIResourceLifeTimePeriod;
+            AiResourceAlertTitleLimit = Configuration.Configuration.Current.AIResourceAlertTitleLimit;
+            AiResourceAlertMessageLimit = Configuration.Configuration.Current.AIResourceAlertMessageLimit;
+            AiResourceAlertImageLimit = Configuration.Configuration.Current.AIResourceAlertImageLimit;
+            AiResourceAlertAudioLimit = Configuration.Configuration.Current.AIResourceAlertAudioLimit;
 
             UpdateQueue();
         }
 
         private void ApplySettings()
         {
-            var startupManager = StartupManager.Current;
-            startupManager.StartupWithWindows = StartWithWindows;
-
             ReminderLoader.Current.SaveReminders();
+
+            StartupManager.Current.StartupWithWindows = StartWithWindows;
 
             Configuration.Configuration.Current.EnableAiFeatures = AiEnabled;
             Configuration.Configuration.Current.OpenAIApiKey = OpenAiApiToken;
+            Configuration.Configuration.Current.AIResourceLifeTime = AiResourceLifeTime;
+            Configuration.Configuration.Current.AIResourceLifeTimePeriod = AiResourceLifeTimePeriod;
+            Configuration.Configuration.Current.AIResourceAlertTitleLimit = AiResourceAlertTitleLimit;
+            Configuration.Configuration.Current.AIResourceAlertMessageLimit = AiResourceAlertMessageLimit;
+            Configuration.Configuration.Current.AIResourceAlertImageLimit = AiResourceAlertImageLimit;
+            Configuration.Configuration.Current.AIResourceAlertAudioLimit = AiResourceAlertAudioLimit;
         }
 
         [RelayCommand]
