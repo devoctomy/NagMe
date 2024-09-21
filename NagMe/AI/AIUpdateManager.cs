@@ -1,5 +1,6 @@
 ﻿using NagMe.Enums;
 using NagMe.Extensions;
+using NagMe.Reminders;
 using System.Data;
 
 namespace NagMe.AI
@@ -30,13 +31,16 @@ namespace NagMe.AI
             _resources = new List<AIResourceEntry>();
         }
 
-        public string GetTextResource(AIResourceSubType subType)
+        public string GetTextResource(
+            AIResourceSubType subType,
+            Reminder referencedReminder)
         {
             ExpireResources();
 
             var allTextResources = _resources.Where(x =>
                 x.Type == Enums.AIResourceType.Text &&
-                x.SubType == subType);
+                x.SubType == subType &&
+                x.ReferencedReminderId == referencedReminder.Id);
 
             // How many resources of each type do we want to cache?
 

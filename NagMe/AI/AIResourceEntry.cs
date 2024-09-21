@@ -1,19 +1,22 @@
 ﻿using NagMe.Enums;
 using NagMe.IO;
+using NagMe.Reminders;
 
 namespace NagMe.AI
 {
     public class AIResourceEntry
     {
         public string Id { get; set; }
+        public string ReferencedReminderId { get; set; }
         public AIResourceType Type { get; set; }
         public AIResourceSubType SubType { get; set; }
         public DateTime CreatedAt { get; set; }
         public string? ContentPath { get; set; }
 
-        public AIResourceEntry()
+        public AIResourceEntry(Reminder referencedReminder)
         {
             Id = Guid.NewGuid().ToString();
+            ReferencedReminderId = Guid.NewGuid().ToString();
             CreatedAt = DateTime.Now;
         }
 

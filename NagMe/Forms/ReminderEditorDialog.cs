@@ -24,7 +24,7 @@ namespace NagMe.Forms
             // General
             GeneralNameTextBox.DataBindings.Add("Text", _viewModel, nameof(_viewModel.Name), false, DataSourceUpdateMode.OnPropertyChanged);
             GeneralDescriptionTextBox.DataBindings.Add("Text", _viewModel, nameof(_viewModel.Description), false, DataSourceUpdateMode.OnPropertyChanged);
-            
+
             // Timing
             TimingsIntervalNumericUpDown.DataBindings.Add("Value", _viewModel, nameof(_viewModel.Interval), false, DataSourceUpdateMode.OnPropertyChanged);
             TimingsIntervalPeriodComboBox.DataBindings.Add("SelectedItem", _viewModel, nameof(_viewModel.Period), false, DataSourceUpdateMode.OnPropertyChanged);

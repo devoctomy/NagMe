@@ -57,8 +57,8 @@
             NotificationTypeComboBox = new ComboBox();
             AiTab = new TabPage();
             AIEnabledCheckBox = new CheckBox();
-            panel1 = new Panel();
-            label2 = new Label();
+            AIAlertPanel = new Panel();
+            AIAlertLabel = new Label();
             BottomPanel.SuspendLayout();
             TopPanel.SuspendLayout();
             ReminderEditorTabs.SuspendLayout();
@@ -71,7 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)NotificationFullScreenDisplayTimeNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NotificationFullScreenBackgroundOpacityTrackbar).BeginInit();
             AiTab.SuspendLayout();
-            panel1.SuspendLayout();
+            AIAlertPanel.SuspendLayout();
             SuspendLayout();
             // 
             // BottomPanel
@@ -335,7 +335,7 @@
             // AiTab
             // 
             AiTab.Controls.Add(AIEnabledCheckBox);
-            AiTab.Controls.Add(panel1);
+            AiTab.Controls.Add(AIAlertPanel);
             AiTab.Location = new Point(4, 24);
             AiTab.Name = "AiTab";
             AiTab.Padding = new Padding(3);
@@ -354,24 +354,24 @@
             AIEnabledCheckBox.Text = "Enable";
             AIEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // AIAlertPanel
             // 
-            panel1.BackColor = Color.FromArgb(255, 192, 192);
-            panel1.Controls.Add(label2);
-            panel1.Location = new Point(8, 6);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(497, 54);
-            panel1.TabIndex = 0;
+            AIAlertPanel.BackColor = Color.FromArgb(255, 192, 192);
+            AIAlertPanel.Controls.Add(AIAlertLabel);
+            AIAlertPanel.Location = new Point(8, 6);
+            AIAlertPanel.Name = "AIAlertPanel";
+            AIAlertPanel.Size = new Size(497, 54);
+            AIAlertPanel.TabIndex = 0;
             // 
-            // label2
+            // AIAlertLabel
             // 
-            label2.ForeColor = SystemColors.ControlText;
-            label2.Location = new Point(12, 10);
-            label2.Name = "label2";
-            label2.Size = new Size(473, 38);
-            label2.TabIndex = 0;
-            label2.Text = "AI Functionality currently only works with FullScreen notifications, and as such enabling this feature will force FullScreen notifications.";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            AIAlertLabel.ForeColor = SystemColors.ControlText;
+            AIAlertLabel.Location = new Point(12, 10);
+            AIAlertLabel.Name = "AIAlertLabel";
+            AIAlertLabel.Size = new Size(473, 38);
+            AIAlertLabel.TabIndex = 0;
+            AIAlertLabel.Text = "AI Functionality currently only works with FullScreen notifications, and as such enabling this feature will force FullScreen notifications.";
+            AIAlertLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // ReminderEditorDialog
             // 
@@ -404,7 +404,7 @@
             ((System.ComponentModel.ISupportInitialize)NotificationFullScreenBackgroundOpacityTrackbar).EndInit();
             AiTab.ResumeLayout(false);
             AiTab.PerformLayout();
-            panel1.ResumeLayout(false);
+            AIAlertPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -437,8 +437,8 @@
         private ComboBox NotificationFullScreenDisplayTimePeriodComboBox;
         private NumericUpDown NotificationFullScreenDisplayTimeNumericUpDown;
         private Label NotificationFullScreenDisplayTimeLabel;
-        private Panel panel1;
-        private Label label2;
+        private Panel AIAlertPanel;
+        private Label AIAlertLabel;
         private CheckBox AIEnabledCheckBox;
     }
 }
