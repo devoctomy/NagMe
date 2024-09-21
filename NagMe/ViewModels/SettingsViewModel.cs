@@ -96,6 +96,9 @@ namespace NagMe.ViewModels
                 return;
             }
 
+            // I had to set minimum limits of these controls to 0 to fix a weird bug
+            // so in order to prevent 0 from being selected, I am detecting the change
+            // here and then forcing to 1 when less than 1.
             switch(e.PropertyName)
             {
                 case nameof(AiResourceAlertTitleLimit):
