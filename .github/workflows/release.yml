@@ -14,8 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Show ref
-        run: echo "GitHub Ref is ${{GITHUB_REF}}"
+      - name: Set Tag
+        run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
 
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v3
