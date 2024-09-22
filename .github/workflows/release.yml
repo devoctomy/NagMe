@@ -29,16 +29,10 @@ jobs:
       - name: Build Installer
         run: dotnet build Installer/Installer.wixproj --configuration Debug --no-restore
 
-      - name: Upload Installer artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: Installer
-          path: ./Installer/bin/Debug/en-US
-
-      - name: Download Installer artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: Installer
+      - name: Package Installer Files
+        run: |
+          cd Installer/bin/Debug/en-US
+          Compress-Archive -Path 'Installer.msi','cab1.cab' -DestinationPath 'Installer.zip'
 
       - name: Create Release
         id: create_release
@@ -55,7 +49,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Installer/bin/Debug/en-US/Installer.zip  # Adjust the path if needed
+          asset_path: Installer/bin/Debug/en-US/Installer.zip
           asset_name: Installer.zip
           asset_content_type: application/zip
           token: ${{ secrets.GITHUB_TOKEN }}
