@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System.Reflection;
 
 namespace NagMe.Windows
 {
@@ -30,7 +29,7 @@ namespace NagMe.Windows
         private StartupManager(string appName)
         {
             _appName = appName;
-            _appPath = Assembly.GetExecutingAssembly().Location;
+            _appPath = AppContext.BaseDirectory;
         }
 
         public bool StartupWithWindows
