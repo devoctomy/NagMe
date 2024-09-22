@@ -1,0 +1,39 @@
+name: Build and Publish
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request' }} 
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build Application
+        run: dotnet build NagMe/NagMe.csproj --configuration Release --no-restore
+
+      - name: Publish Application
+        run: dotnet publish NagMe/NagMe.csproj --configuration Release --no-build -p:PublishProfile=FolderProfile
+
+      - name: Build Installer
+        run: dotnet build Installer/Installer.wixproj --configuration Debug --no-restore
+
+      - name: Upload Installer artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Installer
+          path: ./Installer/bin/Debug/en-US
