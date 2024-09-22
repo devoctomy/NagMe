@@ -7,10 +7,33 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build Application
+        run: dotnet build NagMe/NagMe.csproj --configuration Release --no-restore
+
+      - name: Publish Application
+        run: dotnet publish NagMe/NagMe.csproj --configuration Release --no-build -p:PublishProfile=FolderProfile
+
+      - name: Build Installer
+        run: dotnet build Installer/Installer.wixproj --configuration Debug --no-restore
+
+      - name: Upload Installer artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Installer
+          path: ./Installer/bin/Debug/en-US
 
       - name: Download Installer artifacts
         uses: actions/download-artifact@v3
@@ -32,7 +55,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: Installer.zip
+          asset_path: ./Installer/bin/Debug/en-US/Installer.zip  # Adjust the path if needed
           asset_name: Installer.zip
           asset_content_type: application/zip
           token: ${{ secrets.GITHUB_TOKEN }}
