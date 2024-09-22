@@ -43,6 +43,6 @@ jobs:
         uses: ncipollo/release-action@v1  
         with:
           artifacts: "Installer/bin/Debug/en-US/Installer.zip"
-          bodyFile: "ReleaseNotes/${{ env.TAG_NAME }}.md"
+          bodyFile: "ReleaseNotes/${{ env.RELEASE_VERSION }}.md"
           draft: false
           prerelease: false
