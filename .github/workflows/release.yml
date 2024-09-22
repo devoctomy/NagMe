@@ -14,11 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: GitHub Tag Name example
-        run: |
-          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
-
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v3
         with:
@@ -45,6 +40,6 @@ jobs:
         uses: ncipollo/release-action@v1  
         with:
           artifacts: "Installer/bin/Debug/en-US/Installer.zip"
-          bodyFile: "ReleaseNotes/${{ env.RELEASE_VERSION }}.md"
+          bodyFile: "ReleaseNotes/${{ github.ref_name }}.md"
           draft: false
           prerelease: false
