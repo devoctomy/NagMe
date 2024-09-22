@@ -14,8 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+      - name: Show ref
+        run: echo ${GITHUB_REF}
 
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v3
