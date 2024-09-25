@@ -29,7 +29,7 @@ namespace NagMe.Windows
         private StartupManager(string appName)
         {
             _appName = appName;
-            _appPath = AppContext.BaseDirectory;
+            _appPath = Path.Combine(AppContext.BaseDirectory, "NagMe.exe");
         }
 
         public bool StartupWithWindows
