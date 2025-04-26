@@ -35,7 +35,7 @@ jobs:
         run: ls -R ./Installer/bin/Debug/en-US
 
       - name: Upload Installer artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Installer
           path: ./Installer/bin/Debug/en-US
