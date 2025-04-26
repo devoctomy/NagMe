@@ -30,3 +30,17 @@ In an attempt to make things more interesting and engaging, I am integrating sev
 
 These are only very basic features for now, but I am hoping they will make use of the app more enganging and less irritating when being reminded to do things you know you *should* do but regularly avoid.
 
+## Creating a release
+
+In order to create a release, complete with release notes, do the following.
+
+1. Create a release notes file with the name of the version in the ReleaseNotes folder.
+2. Commit and push the release notes
+2. Create a push a tag for the version
+
+```
+git tag v0.2.0
+git push origin --tags
+```
+
+> The tag should get picked up and the release workflow should get run.
