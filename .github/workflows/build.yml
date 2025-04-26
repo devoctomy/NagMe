@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request' }} 
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request' }}
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -30,6 +30,9 @@ jobs:
 
       - name: Build Installer
         run: dotnet build Installer/Installer.wixproj --configuration Debug --no-restore
+
+      - name: Verify Installer Artifacts
+        run: ls -R ./Installer/bin/Debug/en-US
 
       - name: Upload Installer artifacts
         uses: actions/upload-artifact@v3
