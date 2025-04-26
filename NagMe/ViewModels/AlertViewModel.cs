@@ -34,12 +34,10 @@ namespace NagMe.ViewModels
 
         private void _autoClose_Elapsed(object? sender, ElapsedEventArgs e)
         {
-            var timer = sender as System.Timers.Timer;
-            if(timer == null && _autoClose != null)
+            if(_autoClose != null)
             {
                 _autoClose.Stop();
             }
-
 
             if (_parentForm.InvokeRequired)
             {

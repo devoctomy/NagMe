@@ -22,5 +22,10 @@ namespace NagMe.Forms
             TitleLabel.DataBindings.Add("Text", _viewModel, nameof(_viewModel.Title), false, DataSourceUpdateMode.OnPropertyChanged);
             MessageLabel.DataBindings.Add("Text", _viewModel, nameof(_viewModel.Message), false, DataSourceUpdateMode.OnPropertyChanged);
         }
+
+        private void AlertForm_Shown(object sender, EventArgs e)
+        {
+            BringToFront();
+        }
     }
 }

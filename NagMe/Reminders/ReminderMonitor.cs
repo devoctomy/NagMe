@@ -41,7 +41,9 @@
             object? sender,
             System.Timers.ElapsedEventArgs e)
         {
+            Stop();
             CheckReminders();
+            Start();
         }
 
         private void CheckReminders()

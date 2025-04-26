@@ -68,6 +68,7 @@
             Name = "AlertForm";
             Opacity = 0.9D;
             Text = "AlertForm";
+            Shown += AlertForm_Shown;
             ResumeLayout(false);
         }
 

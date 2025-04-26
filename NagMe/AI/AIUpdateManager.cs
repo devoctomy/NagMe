@@ -129,7 +129,8 @@ namespace NagMe.AI
         {
             var maxLifeTime = Configuration.Configuration.Current.AIResourceLifeTimePeriod.CreateTimeSpan(Configuration.Configuration.Current.AIResourceLifeTime);
             var expiredResources = _resources.Where(x =>
-                DateTime.Now.Subtract(x.CreatedAt!.Value) > maxLifeTime);
+                DateTime.Now.Subtract(x.CreatedAt!.Value) > maxLifeTime)
+                .ToArray();
             foreach(var resource in expiredResources)
             {
                 resource.DeleteContent();
