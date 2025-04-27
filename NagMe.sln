@@ -11,8 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNotes", "{FB4B0D60-43A5-4EDA-B7CB-16AC12CFF9DA}"
 	ProjectSection(SolutionItems) = preProject
+		ReleaseNotes\v-.-.-.md = ReleaseNotes\v-.-.-.md
 		ReleaseNotes\v0.1.11.md = ReleaseNotes\v0.1.11.md
-		ReleaseNotes\v0.1.12.md = ReleaseNotes\v0.1.12.md
+		ReleaseNotes\v0.2.1.md = ReleaseNotes\v0.2.1.md
 	EndProjectSection
 EndProject
 Global

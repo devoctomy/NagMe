@@ -11,7 +11,7 @@ namespace NagMe.AI
         public AIResourceType? ResourceType { get; set; }
         public AIResourceSubType? ResourceSubType { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public string? Content { get; set; }
+        public byte[]? Content { get; set; }
         public string? ContentPath { get; set; }
 
         public AIResourceEntry()
@@ -63,7 +63,7 @@ namespace NagMe.AI
 
         public override string ToString()
         {
-            return string.IsNullOrEmpty(Content) ? "Unset" : Content.Trim('\"');
+            return Content == null ? "Unset" : System.Text.Encoding.UTF8.GetString(Content).Trim('\"');
         }
     }
 }

@@ -76,7 +76,8 @@ namespace NagMe
                 Location = screen.Bounds.Location,
                 Size = screen.Bounds.Size,
                 Opacity = reminder.FullScreenBackgroundOpacity / 100.0,
-                TopLevel = true
+                TopLevel = true,
+                TopMost = true,
             };
             alertForm.ShowDialog();
         }
@@ -90,6 +91,7 @@ namespace NagMe
 
             reminder.AITitleEntry = await AIUpdateManager.Current.GetTextResource(Enums.AIResourceSubType.AlertTitleText, reminder);
             reminder.AIMessageEntry = await AIUpdateManager.Current.GetTextResource(Enums.AIResourceSubType.AlertMessageText, reminder);
+            var pop = await AIUpdateManager.Current.GetImageResource(Enums.AIResourceSubType.AlertBackgroundImage, reminder, reminder.AIMessageEntry.ToString());
         }
 
         private static void AlertForm_FormClosed(object? sender, FormClosedEventArgs e)

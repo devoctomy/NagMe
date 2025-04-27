@@ -2,7 +2,8 @@
 using NagMe.Extensions;
 using NagMe.IO;
 using NagMe.Reminders;
-using OpenAI_API.Models;
+using OpenAI.Chat;
+using OpenAI.Images;
 using System.Data;
 using System.Text.Json;
 
@@ -12,7 +13,7 @@ namespace NagMe.AI
     {
         private static AIUpdateManager? _current;
         
-        private OpenAI_API.OpenAIAPI _openAiApiClient;
+        private OpenAI.OpenAIClient _openAiApiClient;
         private List<AIResourceEntry> _resources;
 
         public static AIUpdateManager Current
@@ -30,7 +31,7 @@ namespace NagMe.AI
         private AIUpdateManager()
         {
             var apiKey = Configuration.Configuration.Current.OpenAIApiKey;
-            _openAiApiClient = new OpenAI_API.OpenAIAPI(apiKey);
+            _openAiApiClient = new OpenAI.OpenAIClient(apiKey);
             _resources = new List<AIResourceEntry>();
             LoadCachedResources();
         }
@@ -75,7 +76,7 @@ namespace NagMe.AI
                     subType,
                     referencedReminder)
                 {
-                    Content = text
+                    Content = System.Text.Encoding.UTF8.GetBytes(text)
                 };
                 _resources.Add(newResource);
 
@@ -86,6 +87,41 @@ namespace NagMe.AI
 
             var i = new Random(Environment.TickCount).Next(0, allTextResources.Count);
             return allTextResources[i];
+        }
+
+        public async Task<AIResourceEntry> GetImageResource(
+            AIResourceSubType subType,
+            Reminder referencedReminder,
+            string overrideMessage = "")
+        {
+            ExpireResources();
+
+            var allImageResources = _resources.Where(x =>
+                x.ResourceType == Enums.AIResourceType.Image &&
+                x.ResourceSubType == subType &&
+                x.ReferencedReminderId == referencedReminder.Id).ToList();
+
+            var limit = Configuration.Configuration.Current.AIResourceAlertImageLimit;
+
+            if (allImageResources.Count < limit)
+            {
+                var imageBytes = await GenerateImageResource(referencedReminder, subType);
+                var newResource = new AIResourceEntry(
+                    AIResourceType.Image,
+                    subType,
+                    referencedReminder)
+                {
+                    Content = imageBytes
+                };
+                _resources.Add(newResource);
+
+                var resourceJson = JsonSerializer.Serialize(newResource);
+                await File.WriteAllTextAsync(newResource.GetResourcePath(), resourceJson);
+                return newResource;
+            }
+
+            var i = new Random(Environment.TickCount).Next(0, allImageResources.Count);
+            return allImageResources[i];
         }
 
         private async Task<string> GenerateTextResource(
@@ -115,14 +151,61 @@ namespace NagMe.AI
                     }
             }
 
-            var chat = _openAiApiClient.Chat.CreateConversation();
-            chat.Model = Model.GPT4;
-            chat.RequestParameters.Temperature = 0.7d;
-            chat.RequestParameters.TopP = 0.8d;
-            chat.AppendSystemMessage(prompt);
-            chat.AppendUserInput($"Name: {reminder.Name}\r\nDescription: {reminder.Description}");
-            var response = await chat.GetResponseFromChatbotAsync();
-            return response;
+            try
+            {
+
+                var chatClient = _openAiApiClient.GetChatClient("gpt-4.1-nano");
+                var chatMessages = new List<ChatMessage>
+                {
+                    ChatMessage.CreateSystemMessage(prompt),
+                    ChatMessage.CreateUserMessage($"Name: {reminder.Name}\r\nDescription: {reminder.Description}")
+                };
+                var response = await chatClient.CompleteChatAsync(chatMessages);                
+                return response.Value.Content[0].Text;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Error generating text: {ex.Message}");
+            }
+        }
+
+        private async Task<byte[]> GenerateImageResource(
+            Reminder reminder,
+            AIResourceSubType subType,
+            string overrideMessage = "")
+        {
+            var prompt = string.Empty;
+            switch (subType)
+            {
+                case AIResourceSubType.AlertBackgroundImage:
+                    {
+                        prompt = await File.ReadAllTextAsync("Data/PromptTemplates/GenerateImageResourcePrompt_BackgroundImage.txt");
+                        prompt = prompt.Replace("{Message}", $"{(string.IsNullOrEmpty(overrideMessage) ? reminder.Description : overrideMessage)}");
+
+                        break;
+                    }
+
+                default:
+                    {
+                        throw new NotImplementedException();
+                    }
+            }
+
+            try
+            {
+                var imageClient = _openAiApiClient.GetImageClient("gpt-image-1");
+
+                var imageGenerationOptions = new ImageGenerationOptions
+                {
+                    Size = GeneratedImageSize.W1024xH1024
+                };
+                var result = await imageClient.GenerateImagesAsync(prompt, 1, imageGenerationOptions);
+                return result.Value[0].ImageBytes.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error generating image: {ex.Message}");
+            }
         }
 
         private void ExpireResources()

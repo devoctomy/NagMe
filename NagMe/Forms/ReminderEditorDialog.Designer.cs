@@ -293,7 +293,7 @@
             NotificationFullScreenDisplayTimeLabel.AutoSize = true;
             NotificationFullScreenDisplayTimeLabel.Location = new Point(14, 77);
             NotificationFullScreenDisplayTimeLabel.Name = "NotificationFullScreenDisplayTimeLabel";
-            NotificationFullScreenDisplayTimeLabel.Size = new Size(74, 15);
+            NotificationFullScreenDisplayTimeLabel.Size = new Size(75, 15);
             NotificationFullScreenDisplayTimeLabel.TabIndex = 6;
             NotificationFullScreenDisplayTimeLabel.Text = "Display Time";
             // 
@@ -320,7 +320,7 @@
             NotificationTypeLabel.AutoSize = true;
             NotificationTypeLabel.Location = new Point(17, 13);
             NotificationTypeLabel.Name = "NotificationTypeLabel";
-            NotificationTypeLabel.Size = new Size(31, 15);
+            NotificationTypeLabel.Size = new Size(32, 15);
             NotificationTypeLabel.TabIndex = 3;
             NotificationTypeLabel.Text = "Type";
             // 
